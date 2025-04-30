@@ -1,0 +1,8 @@
+<!-- config-layout.component.html -->
+<app-admin-nav></app-admin-nav>
+<div class="layout-wrapper" [class.rtl]="isRtl" [class.ltr]="!isRtl">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

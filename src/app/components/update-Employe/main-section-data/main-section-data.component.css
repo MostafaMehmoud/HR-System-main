@@ -1,0 +1,140 @@
+/* إعداد الوضع الافتراضي LTR */
+.form-control.is-invalid {
+    padding-right: 2rem;
+    /* لإعطاء مساحة للأيقونة */
+}
+
+.fs-14 {
+    font-size: 14px !important;
+}
+
+.update-Button {
+    width: 90px !important;
+    min-width: 80px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-Button {
+    display: none;
+}
+
+.save-Button {
+    display: none;
+}
+
+.emp-Hover {
+    transition: all .1s;
+
+    &:hover {
+        background-color: #0d6efd;
+        color: #FFF;
+    }
+}
+
+.listOfEmployee {
+    width: 100% !important;
+    position: absolute;
+    top: 100%;
+    background-color: #ffffff;
+    border: 7px solid #2e2e2e;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-top: 0 !important;
+    max-height: 245px !important;
+    overflow: auto;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+    border-radius: 15px;
+    z-index: 5 !important;
+}
+
+/* start from here ================== */
+.form-control {
+    padding: 4px 20px;
+    min-width: 320px;
+    border-radius: 0;
+    border: 0 ;
+    border-bottom: 1px solid #dee2e6;
+}
+.form-control:disabled{
+    background-color: rgba(241, 241, 241, 0.568);
+}
+
+.input-label {
+    width: 150px;
+}
+
+select{
+    cursor: pointer;
+}
+
+.fs-14 {
+    font-size: 14px !important;
+}
+
+
+@media screen and (max-width:1200px) {
+    .form-control {
+        min-width: 250px;
+    }
+}
+
+
+@media screen and (max-width:767px) {
+    .form-control{
+        max-width: 450px !important;
+        min-width: 360px !important;
+        font-size: 17px;
+        font-weight: 500 !important;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .w-75-mobile {
+        width: 75% !important;
+
+    }
+
+    .w-25-mobile {
+        width: 25% !important;
+    }
+
+    .cancel-Button {
+        width: 50px !important;
+        min-width: 50px !important;
+    }
+
+    .save-Button {
+        width: 50px !important;
+        min-width: 50px !important;
+    }
+
+    .py-2-mobile {
+        padding-block: 10px !important;
+    }
+
+    .font-18-mobile {
+        font-size: 18px !important;
+    }
+
+    /* start from here ================== */
+
+    .input-label {
+        padding-inline:20px;
+        width: 100% !important;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .form-control {
+        padding: 4px 20px;
+        min-width: unset;
+        width: 350px !important;
+        text-align: center !important;
+        font-size: 17px;
+        font-weight: 500 !important;
+    }
+
+}

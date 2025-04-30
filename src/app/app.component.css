@@ -1,0 +1,14 @@
+.goUp-button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.icon-up{
+    transition: all .3s;
+    cursor: pointer;
+}
+.icon-up:hover{
+color: teal;
+scale: 1.08;
+}

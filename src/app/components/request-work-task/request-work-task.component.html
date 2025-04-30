@@ -1,0 +1,195 @@
+<section class="my-5 CardOne" [ngClass]="{'slideIn': pageOpenOne}">
+    <form [formGroup]="taskForm" (submit)="requestTask()">
+        <div class="loanDetails arabicList bg-white rounded-4 w-100 overflow-hidden shadow-lg">
+            <div class="row">
+                <div class="col-md-7 col-lg-6">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-column p-5 requestDetails {{ 'direction' | translate }}">
+                        <h2 class="fw-bolder my-3">{{ 'تكليف_مهمة_عمل' | translate }}</h2>
+
+                        <div *ngIf="page1" class="w-100 mt-5">
+                            <div class="w-100 p-2">
+                                <label for="empName">{{ 'loan.اسم_الموظف' | translate }}:</label>
+                                <input type="text" id="empName" class="form-control {{ 'lang-arabic' | translate }}"
+                                    [value]="nameAr" disabled>
+                                <input type="text" id="empName" class="form-control {{ 'lang-english' | translate }} "
+                                    [value]="nameEN" disabled>
+                            </div>
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="empId">{{ 'loan.رقم_الموظف' | translate }}:</label>
+                                    <input type="text" id="empId" class="form-control w-100" [value]="empId" disabled>
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="empCredit">{{ 'تاريخ_اليوم' | translate }}:</label>
+                                    <input type="date" id="empCredit" class="form-control w-100 text-center"
+                                        [value]="todayDate" disabled>
+                                </div>
+                            </div>
+
+                            <div class="w-100 p-2">
+                                <label for="directionName">{{ 'جهة_مهمة_العمل' | translate }}:</label>
+                                <input type="text" formControlName="directionName" id="directionName"
+                                    class="form-control" placeholder="{{ 'جهة_مهمة_العمل' | translate }}">
+
+                                <p *ngIf="directionNameInput?.errors && directionNameInput?.touched"
+                                    class="my-0 pt-2 small text-danger text-center">{{ 'يجب_ادخال_اسم_الجهة_المقصودة' |
+                                    translate }}</p>
+                            </div>
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="taskType">{{ 'نوع_التكليف' | translate }}:</label>
+                                    <select formControlName="taskType" name="taskType" id="taskType"
+                                        class="form-control form-select">
+                                        <option value="null" disabled selected>{{ 'اختر_نوع_التكليف' | translate }}
+                                        </option>
+                                        <option value="0">{{ 'داخلي' | translate }}</option>
+                                        <option value="1">{{ 'خارجي' | translate }}</option>
+                                    </select>
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="taskDuration">{{ 'المدة_بالأيام' | translate }}:</label>
+                                    <input formControlName="taskDuration" type="number" id="taskDuration"
+                                        class="form-control" placeholder="{{ 'المدة_المطلوبة_للمهمة' | translate }}">
+                                </div>
+                            </div>
+
+                            <div class="w-100 text-center full-flex">
+                                <p *ngIf="taskTypeInput?.errors && taskTypeInput?.touched"
+                                    class="my-0 pt-1 small text-danger w-50">{{ 'يجب_اختيار_نوع_المهمة' | translate }}
+                                </p>
+                                <p *ngIf="taskDurationInput?.errors && taskDurationInput?.touched"
+                                    class="my-0 pt-1 small text-danger w-50">{{ 'يجب_ادخال_المدة' | translate }}</p>
+                            </div>
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="startingDate">{{ 'اعتباراً_من' | translate }}:</label>
+                                    <input #startDate type="date" id="startingDate" formControlName="startingDate"
+                                        class="form-control w-100" placeholder="{{ 'loan.تاريخ_البدء' | translate }}"
+                                        [min]="todayDate">
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="EndingDate">{{ 'حتى_تاريخ' | translate }}:</label>
+                                    <input [min]="taskForm.get('startingDate')?.value" formControlName="EndingDate"
+                                        type="date" id="EndingDate" class="form-control w-100"
+                                        placeholder="{{ 'حتى_تاريخ' | translate }}">
+                                </div>
+                            </div>
+
+                            <div class="w-100 text-center full-flex">
+                                <p *ngIf="startingDateInput?.errors && startingDateInput?.touched"
+                                    class="my-0 pt-1 small text-danger w-50">{{ 'يجب_ادخال_تاريخ_البدء' | translate }}
+                                </p>
+                                <p *ngIf="EndingDateInput?.errors && EndingDateInput?.touched"
+                                    class="my-0 pt-1 small text-danger w-50">{{ 'يجب_ادخال_تاريخ_الانتهاء' | translate
+                                    }}</p>
+                            </div>
+                        </div>
+
+                        <div *ngIf="page2" class="w-100 mt-5">
+                            <div class="w-100 p-2">
+                                <label for="taskDetails">{{ 'بيان_مهمة_العمل' | translate }}:</label>
+                                <textarea formControlName="taskDetails" name="taskDetails" id="taskDetails"
+                                    class="form-text form-control taskDetails" rows="3"
+                                    placeholder="{{ 'بيان_مهمة_العمل' | translate }}"></textarea>
+                                <p *ngIf="taskDetailsInput?.errors && taskDetailsInput?.touched"
+                                    class="my-0 pt-2 small text-danger text-center">{{ 'يجب_ادخال_تفاصيل_المهمة' |
+                                    translate }}</p>
+                            </div>
+                            <div class="w-100 p-2">
+                                <label for="TaskLoan">{{ 'سلفة_مصاريف_بمبلغ' | translate }}:</label>
+                                <input formControlName="TaskLoan" type="text" id="TaskLoan" class="form-control w-100"
+                                    placeholder="{{ 'سلفة_مصاريف_بمبلغ' | translate }}">
+                            </div>
+
+                            <div class="w-100 p-2">
+                                <label for="tickit">{{ 'تذكرة_سفر_خط_السير' | translate }}:</label>
+                                <input formControlName="tickit" type="text" id="tickit" class="form-control"
+                                    placeholder="{{ 'تذكرة_سفر_خط_السير' | translate }}">
+                            </div>
+
+                            <div class="d-flex justify-content-center align-items-center position-relative">
+                                <div class="w-50 p-2">
+                                    <label for="visa1">{{ 'تأشيرة_1' | translate }}:</label>
+                                    <input formControlName="visa1" type="text" id="visa1" class="form-control w-100"
+                                        placeholder="{{ 'التأشيرة_1' | translate }}">
+                                </div>
+                                <div class="w-50 p-2 ">
+                                    <label for="visa2">{{ 'تأشيرة_2' | translate }}:</label>
+                                    <input formControlName="visa2" type="text" id="visa2" class="form-control w-100"
+                                        placeholder="{{ 'التأشيرة_2' | translate }}">
+
+
+                                </div>
+                                <span *ngIf="!moreVisa" (click)="addMoreVisa()" class="plus-visa-icon ">
+                                    <i class="fa-regular fa-square-plus fa-lg"></i>
+                                </span>
+                            </div>
+
+                            <div *ngIf="moreVisa"
+                                class="d-flex justify-content-center align-items-center position-relative">
+                                <div class="w-50 p-2">
+                                    <label for="visa3">{{ 'تأشيرة_3' | translate }}:</label>
+                                    <input formControlName="visa3" type="text" id="visa3" class="form-control w-100"
+                                        placeholder="{{ 'التأشيرة_3' | translate }}">
+                                </div>
+                                <div class="w-50 p-2 ">
+                                    <label for="visa4">{{ 'تأشيرة_4' | translate }}:</label>
+                                    <input formControlName="visa4" type="text" id="visa4" class="form-control w-100"
+                                        placeholder="{{ 'التأشيرة_4' | translate }}">
+
+
+                                </div>
+                                <span (click)="addMoreVisa()" class="remove-visa-icon">
+                                    <i class="fa-regular fa-trash-can fa-lg"></i>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <p class="englishList englishFont fw-light mt-2 text-center small">
+                            <span *ngIf="page1">{{ 'صفحة_1_من_2' | translate }}</span>
+                            <span *ngIf="page2">{{ 'صفحة_2_من_2' | translate }}</span>
+                        </p>
+
+                        <div *ngIf="page1" class="mt-2 ms-auto px-3">
+                            <button (click)="nextPage()" class="btn btn-outline-dark next-Button px-5 py-2 rounded-5 ">
+                                <i class="fa-solid fa-circle-chevron-right fa-xl px-2 position-absolute end-0"></i>
+                                <span class="pe-3">{{ 'التالي' | translate }}</span>
+                            </button>
+                        </div>
+
+                        <div *ngIf="page2" class="mt-2 ms-auto ">
+                            <div class="arabicList">
+                                <button type="submit" class="btn submit-Button px-5 p-3-mobile  py-2 ms-auto rounded-5 ">
+                                    <span *ngIf="!loadButton">
+                                        <i class="fa-solid fa-circle-check fa-xl px-2 position-absolute start-0"></i>
+                                    </span>
+                                    <span *ngIf="loadButton">
+                                        <i class="fa-solid fa-spinner fa-spin fa-xl px-2 position-absolute start-0"></i>
+                                    </span>
+                                    <span class="ps-3">{{ 'ارسال' | translate }}</span>
+                                </button>
+
+                                <button (click)="prevPage()"
+                                    class="btn btn-outline-dark me-3 berv-Button px-5 p-3-mobile py-2 rounded-5 ">
+                                    <i class="fa-solid fa-circle-chevron-left fa-xl px-2 position-absolute start-0"></i>
+                                    <span class="ps-3">{{ 'السابق' | translate }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 hide-on-mobile">
+                    <div class="d-flex justify-content-center align-items-center vectorForm h-100">
+                        <img src="./assets/images/compressed-images/wepb/task.webp"
+                            alt="{{ 'loan.ادخل_بيانات_الطلب' | translate }}" class="w-75 vectorImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

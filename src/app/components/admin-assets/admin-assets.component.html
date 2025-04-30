@@ -1,0 +1,123 @@
+<div class="bg-white   px-sm-5">
+    <section class=" w-100 container-fluid  rounded-3 vh-80  py-5 p-sm-5 CardOne" [ngClass]="{'slideIn': pageOpenOne}">
+        <h1 class="text-center py-5 fw-bolder  {{ 'admin_assets.حجم_العنوان' | translate }}">
+            {{ 'admin_assets.إدارة_طلبات_العهدة' | translate }}
+        </h1>
+
+        <!-- the table header -->
+        <div class="{{  'direction' | translate }} ">
+            <div class="ordersHead rounded-top-1 w-100 py-3">
+                <div class="row">
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0">{{ 'admin_vacation.اسم_الموظف' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0">{{ 'admin_vacation.رقم_الطلب' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0 px-5">{{ 'admin_assets.نوع_الطلب' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0">{{ 'admin_vacation.التاريخ' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center miniHeader show-on-mobile-only">
+                        <p class="p-0 my-0">{{ 'admin_assets.قائمة_طلبات_العهدة' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- the row of each employee -->
+        <div class="accordion {{  'direction' | translate }} overflow-hidden" id="accordionExample">
+
+            <!-- one employee -->
+            <div  #oneItem class="accordion-item rounded-0 oneItem" *ngFor="let order of AssetsList">
+                <h2 class="accordion-header">
+                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#'+order.id" aria-expanded="false" [attr.aria-controls]="order.id">
+                        <div class="py-2 px-0 d-flex w-100 row justify-content-center align-items-center">
+                            <p class="my-0 col-md-3 fw-bolder w-50-mobile text-center {{ 'lang-arabic' | translate }} ">{{ order.employeeNameAr }}</p>
+                            <p class="my-0 col-md-3 fw-bolder w-50-mobile text-center {{ 'lang-english' | translate }}  ">{{ order.employeeNameEn }}</p>
+                            <p class="my-0 col-md-3 arabicFont fw-bolder w-50-mobile text-center">#{{ order.id }}</p>
+                            <p class="my-0 col-md-3 arabicFont fw-bolder text-center w-50-mobile hide-on-mobile">
+                                {{ 'admin_assets.طلب_عهدة' | translate }} </p>
+
+                            <p class="my-0 col-md-3 arabicFont fw-bolder text-center w-50-mobile hide-on-mobile">
+                                {{todayDate | date : 'yyyy/MM/dd' }}</p>
+                        </div>
+                    </div>
+                </h2>
+                <div [id]="order.id" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body p-0">
+                        <div>
+                            <p class="orderNumber my-0 d-inline-block bg-white px-2 mx-3 rounded">{{
+                                'admin_vacation.رقم_الطلب' | translate }}: {{ order.id }}</p>
+                            <div
+                                class="parentOfOrders mx-0 w-100 rounded border row d-flex justify-content-center align-items-center overflow-hidden">
+                                <div class="col-md-4">
+                                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                                        <p class="my-0">{{ 'admin_vacation.اسم_الموظف' | translate }}:
+                                            <span class="my-0 small  {{ 'lang-arabic' | translate }} ">{{
+                                                order.employeeNameAr }}</span>
+                                            <span class="my-0 small fw-normal {{ 'lang-english' | translate }} ">{{
+                                                order.employeeNameEn }}</span>
+                                        </p>
+                                        <p class="my-0">{{ 'admin_vacation.كود_الموظف' | translate }}: {{
+                                            order.employeeId }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                                        <p class="my-0">{{ 'admin_assets.تفاصيل_العهدة' | translate }} :
+                                            <span class="fw-light">{{order.details}}</span>
+                                        </p>
+                                        <p class="my-0">{{ 'admin_assets.الحفاظ_علي_العهدة' | translate }}:
+                                            <span *ngIf="order.isEmployeeAgree" class="fw-lighter"> {{
+                                                'admin_assets.موافق' | translate }} </span>
+                                            <span *ngIf="order.isEmployeeAgree==false" class="fw-lighter"> {{
+                                                'admin_assets.غير_موافق' | translate }} </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="w-100 noBorder-mobile">
+                                        <p class="my-0">
+                                            {{ 'admin_assets.مرفقات' | translate }} :
+                                            <span *ngIf="order.uploadFileId"> {{ 'admin_assets.نعم' | translate }}
+                                            </span>
+                                            <span *ngIf="order.uploadFileId == null"> {{ 'admin_assets.لا_يوجد' |
+                                                translate }} </span>
+                                        </p>
+                                        <p class="my-0" *ngIf="order.uploadFileId">
+                                            <span (click)="fileDownload(order.uploadFileId)"
+                                                class="download-button text-primary cursor-pointer">
+                                                {{ 'admin_assets.تحميل_المرفق' | translate }}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="w-100 mx-auto p-1 text-center">
+                                        <button (click)="actionRequest(order.id, true, detailsInput.value, oneItem)"
+                                            class="btn btn-success my-1 w-100">{{ 'admin_assets.قبول' | translate
+                                            }}</button>
+                                        <button (click)="actionRequest(order.id, false, detailsInput.value, oneItem)"
+                                            class="btn btn-danger my-1 w-100">{{ 'admin_assets.رفض' | translate
+                                            }}</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="w-100 mx-auto pb-1 text-center">
+                                        <input #detailsInput type="text" class="form-control border-dark"
+                                            placeholder="{{ 'admin_assets.أضف_ملاحظاتك_هنا' | translate }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

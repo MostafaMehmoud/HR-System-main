@@ -1,0 +1,268 @@
+<section class="hide-on-mobile  admin-nav">
+    <nav class="navbar navbar-expand-lg  shadow z-3 py-0">
+        <div class="container">
+            <a class="navbar-brand" routerLink="/admin-home">
+                <img src="./assets/company-Logo/logo_white.png"
+                    alt="saudia formica logo" class="w-100">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul
+                    class="navbar-nav {{ 'direction' | translate}} mx-auto me-0 mb-2 mb-lg-0 text-capitalize text-center">
+                    <li class="nav-item mx-2 ">
+                        <a class="nav-link " routerLink="admin-home" routerLinkActive="active-menu">{{
+                            'admin_nav.الرئيسية' | translate }}</a>
+                    </li>
+
+
+
+
+
+
+                    <li class="nav-item dropdown mx-2">
+                        <span class="nav-link d-flex justify-content-center align-items-center" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'admin_nav.الطلبات' | translate }}
+                            <i class="fa-solid fa-chevron-down fa-2xs px-1"></i>
+                        </span>
+                        <ul class="dropdown-menu text-center">
+
+                            <li><a class="dropdown-item " routerLink="admin-vacation">{{ 'admin_nav.طلبات_الاجازات' |
+                                    translate }}</a></li>
+                            <li><a class="dropdown-item" routerLink="admin-loan">{{ 'admin_nav.طلبات_السلفة' | translate
+                                    }}</a></li>
+                            <li><a class="dropdown-item" routerLink="admin-assets">{{ 'admin_nav.طلبات_العهدة' |
+                                    translate }}</a></li>
+                            <li><a class="dropdown-item" routerLink="admin-permissions">{{ 'admin_nav.طلبات_الاذن' |
+                                    translate }}</a></li>
+                            <li><a class="dropdown-item" routerLink="admin-letters"> {{ 'admin_nav.الخطابات' | translate
+                                    }}</a></li>
+                            <li><a class="dropdown-item" routerLink="admin-worktask">{{ 'admin_nav.مهمة_عمل' | translate
+                                    }}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" routerLink="home-dashboard" routerLinkActive="active-menu">
+                            {{ 'admin_nav.لوحة_التحكم' | translate }}</a>
+                    </li>
+
+                    <li class="  mx-2 t-sheet ">
+                        <div class=" dropdown w-100  text-center mx-auto z-3 cursor-pointer">
+                            <span
+                                class="nav-link border-0 d-flex justify-content-center align-items-center {{ 'direction' | translate}} logoutBtn"
+                                data-bs-toggle="dropdown" aria-expanded="true">
+                                <span class="fw-bold  custom-border">{{ 'admin_nav.سجل_الحضور' | translate }}</span>
+                            </span>
+
+
+
+                            <ul class="dropdown-menu sidedown myAccount text-center ">
+                                <li routerLink="admin-timesheet/new"><span class="dropdown-item py-2 border-bottom">
+                                        {{ 'admin_nav.سجل_جديد' | translate }}
+                                        <i class="fa-solid fa-plus px-1"></i>
+                                    </span>
+                                </li>
+
+                                <li routerLink="admin-timesheet/display"> <span class="dropdown-item py-2 ">
+                                        {{ 'admin_nav.عرض_سجل' | translate }}
+                                        <i class="fa-regular fa-file-lines px-1"></i></span>
+                                </li>
+                            </ul>
+
+                        </div>
+
+
+                    </li>
+
+
+
+
+                </ul>
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-capitalize">
+                    <li class=" mx-2">
+                        <div class=" dropdown w-75 px-3 text-center mx-auto z-3 cursor-pointer">
+                            <span
+                                class="nav-link border-0 d-flex justify-content-center align-items-center {{ 'direction' | translate}} logoutBtn"
+                                data-bs-toggle="dropdown" aria-expanded="true">
+                                <span class="fw-light px-1">{{ 'admin_nav.مرحباً' | translate }}</span>
+                                <span class="fw-bolder {{ 'lang-arabic' | translate }}">{{employeeNameAR}}</span>
+                                <span class="fw-light {{ 'lang-english' | translate }}">{{employeeNameEN}}</span>
+                                <i class="fa-solid fa-user-tie align-middle  px-1"></i>
+                            </span>
+                            <ul class="dropdown-menu sidedown myAccount text-center  ">
+                                <li routerLink="my-profile"><span
+                                        class="dropdown-item py-2 border-bottom {{ 'direction' | translate}}"
+                                        (click)="closeNav()">
+                                        {{ 'admin_nav.حـســابـي' | translate }}
+                                        <i class="fa-regular fa-id-badge px-1"></i>
+                                    </span>
+                                </li>
+                                <li routerLink="admin-dashboard"><span
+                                        class="dropdown-item py-2 border-bottom {{ 'direction' | translate}}"
+                                        (click)="closeNav()">
+                                        {{ 'admin_nav.لوحة_التحكم' | translate }}
+                                        <i class="fa-solid fa-dashboard px-1"></i>
+                                    </span>
+                                </li>
+                                <li><span class="dropdown-item py-2 {{ 'direction' | translate}}"
+                                        (click)="setLogout()">{{ 'admin_nav.تسجيل الخروج' | translate }}
+                                        <i class="fa-solid fa-arrow-right-from-bracket px-1"></i></span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item mx-2 languageIcon cursor-pointer {{ 'direction' | translate}}"
+                        (click)="switchLanguage()">
+                        <a class="nav-link fs-6 fw-light">{{ 'admin_nav.العربية' | translate }}</a>
+                        <!-- <a class="nav-link fs-6 fw-light py-0">{{ 'admin_nav.العربية' | translate }}</a> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>
+
+<!--    start  side nave component     -->
+
+<div class="sideNav" [ngClass]="{'hideNow': opened}">
+    <div class="left" [ngClass]="{'shadow-now': opened}">
+        <div class="w-100">
+            <div class="navbar-brand w-75 mx-auto mb-3" routerLink="home">
+                <img src="./assets/company-Logo/logo_white.png" alt="dashboard logo" class="w-100">
+            </div>
+
+            <div class="nav-link w-100 text-end px-3  d-flex justify-content-between {{ 'direction' | translate}}">
+                <div>
+                    <span class="fw-light px-1">{{ 'admin_nav.مرحباً' | translate }}</span>
+                    <span class="fw-bolder {{ 'lang-arabic' | translate }}">{{employeeNameAR}}</span>
+                    <span class="fw-light {{ 'lang-english' | translate }}">{{employeeNameEN}}</span>
+                </div>
+
+                <div class="nav-item mx-2  " (click)="switchLanguage()">
+                    <a class="nav-link fs-6 fw-light cursor-pointer">{{ 'admin_nav.العربية' | translate }}</a>
+                </div>
+            </div>
+
+            <ul class="list-unstyled sidbarUnits  my-3 border-top border-bottom">
+                <li class="nav-item w-75 px-3 text-center mx-auto" (click)="closeNav()">
+                    <a class="nav-link" routerLink="admin-home" routerLinkActive="active-menu">{{ 'admin_nav.الرئيسية' |
+                        translate }}</a>
+                </li>
+
+                <li class="nav-item dropdown w-75 px-3 text-center mx-auto z-3">
+                    <span class="nav-link d-flex justify-content-center align-items-center {{ 'direction' | translate}}"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ 'admin_nav.الطلبات' | translate }}
+                        <i class="fa-solid fa-chevron-down fa-2xs px-1"></i>
+                    </span>
+                    <ul class="dropdown-menu sidedown text-center">
+                        <li class="text-centerw-100 px-0"><span class="dropdown-item px-5"
+                                routerLink="admin-vacation">{{ 'admin_nav.طلبات_الاجازات' | translate }}</span></li>
+                        <li class="text-centerw-100 px-0"><a class="dropdown-item px-5" routerLink="admin-loan">{{
+                                'admin_nav.طلبات_السلفة' | translate }}</a></li>
+                        <li class="text-centerw-100 px-0"><a class="dropdown-item px-5" routerLink="admin-assets">{{
+                                'admin_nav.طلبات_العهدة' | translate }}</a></li>
+                        <li class="text-centerw-100 px-0"><a class="dropdown-item px-5"
+                                routerLink="admin-permissions">{{ 'admin_nav.طلبات_الاذن' | translate }}</a></li>
+                        <li class="text-centerw-100 px-0"><a class="dropdown-item px-5" routerLink="admin-letters"> {{
+                                'admin_nav.الخطابات' | translate }}</a></li>
+                        <li class="text-centerw-100 px-0"><a class="dropdown-item px-5" routerLink="admin-worktask">{{
+                                'admin_nav.مهمة_عمل' | translate }}</a></li>
+                    </ul>
+                </li>
+
+
+
+
+
+
+
+
+
+                <li class="nav-item w-75 px-3 text-center mx-auto" (click)="closeNav()">
+                    <a class="nav-link" routerLink="admin-assets" routerLink="admin-timesheet/new">
+                        {{ 'admin_nav.سجل_جديد' | translate }}
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item w-75 px-3 text-center mx-auto" (click)="closeNav()">
+                    <a class="nav-link" routerLink="admin-timesheet/display" routerLinkActive="active-menu">
+                        {{ 'admin_nav.عرض_سجل' | translate }}
+                    </a>
+                </li>
+
+
+                <li class="nav-item w-75 px-3 text-center mx-auto" (click)="closeNav()">
+                    <a class="nav-link" routerLink="home-dashboard" routerLinkActive="active-menu">
+                        {{ 'admin_nav.لوحة_التحكم' | translate }}
+                    </a>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+        </div>
+
+
+        <div routerLink="my-profile" class="text-end px-3 py-2 logoutBtn w-100 mb-2 {{ 'direction' | translate}}">
+            <span class="py-2 " (click)="closeNav()">{{ 'admin_nav.حـســابـي' | translate }}
+                <i class="fa-regular fa-id-badge px-1"></i></span>
+        </div>
+
+
+        <div class="text-end px-3 py-2 logoutBtn w-100 mb-2 {{ 'direction' | translate}}">
+            <span class="py-2 " (click)="setLogout()">{{ 'admin_nav.تسجيل الخروج' | translate }}
+                <i class="fa-solid fa-arrow-right-from-bracket px-1 "></i></span>
+        </div>
+
+
+
+
+        <div class="sideFooter position-absolute bottom-0 text-white">
+            <div>
+                <i class="fa-solid fa-globe px-2"></i>
+                <i class="fa-brands fa-twitter px-2"></i>
+                <i class="fa-brands fa-facebook px-2"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <!-- <div class="d-flex justify-content-between align-items-center flex-column d-none">
+            <img src="./assets/images/saudia_formica_logo.png" alt="logo" class="w-75 logo py-2">
+        </div> -->
+
+        <div>
+            <span (click)="openNav()" *ngIf="closed" class="w-100">
+                <i class="fa-solid fa-bars fa-2xl"></i>
+            </span>
+            <span (click)="closeNav()" *ngIf="opened" class="w-100">
+                <i class="fa-solid fa-xmark fa-2xl"></i>
+            </span>
+        </div>
+
+        <div class="d-flex flex-column d-none">
+            <i class="fa-solid fa-globe py-2"></i>
+        </div>
+    </div>
+</div>

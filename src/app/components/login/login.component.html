@@ -1,0 +1,34 @@
+<form [formGroup]="loginForm" (ngSubmit)="setLoging()">
+    <div id="loginPage" class="d-flex justify-content-center align-items-center">
+        <div
+            class="loginSquare rounded-3 d-flex justify-content-center align-items-center row col-lg-6 col-md-7 col-sm-10 text-center">
+            <h1 class="welcome text-darkly">{{ 'login_page.تسجيل_الدخول' | translate }}</h1>
+
+            <!-- my inputs -->
+            <div class="inputs p-1">
+                <!-- user name input -->
+                <input (click)="hideErrMsg()" formControlName="Username" type="email" name="Username"
+                    [placeholder]="'login_page.البريد_الإلكتروني' | translate"
+                    class="userEmail my-md-2 py-3 my-2 form-control py-3">
+                <!-- password input -->
+                <input (click)="hideErrMsg()" formControlName="Password" type="password" name="Password"
+                    [placeholder]="'login_page.كلمة_المرور' | translate"
+                    class="userPass my-md-2 py-3 my-2 form-control py-3">
+            </div>
+
+            <!-- رسالة الخطأ في اسم المستخدم او كلمة المرور -->
+            <p *ngIf="wrongMsg" class="dontHave text-danger">{{ 'login_page.خطأ_تسجيل_الدخول' | translate }}</p>
+
+            <button type="submit" class="loginBtn btn btn-dark bg-darkly col-6">
+                <p *ngIf="isloading" class="d-inline-block my-0 px-1"> <i class="fa-solid fa-spinner fa-spin"></i></p>
+                {{ 'login_page.دخول' | translate }}
+            </button>
+
+            <p class="lead {{ 'direction' | translate }}">
+                {{ 'login_page.ليس_لديك_حساب' | translate }}
+                <a routerLink="/register" class="text-decoration-none textBtn text-primary">{{ 'login_page.سجل_الان' |
+                    translate }}</a>
+            </p>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,72 @@
+<section class="w-100  bg-body-secondary  my-5 rounded-3 vh-80 shadow-lg CardOne" [ngClass]="{'slideIn': pageOpenOne}">
+    <h1 class="text-center pt-5 fw-bolder">{{ 'all_orders.قائمة_الطلبات' | translate }}</h1>
+    <!-- head of requests chooseList -->
+    <div class="text-center p-md-5 py-4 mx-0 arabicList row g-3 d-flex justify-content-center align-items-center ">
+        <div class="col-md-2 w-40-mobile hide-on-mobile ">
+            <button routerLinkActive="btn-dark text-white" routerLink="/allOrders/loan"
+                class="btn btn-outline-dark w-100 rounded-1 fw-bolder py-3 ordersButton">{{
+                'all_orders.طلبات_السلفة' | translate }}</button>
+        </div>
+        <div class="col-md-2 w-40-mobile hide-on-mobile">
+            <button routerLinkActive="btn-dark text-white" routerLink="/allOrders/vacation"
+                class="btn btn-outline-dark w-100 rounded-1 fw-bolder py-3 ordersButton  {{ 'all_orders.حجم_الخط' | translate }}">{{
+                'all_orders.طلبات_الإجازة' | translate }}</button>
+        </div>
+        <div class="col-md-2 w-40-mobile hide-on-mobile ">
+            <button routerLinkActive="btn-dark text-white" routerLink="/allOrders/permissions"
+                class="btn btn-outline-dark w-100 rounded-1 fw-bolder py-3 ordersButton {{ 'all_orders.حجم_الخط' | translate }}">
+                {{ 'all_orders.طلبات_الاستئذان' | translate }}
+            </button>
+        </div>
+        <div class="col-md-2 w-40-mobile hide-on-mobile ">
+            <button routerLinkActive="btn-dark text-white" routerLink="/allOrders/assets"
+                class="btn btn-outline-dark w-100 rounded-1 fw-bolder py-3 ordersButton ">
+                {{ 'all_orders.طلبات_العهدة' | translate }}
+            </button>
+        </div>
+        <div class="col-md-2 w-40-mobile hide-on-mobile ">
+            <button routerLinkActive="btn-dark text-white" routerLink="/allOrders/letters"
+                class="btn btn-outline-dark w-100 rounded-1 fw-bolder py-3 ordersButton ">
+                {{ 'all_orders.طلبات_الخطابات' | translate }}
+            </button>
+        </div>
+        <div class="col-md-2 w-40-mobile hide-on-mobile ">
+            <button routerLinkActive="btn-dark text-white" routerLink="/allOrders/worktask"
+                class="btn btn-outline-dark w-100 rounded-1 fw-bolder py-3 ordersButton ">
+                مهمة عمل
+            </button>
+        </div>
+
+
+
+
+
+
+        <div class="nav-item dropdown w-75 px-3 text-center mx-auto z-3 show-on-mobile-only">
+            <span class="nav-link form-control w-100 p-2 d-flex justify-content-center align-items-center {{ 'direction' | translate}}" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ 'all_orders.اختر_احد_الاقسام_لعرضها' | translate }}<i class="fa-solid fa-chevron-down fa-2xs px-1"></i>
+            </span>
+            <ul class="dropdown-menu sidedown text-center w-75">
+                <li><span class="dropdown-item py-2 border-bottom " routerLink="/allOrders/loan">{{ 'all_orders.طلبات_السلفة' | translate }}</span></li>
+                <li><span class="dropdown-item py-2 border-bottom " routerLink="/allOrders/vacation">{{ 'all_orders.طلبات_الإجازة' | translate }}</span></li>
+                <li><span class="dropdown-item py-2 border-bottom " routerLink="/allOrders/assets">{{ 'all_orders.طلبات_العهدة' | translate }}</span></li>
+                <li><span class="dropdown-item py-2 border-bottom " routerLink="/allOrders/letters">{{ 'all_orders.طلبات_الخطابات' | translate }}</span></li>
+                <li><span class="dropdown-item py-2 border-bottom" routerLink="/allOrders/permissions">{{ 'all_orders.طلبات_الاستئذان' | translate }}</span></li>
+                <li><span class="dropdown-item py-2" routerLink="/allOrders/worktask">مهمة عمل</span></li>
+            </ul>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+    <router-outlet></router-outlet>
+
+</section>

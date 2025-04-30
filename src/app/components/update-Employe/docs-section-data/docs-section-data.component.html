@@ -1,0 +1,225 @@
+<table class=" w-100 mb-4 {{ 'direction' | translate }}" [formGroup]="DocsFormData">
+    <tbody>
+        <!-- ===========================================      START card     ========================================= -->
+        <!-- ===========================================      START card     ========================================= -->
+
+        <!--  id + date -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee Card Id -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.CardId' | translate }} : </p>
+                <div class="position-relative">
+                    <input formControlName="cardId" type="number" [value]="oneEmployee.cardId"
+                        class="form-control ">
+                    <span *ngIf="oneEmployee.cardId != DocsFormData.get('cardId')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Card Date -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.CardDate' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="cardDate" type="date" [value]="oneEmployee.cardDate"
+                        class="form-control text-center ">
+                </div>
+            </td>
+
+        </tr>
+
+        <!--  Place + Expired -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+
+            <!-- employee Card Place -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.CardPlace' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="cardPlace" type="text" [value]="oneEmployee.cardPlace"
+                        class="form-control ">
+                    <span *ngIf="oneEmployee.cardPlace != DocsFormData.get('cardPlace')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Card Expired -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.CardExpired' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="cardExpired" type="date" [value]="oneEmployee.cardExpired"
+                        class="form-control text-center ">
+                </div>
+            </td>
+
+        </tr>
+
+        <!-- ===========================================       END card      ========================================= -->
+
+
+
+
+
+
+
+
+        <!-- ===========================================      START health     ========================================= -->
+        <!-- ===========================================      START health     ========================================= -->
+        <!-- ===========================================      START health     ========================================= -->
+
+        <!--  Health Id + date -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee Health Id -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.HealthId' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="healthId" type="number" [value]="oneEmployee.healthId"
+                        class="form-control ">
+                    <span *ngIf="oneEmployee.healthId != DocsFormData.get('healthId')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Health Date -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.HealthDate' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="healthDate" type="date" [value]="oneEmployee.healthDate"
+                        class="form-control text-center ">
+                </div>
+            </td>
+
+        </tr>
+
+
+
+        <!-- Expired + place -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+
+            <!-- employee Health Place -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.HealthPlace' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="healthPlace" type="text" [value]="oneEmployee.healthPlace"
+                        class="form-control ">
+                    <span *ngIf="oneEmployee.healthPlace != DocsFormData.get('healthPlace')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Health Date Expired -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.HealthDateExpired' |
+                    translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="healthExpired" type="date" [value]="oneEmployee.healthExpired"
+                        class="form-control text-center ">
+                </div>
+            </td>
+
+        </tr>
+
+        <!-- ===========================================       END health      ========================================= -->
+
+
+
+
+
+
+        <!-- ===========================================      START passport     ========================================= -->
+        <!-- ===========================================      START passport     ========================================= -->
+        <!-- ===========================================      START passport     ========================================= -->
+
+        <!--  Pass Id + date -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee Passport Id -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.PassportId' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="passportId" type="number" [value]="oneEmployee.passportId"
+                        class="form-control ">
+                    <span *ngIf="oneEmployee.passportId != DocsFormData.get('passportId')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Passport Date -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.PassportDate' | translate }}
+                    : </p>
+                <div class="position-relative">
+                    <input formControlName="passportDate" type="date" [value]="oneEmployee.passportDate"
+                        class="form-control text-center ">
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!--  Pass Place + expired -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee Passport Place -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.PassportPlace' | translate }}
+                    : </p>
+                <div class="position-relative">
+                    <input formControlName="passportPlace" type="text" [value]="oneEmployee.passportPlace"
+                        class="form-control ">
+                    <span *ngIf="oneEmployee.passportPlace != DocsFormData.get('passportPlace')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Passport Expired -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.PassportExpired' | translate
+                    }} : </p>
+                <div class="position-relative">
+                    <input formControlName="passportExpired" type="date" [value]="oneEmployee.passportExpired"
+                        class="form-control text-center ">
+                </div>
+            </td>
+
+        </tr>
+
+        <!-- ===========================================       END passport      ========================================= -->
+
+    </tbody>
+</table>
+

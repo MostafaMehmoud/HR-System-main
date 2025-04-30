@@ -1,0 +1,30 @@
+.inputs-div{
+    padding: 10px;
+}
+
+.w-170px{
+    width: 170px !important;
+}
+
+
+
+.next-Button {
+    position: relative;
+    overflow: hidden;
+    /* background-color: #1B2E35; */
+    /* color: white; */
+    transition: all .4s;
+
+    &:hover {
+        transform: translateX(-10px);
+    }
+}
+@media screen and (max-width:576px) {
+    .inputs-div{
+        padding: 30px !important;
+    }
+
+    .input-label{
+        font-size: 16px !important;
+    }
+}

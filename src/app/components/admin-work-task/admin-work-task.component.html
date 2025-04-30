@@ -1,0 +1,467 @@
+<!-- <section [ngClass]="{'d-none': showTaskDetails}"
+    class="vh-80 min-vh-100 bg-secondary-subtle d-flex justify-content-center flex-column align-items-center ">
+    <h1 class="text-center py-5 fw-bolder {{ 'admin_vacation.حجم_الخط_إدارة_الطلبات' | translate }}">ادارة مهمات العمل
+    </h1>
+    <div class="row w-100 mx-auto arabicList g-3 py-3 pb-5 text-center container">
+
+        <div *ngFor="let item of taskList" class="col-md-12 ">
+            <div class="bg-white rounded-5 myItem mycustomItem h-auto shadow py-3 px-2">
+
+                <div class="myVector full-flex row w-100 mx-auto">
+                    <span class="col-md-1">
+                        <p class="my-1">#{{item.id}}</p>
+                    </span>
+                    <span class="col-md-4">
+                        <p *ngIf="currentLang == 'ar'" class="my-1">{{item.employeeNameAr}} </p>
+                        <p *ngIf="currentLang == 'en'" class="my-1">{{item.employeeNameEn}} </p>
+                    </span>
+                    <span class="col-md-3">
+                        <p class="my-1">{{item.direction}}</p>
+                    </span>
+                    <span class="col-md-2 col-xxl-3">
+                        <p class="my-1">{{item.createDate | date :'dd/MM/yyyy'}}</p>
+                    </span>
+                    <span class="col-md-2 col-xxl-1">
+                        <button (click)="getOneTask(item)"
+                            class="btn btn-dark rounded-4 py-3 my-1 w-100 fw-bolder">مراجعة
+                        </button>
+
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div *ngIf="taskList.length == 0 && dataArrived" class="w-100 bg-white rounded-4 py-5 full-flex">
+            <p class="fs-4"> لا يوجد طلبات في هذا القسم </p>
+        </div>
+
+
+    </div>
+</section>
+
+<section [ngClass]="{'d-none': !showTaskDetails}" class=" bg-dark-subtle p-sm-5 task-Div ">
+    <div class="bg-white w-100 position-relative">
+        <p class="fs-2 my-1 text-center">
+            مهمة عمل رقم {{oneTask.id}}
+        </p>
+        <div class="arabicList row p-5 ">
+            <div class=" col-md-6 ">
+                <p class="w-100 pe-sm-5 w-100-mobile fw-bolder">اسم الموظف :
+                    <span *ngIf="currentLang == 'ar'" class="fw-bold "> {{oneTask.employeeNameAr}}</span>
+                    <span *ngIf="currentLang == 'en'" class="fw-normal "> {{oneTask.employeeNameEn}}</span>
+                </p>
+                <p class="w-100 pe-sm-5 w-100-mobile  fw-bolder">كود الموظف : <span
+                        class="fw-normal">{{oneTask.employeeId}}</span> </p>
+                <p class="w-100 pe-sm-5 w-100-mobile fw-bolder">المسمي الوظيفي :
+                    <span *ngIf="currentLang == 'ar' && oneTask.jobNameAr" class="fw-bold ">
+                        {{oneTask.jobNameAr}}</span>
+                    <span *ngIf="currentLang == 'en' && oneTask.jobNameEn" class="fw-normal ">
+                        {{oneTask.jobNameEn}}</span>
+                    <span *ngIf="currentLang == 'ar' && oneTask.jobNameAr == null " class="fw-bold "> غير متوفر
+                    </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.jobNameEn == null " class="fw-normal "> not data
+                    </span>
+                </p>
+
+            </div>
+            <div class=" col-md-6 ">
+                <p class="  fw-bolder"> تاريخ الطلب : <span class="fw-bold"> {{oneTask.createDate | date :
+                        'dd/MM/yyyy'}}</span> </p>
+                <p class="  fw-bolder">الادارة :
+                    <span *ngIf="currentLang == 'ar' && oneTask.manageNameAr" class="fw-bold    ">
+                        {{oneTask.manageNameAr}} </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.manageNameEn" class="fw-normal    ">
+                        {{oneTask.manageNameEn}} </span>
+                    <span *ngIf="currentLang == 'ar' && oneTask.manageNameAr == null " class="fw-bold"> غير متوفر
+                    </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.manageNameEn == null " class="fw-normal"> not data
+                    </span>
+                </p>
+                <p class="  fw-bolder">القسم :
+                    <span *ngIf="currentLang == 'ar' && oneTask.departmentNameAr" class="fw-bold    ">
+                        {{oneTask.departmentNameAr}}</span>
+                    <span *ngIf="currentLang == 'en' && oneTask.departmentNameEn" class="fw-normal    ">
+                        {{oneTask.departmentNameEn}}</span>
+                    <span *ngIf="currentLang == 'ar' && oneTask.departmentNameAr == null " class="fw-bold    "> غير
+                        متوفر </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.departmentNameEn == null " class="fw-normal    "> not
+                        data </span>
+                </p>
+            </div>
+            <hr />
+            <div class="arabicList row py-3 mx-0">
+                <p class="fs-4  mx-0 py-3 mb-3  bg-secondary-subtle  text-center"> بيانات المهمة </p>
+                <div class="col-md-12">
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">جهة مهمة العمل :
+                        <span class="fw-bold px-3"> {{oneTask.direction}}</span>
+                    </p>
+                    <p class=" mx-auto w-100-mobile  fs-5 fs-18-mobile-16 fw-bolder">مدة المهمة :
+                        <span *ngIf="oneTask.duration == 1" class="fw-bold px-3"> {{oneTask.duration}} يوم </span>
+                        <span *ngIf="oneTask.duration != 1" class="fw-bold px-3"> {{oneTask.duration}} ايام </span>
+                    </p>
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">اعتباراً من :
+                        <span class="fw-normal px-3"> {{oneTask.fromDate | date : 'dd/MM/yyyy'}}</span>
+                    </p>
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder"> حتى تاريخ :
+                        <span class="fw-normal px-3">{{oneTask.toDate | date : 'dd/MM/yyyy'}}</span>
+                    </p>
+                </div>
+                <div class="task-details mb-5 ">
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder"> بيان المهمة :
+                    </p>
+
+                    <p *ngIf="oneTask.details" class="text-muted fw-bold px-sm-5 "> {{oneTask.details}}</p>
+                    <p *ngIf=" oneTask.details == null " class="text-muted fw-bold px-sm-5 "> غير متوفر </p>
+                </div>
+                <hr>
+                <p class="fs-4  mx-0 py-3  mb-3 bg-secondary-subtle text-center"> تكاليف المهمة </p>
+                <div class="col-md-12 mb-5">
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">سلفة مصاريف بمبلغ :
+                        <span *ngIf="oneTask.cost" class="fw-normal px-3"> {{oneTask.cost}}</span>
+                        <span *ngIf=" oneTask.cost == null " class="fw-bold"> لا توجد سلفة مصاريف</span>
+
+                    </p>
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">تذكرة سفر خط سير :
+                        <span *ngIf="oneTask.travelTicket != 'null' && oneTask.travelTicket "
+                            class="fw-normal px-3 w-100"> {{oneTask.travelTicket}}</span>
+                        <span *ngIf=" ( oneTask.travelTicket == null || oneTask.travelTicket == 'null' )  "
+                            class="fw-bold"> لا توجد تذكرة سفر</span>
+                    </p>
+                    <p class=" mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder"> التأشيرات :
+                        <span *ngFor="let visa of visasArray " class="fw-bold px-3 border"> {{visa}} </span>
+                        <span *ngIf=" visasArray.length == 0 " class="fw-bold"> لا توجد تأشيرات</span>
+                    </p>
+                </div>
+
+                <hr>
+                <p class="fs-4  mx-0 py-3  mb-3 bg-secondary-subtle text-center"> قرار الادارة </p>
+                <div [formGroup]="confirmationForm" class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="">
+                            <p class="fw-bolder">السيد /
+                                <span *ngIf="currentLang == 'ar'" class="fw-bold  "> {{nameAr}} </span>
+                                <span *ngIf="currentLang == 'en'" class="fw-normal   "> {{nameEN}} </span>
+                            </p>
+                        </div>
+                        <div class="">
+                            <p class="fw-bolder">رقم التعريف :
+                                <span class="fw-bold">{{empId}}</span>
+                            </p>
+                        </div>
+                        <div class="">
+                            <p class="fw-bolder">اليوم الموافق :
+                                <span class="fw-normal">{{todayDate | date : 'dd/MM/yyyy' }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-md-12 py-3">
+                        <div class=" d-flex align-items-center flex-wrap">
+
+                            <div class="d-flex justify-content-center align-items-center py-3">
+                                <span class="fs-4 font-14-mobile fw-bolder  d-inline-block">
+                                    قرأت بعناية كافة التفاصيل الخاصة بالمهمة
+                                </span>
+                                <input formControlName="readAllDetails" id="ivReadAll" type="checkbox"
+                                    class="form-check-input form-check form-check-inline border-dark  mx-2 ">
+                            </div>
+                        </div>
+                        <p *ngIf="confirmationForm.get('readAllDetails')?.errors && confirmationForm.get('readAllDetails')?.touched"
+                            class="small text-danger my-0"> يجب قراءة التفاصيل بعناية قبل اتخاذ القرار المناسب * </p>
+                    </div>
+
+                    <div class="w-100">
+                        <label for="decisionDetails" class="fs-5 fs-18-mobile-16 fw-bolder">
+                            ملاحظات :
+                        </label>
+                        <textarea formControlName="addDetails" name="decisionDetails" id="decisionDetails" rows="4"
+                            class="decisionDetails form-control w-100-mobile "
+                            placeholder="اضف ملاحظاتك حول المهمة او القرار الاداري . . "></textarea>
+                    </div>
+
+                </div>
+                <div class="buttons  mx-0 my-5 text-center">
+                    <div class="w-50-mobile px-2  ">
+                        <button (click)="respondToMission(true , oneTask.id)"
+                            class="btn mx-0 submit-Button px-sm-5 w-100-mobile py-3 rounded-3 ">
+                            <span class="px-1">
+                                قبول
+                            </span>
+                            <i class="fa-solid fa-check-double fa-xl "></i>
+                        </button>
+                    </div>
+                    <div class="w-50-mobile px-2  ">
+                        <button (click)="respondToMission(false , oneTask.id)"
+                            class="btn reject-Button mx-0 px-sm-5 w-100-mobile py-3 rounded-3 ">
+                            <span class="px-1">
+                                رفض
+                            </span>
+                            <i class="fa-solid fa-xmark fa-xl "></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span (click)="taskDetailsHideShow()">
+            <i class="fa-solid fa-xmark fa-2x closeBtn"></i>
+        </span>
+
+
+    </div>
+    <div class="py-5"></div>
+
+</section> -->
+
+<section [ngClass]="{'d-none': showTaskDetails}"
+    class="vh-80 min-vh-100 bg-secondary-subtle d-flex justify-content-center flex-column align-items-center  ">
+    <h1 class="text-center py-5 fw-bolder">
+        {{ 'admin_tasks.title' | translate }}
+    </h1>
+    <div class="row w-100 mx-auto arabicList g-3 py-3 pb-5 text-center container">
+
+        <div *ngFor="let item of taskList" class="col-md-12 ">
+            <div class="bg-white rounded-5 myItem mycustomItem h-auto shadow py-3 px-2">
+
+                <div class="myVector full-flex row w-100 mx-auto {{ 'direction' | translate }}">
+                    <span class="col-md-1">
+                        <p class="my-1 arabicFont">#{{item.id}}</p>
+                    </span>
+                    <span class="col-md-4">
+                        <p *ngIf="currentLang == 'ar'" class="my-1">{{item.employeeNameAr}} </p>
+                        <p *ngIf="currentLang == 'en'" class="my-1 fw-semibold">{{item.employeeNameEn}} </p>
+                    </span>
+                    <span class="col-md-3">
+                        <p class="my-1">{{item.direction}}</p>
+                    </span>
+                    <span class="col-md-2 col-xxl-3">
+                        <p class="my-1 arabicFont">{{item.createDate | date :'dd/MM/yyyy'}}</p>
+                    </span>
+                    <span class="col-md-2 col-xxl-1">
+                        <button (click)="getOneTask(item)"
+                            class="btn btn-dark rounded-4 py-3 my-1 w-100 fw-bolder">
+                            {{ 'admin_tasks.review_button' | translate }}
+                        </button>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div *ngIf="taskList.length == 0 && dataArrived" class="w-100 bg-white rounded-4 py-5 full-flex">
+            <p class="fs-4">{{ 'admin_tasks.no_tasks' | translate }}</p>
+        </div>
+
+    </div>
+</section>
+
+<section [ngClass]="{'d-none': !showTaskDetails}" class=" bg-dark-subtle p-sm-5 task-Div ">
+    <div class="bg-white w-100 position-relative">
+        <p class="fs-2 my-1 text-center">
+            {{ 'admin_tasks.task_number' | translate }} {{oneTask.id}}
+        </p>
+        <div class="{{'direction' | translate}} row p-5 ">
+            <div class=" col-md-6 ">
+                <p class="w-100 pe-sm-5 w-100-mobile fw-bolder">
+                    {{ 'admin_tasks.employee_name' | translate }} :
+                    <span *ngIf="currentLang == 'ar'" class="fw-bold"> {{oneTask.employeeNameAr}}</span>
+                    <span *ngIf="currentLang == 'en'" class="fw-normal"> {{oneTask.employeeNameEn}}</span>
+                </p>
+                <p class="w-100 pe-sm-5 w-100-mobile  fw-bolder">
+                    {{ 'admin_tasks.employee_code' | translate }} : <span class="fw-normal">{{oneTask.employeeId}}</span>
+                </p>
+                <p class="w-100 pe-sm-5 w-100-mobile fw-bolder">
+                    {{ 'admin_tasks.job_title' | translate }} :
+                    <span *ngIf="currentLang == 'ar' && oneTask.jobNameAr" class="fw-bold ">
+                        {{oneTask.jobNameAr}}</span>
+                    <span *ngIf="currentLang == 'en' && oneTask.jobNameEn" class="fw-normal ">
+                        {{oneTask.jobNameEn}}</span>
+                    <span *ngIf="currentLang == 'ar' && oneTask.jobNameAr == null " class="fw-bold">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.jobNameEn == null " class="fw-normal">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </span>
+                </p>
+            </div>
+            <div class=" col-md-6 ">
+                <p class="fw-bolder">
+                    {{ 'admin_tasks.request_date' | translate }} : <span class="fw-bold"> {{oneTask.createDate | date : 'dd/MM/yyyy'}}</span>
+                </p>
+                <p class="fw-bolder">
+                    {{ 'admin_tasks.management' | translate }} :
+                    <span *ngIf="currentLang == 'ar' && oneTask.manageNameAr" class="fw-bold">
+                        {{oneTask.manageNameAr}}</span>
+                    <span *ngIf="currentLang == 'en' && oneTask.manageNameEn" class="fw-normal">
+                        {{oneTask.manageNameEn}}</span>
+                    <span *ngIf="currentLang == 'ar' && oneTask.manageNameAr == null " class="fw-bold">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.manageNameEn == null " class="fw-normal">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </span>
+                </p>
+                <p class="fw-bolder">
+                    {{ 'admin_tasks.department' | translate }} :
+                    <span *ngIf="currentLang == 'ar' && oneTask.departmentNameAr" class="fw-bold">
+                        {{oneTask.departmentNameAr}}</span>
+                    <span *ngIf="currentLang == 'en' && oneTask.departmentNameEn" class="fw-normal">
+                        {{oneTask.departmentNameEn}}</span>
+                    <span *ngIf="currentLang == 'ar' && oneTask.departmentNameAr == null " class="fw-bold">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </span>
+                    <span *ngIf="currentLang == 'en' && oneTask.departmentNameEn == null " class="fw-normal">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </span>
+                </p>
+            </div>
+            <hr />
+            <div class="{{'direction' | translate}} row py-3 mx-0">
+                <p class="fs-4 mx-0 py-3 mb-3 bg-secondary-subtle text-center">
+                    {{ 'admin_tasks.task_data' | translate }}
+                </p>
+                <div class="col-md-12">
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.task_direction' | translate }} :
+                        <span class="fw-bold px-3"> {{oneTask.direction}}</span>
+                    </p>
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.task_duration.task_duration' | translate }} :
+                        <span *ngIf="oneTask.duration == 1" class="fw-bold px-3"> {{oneTask.duration}} {{ 'admin_tasks.task_duration.single' | translate }} </span>
+                        <span *ngIf="oneTask.duration != 1" class="fw-bold px-3"> {{oneTask.duration}} {{ 'admin_tasks.task_duration.plural' | translate }} </span>
+                    </p>
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.start_date' | translate }} :
+                        <span class="fw-normal px-3"> {{oneTask.fromDate | date : 'dd/MM/yyyy'}}</span>
+                    </p>
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.end_date' | translate }} :
+                        <span class="fw-normal px-3">{{oneTask.toDate | date : 'dd/MM/yyyy'}}</span>
+                    </p>
+                </div>
+                <div class="task-details mb-5">
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.task_details' | translate }} :
+                    </p>
+                    <p *ngIf="oneTask.details" class="text-muted fw-bold px-sm-5">
+                        {{oneTask.details}}
+                    </p>
+                    <p *ngIf="oneTask.details == null" class="text-muted fw-bold px-sm-5">
+                        {{ 'admin_tasks.no_data' | translate }}
+                    </p>
+                </div>
+                <hr>
+                <p class="fs-4 mx-0 py-3 mb-3 bg-secondary-subtle text-center">
+                    {{ 'admin_tasks.task_costs' | translate }}
+                </p>
+                <div class="col-md-12 mb-5">
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.advance_expense' | translate }} :
+                        <span *ngIf="oneTask.cost" class="fw-normal px-3"> {{oneTask.cost}}</span>
+                        <span *ngIf="oneTask.cost == null" class="fw-bold px-2">
+                            {{ 'admin_tasks.no_advance_expense' | translate }}
+                        </span>
+                    </p>
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.travel_ticket' | translate }} :
+                        <span *ngIf="oneTask.travelTicket != 'null' && oneTask.travelTicket" class="fw-normal px-3 w-100"> {{oneTask.travelTicket}}</span>
+                        <span *ngIf="oneTask.travelTicket == null || oneTask.travelTicket == 'null'" class="fw-bold px-2">
+                            {{ 'admin_tasks.no_travel_ticket' | translate }}
+                        </span>
+                    </p>
+                    <p class="mx-auto w-100-mobile fs-5 fs-18-mobile-16 fw-bolder">
+                        {{ 'admin_tasks.visas' | translate }} :
+                        <span *ngFor="let visa of visasArray" class="fw-bold px-3 border"> {{visa}} </span>
+                        <span *ngIf="visasArray.length == 0" class="fw-bold px-2">
+                            {{ 'admin_tasks.no_visas' | translate }}
+                        </span>
+                    </p>
+                </div>
+
+                <hr>
+                <p class="fs-4 mx-0 py-3 mb-3 bg-secondary-subtle text-center">
+                    {{ 'admin_tasks.management_decision' | translate }}
+                </p>
+                <div [formGroup]="confirmationForm" class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="">
+                            <p class="fw-bolder">
+                                {{ 'admin_tasks.mr' | translate }} 
+                                <span *ngIf="currentLang == 'ar'" class="fw-bold"> {{nameAr}} </span>
+                                <span *ngIf="currentLang == 'en'" class="fw-normal"> {{nameEN}} </span>
+                            </p>
+                        </div>
+                        <div class="">
+                            <p class="fw-bolder">
+                                {{ 'admin_tasks.ID' | translate }} :
+                                <span class="fw-bold">{{empId}}</span>
+                            </p>
+                        </div>
+                        <div class="">
+                            <p class="fw-bolder">
+                                {{ 'admin_tasks.date' | translate }} :
+                                <span class="fw-normal">{{todayDate | date : 'dd/MM/yyyy' }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-md-12 py-3">
+                        <div class="d-flex align-items-center flex-wrap">
+                            <div class="d-flex justify-content-center align-items-center py-3">
+                                <span class="fs-4 font-14-mobile fw-bolder d-inline-block">
+                                    {{ 'admin_tasks.read_all_details' | translate }}
+                                </span>
+                                <input formControlName="readAllDetails" id="ivReadAll" type="checkbox"
+                                    class="form-check-input form-check form-check-inline border-dark mx-2 ">
+                            </div>
+                        </div>
+                        <p *ngIf="confirmationForm.get('readAllDetails')?.errors && confirmationForm.get('readAllDetails')?.touched"
+                            class="small text-danger my-0">
+                            {{ 'admin_tasks.must_read_all_details' | translate }}
+                        </p>
+                    </div>
+
+                    <div class="w-100">
+                        <label for="decisionDetails" class="fs-5 fs-18-mobile-16 fw-bolder">
+                            {{ 'admin_tasks.notes' | translate }} :
+                        </label>
+                        <textarea formControlName="addDetails" name="decisionDetails" id="decisionDetails" rows="4"
+                            class="decisionDetails form-control w-100-mobile "
+                            placeholder="{{ 'admin_tasks.notes_placeholder' | translate }}"></textarea>
+                    </div>
+
+                </div>
+                <div class="buttons mx-0 my-5 text-center">
+                    <div class="w-50-mobile px-2  ">
+                        <button (click)="respondToMission(true , oneTask.id)"
+                            class="btn mx-0 submit-Button px-sm-5 w-100-mobile py-3 rounded-3 ">
+                            <span class="px-1">
+                                {{ 'admin_tasks.accept_button' | translate }}
+                            </span>
+                            <i class="fa-solid fa-check-double fa-xl "></i>
+                        </button>
+                    </div>
+                    <div class="w-50-mobile px-2  ">
+                        <button (click)="respondToMission(false , oneTask.id)"
+                            class="btn reject-Button mx-0 px-sm-5 w-100-mobile py-3 rounded-3 ">
+                            <span class="px-1">
+                                {{ 'admin_tasks.reject_button' | translate }}
+                            </span>
+                            <i class="fa-solid fa-xmark fa-xl "></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span (click)="taskDetailsHideShow()">
+            <i class="fa-solid fa-xmark fa-2x closeBtn"></i>
+        </span>
+
+    </div>
+    <div class="py-5"></div>
+
+</section>
+

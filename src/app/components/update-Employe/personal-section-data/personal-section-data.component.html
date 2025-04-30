@@ -1,0 +1,171 @@
+<table class=" w-100 mb-4 {{ 'direction' | translate }}" [formGroup]="personalDataForm">
+    <tbody>
+
+        <!-- =========================================== start cminucate ========================================= -->
+        <!-- =========================================== start cminucate ========================================= -->
+        <!-- =========================================== start cminucate ========================================= -->
+
+        <!-- employee Mobile -->
+        <tr class="row w-100  py-md-2 font-18-mobile ">
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.Mobile' |
+                    translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="mobile" type="number" [value]="oneEmpolyee.mobile"
+                        class="form-control">
+                    <span *ngIf="oneEmpolyee.mobile != personalDataForm.get('mobile')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+
+            <!-- employee Mobile Emergency -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0 input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.MobileEmergency' |
+                    translate
+                    }} : </p>
+                <div class="position-relative">
+                    <input formControlName="mobileEmergency" type="number" [value]="oneEmpolyee.mobileEmergency"
+                        class="form-control">
+                    <span *ngIf="oneEmpolyee.mobileEmergency != personalDataForm.get('mobileEmergency')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+        </tr>
+
+
+
+        <!-- =========================================== end cminucate ========================================= -->
+
+
+        <!-- ===========================================      START nationality     ========================================= -->
+        <!-- ===========================================      START nationality     ========================================= -->
+        <!-- ===========================================      START nationality     ========================================= -->
+
+
+        <!-- employee Nation Name (Arabic) -->
+        <!-- employee Nation Id -->
+        <tr class="row w-100  py-md-2 font-18-mobile">
+            <!-- employee Nation Name (Arabic) -->
+            <td *ngIf="currentLang == 'ar'"
+                class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0 input-label py-sm-1  ">{{ 'Update.NationNameAr' | translate}}:
+                </p>
+                <div class="position-relative">
+                    <select (change)="setNation('nationNameAr')" formControlName="nationNameAr" name="nationNameAr"
+                        id="nationNameAr" class="form-control ">
+                        <option *ngFor="let item of nationList" [value]="item.nameAr">{{item.nameAr}}</option>
+                    </select>
+                    <span *ngIf="oneEmpolyee.nationNameAr != personalDataForm.get('nationNameAr')?.value"
+                        class="edited-mark">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Nation Name (English) -->
+            <td *ngIf="currentLang == 'en'"
+                class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0 input-label py-sm-1   {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.NationNameEn' | translate}}: </p>
+                <div class="position-relative">
+                    <select (change)="setNation('nationNameEn')" formControlName="nationNameEn" name="nationNameEn"
+                        id="nationNameEn" class="form-control">
+                        <option [value]="oneEmpolyee.nationNameEn">{{oneEmpolyee.nationNameEn}}</option>
+                        <option *ngFor="let item of nationList" [value]="item.nameEn">{{item.nameEn}}</option>
+                    </select>
+                    <span *ngIf="oneEmpolyee.nationNameEn != personalDataForm.get('nationNameEn')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+
+            </td>
+
+
+
+
+            <!-- employee Nation Id -->
+
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0 input-label py-sm-1   {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.NationId' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input readonly formControlName="nationId" type="text" [value]="oneEmpolyee.nationId"
+                        class="form-control">
+                    <span *ngIf="oneEmpolyee.nationId != personalDataForm.get('nationId')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+
+
+        </tr>
+
+        <!-- ===========================================       END nationality      ========================================= -->
+
+
+
+
+
+
+
+        <!-- ===========================================      START Blood and state     ========================================= -->
+        <!-- ===========================================      START Blood and state     ========================================= -->
+        <!-- ===========================================      START Blood and state     ========================================= -->
+
+        <!-- employee State -->
+        <tr class="row w-100  py-md-2 font-18-mobile  ">
+
+            <!-- employee State -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0 input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.State' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <select formControlName="state" name="state" id="state"
+                        class="form-control">
+                        <option [value]="2 || 1">منفصل عن العمل</option>
+                        <option value="0">علي رأس العمل</option>
+                    </select>
+                    <span *ngIf="oneEmpolyee.state != personalDataForm.get('state')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0 input-label py-sm-1    {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.BloodType' | translate }} :
+                </p>
+                <div class="position-relative ">
+                    <input formControlName="blood" type="text" [value]="oneEmpolyee.blood"
+                        class="form-control">
+                    <span *ngIf="oneEmpolyee.blood != personalDataForm.get('blood')?.value" class="edited-mark"
+                        [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+
+
+
+        </tr>
+
+        <!-- ===========================================       END Blood and state      ========================================= -->
+    </tbody>
+</table>
+

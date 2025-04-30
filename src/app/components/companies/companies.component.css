@@ -1,0 +1,40 @@
+pagination-controls {
+    direction: ltr;
+  }
+  
+  :host-context([dir="rtl"]) pagination-controls {
+    direction: rtl;
+  }
+  /* قاعدة لتحديد مكان الـ sidebar بناءً على الاتجاه */
+.rtl-sidebar {
+  right: 0;
+  left: auto;
+}
+
+.ltr-sidebar {
+  left: 0;
+  right: auto;
+}
+
+/* تأكد من أن الـ content يبدأ من مكان صحيح */
+.main-content {
+  margin-inline-start: 230px; /* ستتغير هذه القيمة حسب المكان الذي سيظهر فيه الـ sidebar */
+  width: calc(100% - 230px);
+  padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .main-content {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+
+  app-sidebar {
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+  }
+}
+.container-fluid{
+  margin-top: 120px;
+}

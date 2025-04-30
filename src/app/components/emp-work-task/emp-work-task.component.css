@@ -1,0 +1,23 @@
+.hover-scale {
+    transition: all .4s;
+}
+
+.hover-scale:hover {
+    scale: 1.03;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+
+@media print {
+    @page {
+        margin: 0;
+    }
+
+}

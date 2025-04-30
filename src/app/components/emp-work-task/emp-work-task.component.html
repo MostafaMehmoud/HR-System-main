@@ -1,0 +1,297 @@
+<section class="w-100 bg-body-secondary arabicList rounded-bottom-3">
+    <div class="w-100 p-sm-5 px-2">
+        <div *ngFor="let order of ordersList" class="hover-scale">
+            <div class="w-100 {{ 'direction' | translate }}">
+                <p class="orderNumber my-0 d-inline-block bg-white px-2 rounded {{ 'fixOrderNumber' | translate }}">
+                    {{ 'رقم الطلب' | translate }}: {{order.id}}
+                </p>
+            </div>
+            <div class="parentOfOrders my-2 {{ 'direction' | translate }} mx-0 w-100 bg-white shadow my-2  rounded-3 border row d-flex justify-content-center align-items-center overflow-hidden">
+                <div class="col-md-3">
+                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                        <p class="my-0 fw-bolder">
+                            {{ 'جهة المهمة' | translate }}:
+                            <span class="fw-bold">
+                                {{order.direction}}
+                            </span>
+                        </p>
+                        <p class="my-0 fw-bolder">
+                            {{ 'التاريخ' | translate }}:
+                            <span class="fw-bold">
+                                {{order.createDate| date : 'yyyy/MM/dd'}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                        <p class="my-0 fw-bolder">
+                            {{ 'يبدأ من' | translate }}:
+                            <span class="fw-bold">
+                                {{order.fromDate | date : 'yyyy/MM/dd'}}
+                            </span>
+                        </p>
+                        <p class="my-0 fw-bolder">
+                            {{ 'حتى تاريخ' | translate }}: 
+                            <span class="fw-bold">
+                                {{order.toDate | date : 'yyyy/MM/dd'}}
+                            </span>    
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-100 noBorder-mobile">
+                        <p class="my-0 fw-bolder">
+                            {{ 'نوع المهمة' | translate }}:
+                            <span *ngIf=" order.kind == 'Local'" class="fw-bold"> {{ 'داخلي' | translate }}</span>
+                            <span *ngIf=" order.kind == 'International'" class="fw-bold"> {{ 'خارجي' | translate }}</span>
+                        </p>
+                        <p *ngIf="order.approveStatus == 'Approved'" class="my-0 fw-bolder">
+                            {{ 'حالة الطلب' | translate }}:
+                            <span class="status-Msg-confirmed fw-bold">{{ 'تمت الموافقة' | translate }}</span>
+                        </p>
+                        <p *ngIf="order.approveStatus == 'NotApproved'" class="my-0 fw-bolder">
+                            {{ 'حالة الطلب' | translate }}:
+                            <span class="status-Msg-rejected fw-bold">{{ 'تم رفض الطلب' | translate }}</span>
+                        </p>
+                        <p *ngIf="order.approveStatus == 'Pinding'" class="my-0 fw-bolder">
+                            {{ 'حالة الطلب' | translate }}:
+                            <span class="status-Msg-pendding fw-bold">{{ 'جاري مراجعة الطلب' | translate }}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2 statusImg {{ 'fixStatusImg' | translate }} ">
+                    <div class="w-100 mx-auto p-2 text-center">
+                        <img *ngIf="order.approveStatus == 'Approved'"
+                             src="./assets/images/compressed-images/wepb/accepted.png" alt="Approved"
+                             class="w-50 ">
+                        <img *ngIf="order.approveStatus == 'Pinding'"
+                             src="./assets/images/compressed-images/wepb/pending_3388322.png" alt="Pending"
+                             class="w-50 ">
+                        <img *ngIf="order.approveStatus == 'NotApproved'"
+                             src="./assets/images/compressed-images/wepb/delete_2808336.png" alt="NotApproved"
+                             class="w-50 ">
+                    </div>
+                </div>
+                <div *ngIf="order.approveStatus != 'Pinding'" class="row">
+
+                    <span class=" px-3">
+                        <hr class="my-0">
+                    </span>
+
+                    <div class="col-md-10 ">
+                        <div class="w-100 noBorder-mobile ">
+                            <p class="my-0">
+                                {{ 'ملاحظات' | translate }}:
+                            </p>
+                            <p *ngIf="order.approveDetails" class="text-muted fw-bold px-sm-5 py-3"> {{order.approveDetails}}</p>
+                            <p *ngIf=" order.approveDetails == null " class="text-muted fw-bold px-sm-5 py-3"> {{ 'لا يوجد ملاحظات' | translate }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 ">
+                        <div class="w-100  full-flex justify-content-center h-100">
+                            <button (click)="downloadPDF(order)"
+                                    class="btn btn-dark rounded-3 fs-14  py-sm-2 my-1  fw-bolder ">{{ 'تنزيل PDF' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="content" style="display: none;" class="  w-100 position-relative ">
+
+    <div class="w-100">
+        <img src="./assets/pdf-header/custom_header.jpg" alt="" class="w-100">
+    </div>
+    <p class="fs-5 pt-1 mb-2 text-center testo">
+        {{ 'admin_tasks.task_number' | translate }} {{oneTask.id}}
+    </p>
+    <div class="arabicList {{'direction' | translate}} row px-1 py-2">
+        <div class=" col-6 ">
+            <p class="w-100 {{'peAR_En' | translate}} fs-14 my-0  fw-bolder">{{ 'admin_tasks.employee_name' | translate }} :
+                <span *ngIf="currentLang == 'ar'" class="fw-bold "> {{nameAr}}</span>
+                <span *ngIf="currentLang == 'en' " class="fw-normal "> {{nameEN}}</span>
+            </p>
+            <p class="w-100 fs-14 {{'peAR_En' | translate}} my-0    fw-bolder"> {{ 'admin_tasks.employee_code' | translate }} : <span
+                    class="fw-normal">{{empId}}</span> </p>
+            <p class="w-100 fs-14 {{'peAR_En' | translate}} my-0   fw-bolder">  {{ 'admin_tasks.job_title' | translate }} :
+                <span *ngIf="currentLang == 'ar' && mypersonalDetails.jobNameAr" class="fw-bold ">
+                    {{mypersonalDetails.jobNameAr}}</span>
+                <span *ngIf="currentLang == 'en' && mypersonalDetails.jobNameEn" class="fw-normal ">
+                    {{mypersonalDetails.jobNameEn}}</span>
+                <span *ngIf="currentLang == 'ar' && mypersonalDetails.jobNameAr == null " class="fw-bold "> {{ 'admin_tasks.no_data' | translate }}
+                </span>
+                <span *ngIf="currentLang == 'en' && mypersonalDetails.jobNameEn == null " class="fw-normal "> {{ 'admin_tasks.no_data' | translate }}
+                </span>
+            </p>
+
+        </div>
+        <div class=" col-6 fs-14">
+            <p class="  fw-bolder my-0 "> {{ 'admin_tasks.request_date' | translate }} : <span class="fw-bold"> {{oneTask.createDate | date :'dd/MM/yyyy'}}</span> </p>
+            <p class="  fw-bolder my-0 ">  {{ 'admin_tasks.management' | translate }} :
+                <span *ngIf="currentLang == 'ar' && mypersonalDetails.manageNameAr" class="fw-bold    ">
+                    {{mypersonalDetails.manageNameAr}} </span>
+                <span *ngIf="currentLang == 'en' && mypersonalDetails.manageNameEn" class="fw-normal    ">
+                    {{mypersonalDetails.manageNameEn}} </span>
+                <span *ngIf="currentLang == 'ar' && mypersonalDetails.manageNameAr == null " class="fw-bold">  {{ 'admin_tasks.no_data' | translate }}
+                </span>
+                <span *ngIf="currentLang == 'en' && mypersonalDetails.manageNameEn == null " class="fw-normal">  {{ 'admin_tasks.no_data' | translate }}
+                </span>
+            </p>
+            <p class="  fw-bolder my-0 ">  {{ 'admin_tasks.department' | translate }} :
+                <span *ngIf="currentLang == 'ar' && mypersonalDetails.departmentNameAr" class="fw-bold    ">
+                    {{mypersonalDetails.departmentNameAr}}</span>
+                <span *ngIf="currentLang == 'en' && mypersonalDetails.departmentNameEn" class="fw-normal    ">
+                    {{mypersonalDetails.departmentNameEn}}</span>
+                <span *ngIf="currentLang == 'ar' && mypersonalDetails.departmentNameAr == null " class="fw-bold    ">
+                    {{ 'admin_tasks.no_data' | translate }}                </span>
+                <span *ngIf="currentLang == 'en' && mypersonalDetails.departmentNameEn == null " class="fw-normal    ">
+                    {{ 'admin_tasks.no_data' | translate }}
+                 </span>
+            </p>
+        </div>
+        <div class="{{'direction' | translate}}   row pt-3 mx-0">
+            <p class="fs-6  mx-0 py-1 mb-3  bg-secondary-subtle  text-center">{{ 'admin_tasks.task_data' | translate }}</p>
+            <div class="col-md-12">
+                <div class="d-flex align-items-center ">
+                    <p class="fs-14 my-0 py-0 fw-bolder "> {{ 'admin_tasks.task_direction' | translate }} :
+                    </p>
+                    <p class="fw-semibold my-0 pt-2 px-3 lh-1"> {{oneTask.direction}} </p>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class="  fs-14   my-0   fw-bolder">  {{ 'admin_tasks.task_duration.task_duration' | translate }} :
+                    </p>
+                    <p *ngIf="oneTask.duration == 1" class="fw-semibold fs-14 my-0 pt-2 px-3"> {{oneTask.duration}}  {{ 'admin_tasks.task_duration.single' | translate }}
+                    </p>
+                    <p *ngIf="oneTask.duration != 1" class="fw-semibold fs-14 my-0 pt-2 px-3"> {{oneTask.duration}}  {{ 'admin_tasks.task_duration.plural' | translate }}
+                    </p>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class=" fs-14  my-0  fw-bolder"> {{ 'admin_tasks.start_date' | translate }} :
+                    </p>
+                    <p class="fw-semibold fs-14 px-3 my-0 pt-2"> {{oneTask.fromDate | date : 'dd/MM/yyyy'}}</p>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class="  fs-14 my-0   fw-bolder"> {{ 'admin_tasks.end_date' | translate }} :
+                    </p>
+                    <p class="fw-semibold fs-14 px-3 my-0 pt-2">{{oneTask.toDate | date : 'dd/MM/yyyy'}}</p>
+                </div>
+            </div>
+
+            <div class="task-details my-0 ">
+                <p class=" mx-auto fs-14  mb-1 fw-bolder">    {{ 'admin_tasks.task_details' | translate }} :
+                </p>
+                <!-- <p class="text-muted fs-12 fw-bold px-sm-5 ">
+                    هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى،
+                    حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
+                    التطبيق.
+                </p> -->
+                <p *ngIf="oneTask.details" class="text-muted fs-12 fw-bold px-sm-5 "> {{oneTask.details}}</p>
+                <p *ngIf=" oneTask.details == null " class="text-muted fs-12 fw-bold px-sm-5 ">{{ 'admin_tasks.no_data' | translate }}</p>
+            </div>
+
+
+
+            <p class="fs-6 mx-0 py-1  mb-2 bg-secondary-subtle text-center">   {{ 'admin_tasks.task_costs' | translate }} </p>
+            <div class="col-md-12 mb-3">
+                <div class="d-flex align-items-center">
+                    <p class="   fs-14 mb-0  fw-bolder"> {{ 'admin_tasks.advance_expense' | translate }} :
+                    </p>
+                    <p *ngIf="oneTask.cost" class="fw-semibold fs-14 mb-0 pt-2 px-3"> {{oneTask.cost}}</p>
+                    <p *ngIf=" oneTask.cost == null " class="fw-semibold fs-14 px-2 pt-2 mb-0"> {{ 'admin_tasks.no_advance_expense' | translate }} </p>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class="   fs-14 mb-0 fw-bolder">  {{ 'admin_tasks.travel_ticket' | translate }} :
+                    </p>
+                    <p *ngIf="oneTask.travelTicket != 'null' && oneTask.travelTicket "
+                        class="fw-semibold px-3  fs-14 mb-0 pt-2">
+                        {{oneTask.travelTicket}}</p>
+                    <p *ngIf=" ( oneTask.travelTicket == null || oneTask.travelTicket == 'null' )  "
+                        class="fw-semibold px-2 fs-14  mb-0 pt-2">
+                        {{ 'admin_tasks.no_travel_ticket' | translate }}</p>
+                </div>
+                <div class="d-flex align-items-center">
+                    <p class="  fs-14 mb-0 fw-bolder ">   {{ 'admin_tasks.visas' | translate }} :
+                    </p>
+                    <p *ngFor="let visa of visasArray " class="fw-semibold mb-0 fs-14 pt-2  px-3 border"> {{visa}} </p>
+                    <p *ngIf=" visasArray.length == 0 " class="fw-semibold mb-0 fs-14 pt-2  px-2"> {{ 'admin_tasks.no_visas' | translate }}</p>
+                </div>
+            </div>
+            <p class="fs-6  mx-0 py-1  mb-3 bg-secondary-subtle text-center"> {{ 'admin_tasks.management_decision' | translate }}</p>
+            <div class="row mb-3">
+                <div class="col-md-12 mb-1">
+                    <div class="d-flex align-items-center">
+                        <p class="fw-bolder my-0 fs-14 "> {{ 'admin_tasks.mr' | translate }} 
+                        </p>
+                   
+                        <p *ngIf="currentLang == 'ar'" class="fw-semibold my-0 fs-14 pt-1 px-2"> {{oneTask.approveByNameAr}} </p>
+                        <p *ngIf="currentLang == 'en'" class="fw-light  my-0 fs-14 pt-1  px-2"> {{oneTask.approveByNameEn}} </p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <p class="fw-bolder fs-14 my-0 "> {{ 'admin_tasks.ID' | translate }} :
+                        </p>
+                        <p class="fw-bold my-0  fs-14 pt-2  px-2">{{oneTask.approveById}}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <p class="fw-bolder fs-14 my-0">  {{ 'admin_tasks.date' | translate }} :
+                        </p>
+                        <p class="fw-normal my-0  fs-14 px-2 ">{{oneTask.approveDate | date :'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-12 py-0">
+                    <div class=" d-flex align-items-center flex-wrap">
+
+                        <div class="d-flex justify-content-center align-items-center py-0">
+                            <span class=" fs-14  font-14-mobile my-0 py-1 fw-bolder  d-inline-block">
+                                {{ 'admin_tasks.read_all_details' | translate }}
+                            </span>
+                            <input checked id="ivReadAll" type="checkbox"
+                                class="form-check-input form-check form-check-inline mx-2 ">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-100">
+                    <label for="decisionDetails" class=" fs-14 font-14-mobile fw-bolder">
+                        {{ 'admin_tasks.notes' | translate }} :
+                    </label>
+                    <!-- <p class="text-muted fs-12 fw-bold px-sm-5 ">
+                        هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى،
+                        حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
+                        التطبيق.
+                    </p> -->
+                    <p *ngIf="oneTask.approveDetails" class="text-muted fs-12 fw-bold px-sm-5 "> {{oneTask.approveDetails}}</p>
+                    <p *ngIf=" oneTask.approveDetails == null " class="text-muted fs-12 fw-bold px-sm-5 "> {{ 'admin_tasks.no_data' | translate }}</p>
+                </div>
+                <div class="w-100 px-5 py-0 my-0 ">
+                    <hr>
+                </div>
+
+
+                <div class="w-100   d-flex ">
+                    <div class="w-50 full-flex align-items-center    h-100">
+                        <p *ngIf="oneTask.approveStatus=='Approved'" class=" my-0 fs-4"> {{'تم_قبول_الطلب' | translate }}</p>
+                        <p *ngIf="oneTask.approveStatus=='NotApproved'" class=" my-0 fs-4"> {{'تم_رفض_الطلب'| translate}}</p>
+                    </div>
+                    <div class="w-25 {{'meAR_En'| translate}}">
+                        <img *ngIf="oneTask.approveStatus=='Approved'" src="./assets/images/non-compressed/approved.webp" class="w-100" alt="">
+                        <img *ngIf="oneTask.approveStatus=='NotApproved'" src="./assets/images/non-compressed/rejected.webp" class="w-100" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

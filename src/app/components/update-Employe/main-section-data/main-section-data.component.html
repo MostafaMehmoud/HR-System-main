@@ -1,0 +1,393 @@
+<table class=" w-100  {{ 'direction' | translate }}" [formGroup]="mainEmployeeData">
+    <tbody>
+
+
+
+        <!-- ===========================================    start main    ========================================= -->
+        <!-- ===========================================    start main    ========================================= -->
+        <!-- ===========================================    start main    ========================================= -->
+
+
+
+
+
+
+
+        <!--  name -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- arabic name -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}"> {{ 'Update.ArabicName' | translate }}
+                    : </p>
+                <div class="position-relative ">
+                    <input formControlName="employeeNameAr" type="text" [value]=" oneEmployee.employeeNameAr "
+                        class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.employeeNameAr != mainEmployeeData.get('employeeNameAr')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+            <!-- english name -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.EnglishName' | translate }}
+                    : </p>
+
+                <div class="position-relative ">
+                    <input formControlName="employeeNameEn" type="text" [value]=" oneEmployee.employeeNameEn "
+                        class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.employeeNameEn != mainEmployeeData.get('employeeNameEn')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+        </tr>
+
+
+
+        <!--  ID  + Age  -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee ID -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.EmployeeId' | translate }} :
+                </p>
+
+                <div class="position-relative ">
+                    <input formControlName="employeeId" type="text" [value]=" oneEmployee.employeeId "
+                        class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.employeeId != mainEmployeeData.get('employeeId')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+            <!-- employee Age -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.Age' | translate }} : </p>
+
+                <div class="position-relative ">
+                    <input formControlName="age" type="number" max="99" [value]="oneEmployee.age" class="form-control">
+                    
+                </div>
+            </td>
+
+        </tr>
+
+        <!-- personalID  -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee personalID -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.PersonalId' | translate }} :
+                </p>
+
+                <div class="position-relative ">
+                    <input formControlName="employeePersonId" type="number" [value]="oneEmployee.employeePersonId "
+                        class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.employeePersonId != mainEmployeeData.get('employeePersonId')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+            <!-- employee personalID Expire Date -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">
+                    {{ 'Update.PersonalIdExpire' | translate }} :
+                </p>
+                <div class="position-relative ">
+                    <input formControlName="employeePersonExpireDate" type="date"
+                        [value]=" oneEmployee.employeePersonExpireDate " class="form-control text-center">
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!-- Birth info -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- Birth Date -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.BirthDate' | translate }} :
+                </p>
+                <div class="position-relative ">
+                    <input (blur)="CalcAgeDirectly()" formControlName="birthDate" type="date" [max]="todayDate" [value]=" oneEmployee.birthDate "
+                        class="form-control text-center">
+                </div>
+            </td>
+
+            <!-- Birth Place -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.BirthPlace' | translate }} :
+                </p>
+
+                <div class="position-relative ">
+                    <input formControlName="birthPlace" type="text" [value]=" oneEmployee.birthPlace "
+                        class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.birthPlace != mainEmployeeData.get('birthPlace')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!--  Mother Name + gender  -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- employee Mother Name -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.MotherName' | translate }} :
+                </p>
+
+                <div class="position-relative ">
+                    <input formControlName="motherName" type="text" [value]="oneEmployee.motherName"
+                        class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.motherName != mainEmployeeData.get('motherName')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+            <!-- employee Gender -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.Gender' | translate }} : </p>
+
+                <div class="position-relative ">
+                    <select formControlName="gender" name="gender" id="gender" [value]="oneEmployee.gender"
+                        class="form-control">
+                        <option value="0">رجل</option>
+                        <option value="1">امرأة</option>
+                    </select>
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.gender != mainEmployeeData.get('gender')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+        </tr>
+        <!-- ===========================================    end main    ========================================= -->
+
+
+
+
+
+
+
+
+
+        <!-- =========================================== start company ========================================= -->
+        <!-- =========================================== start company ========================================= -->
+        <!-- =========================================== start company ========================================= -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <!-- Company Ar -->
+            <td *ngIf="currentLang == 'ar'"
+                class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} ">{{ 'Update.CompanyAr' |
+                    translate }} :
+                </p>
+
+                <div class="position-relative my-options-list">
+                    <input formControlName="companyNameAr" type="text" [value]="oneEmployee.companyNameAr"
+                        (keyup)="makeItInvalid('companyId')"
+                        (focus)="getAllGroubOf('Company' , 'companyNameAr' , 'companyId' )"
+                        [ngClass]="{'is-invalid': mainEmployeeData.get('companyId')?.errors}" class="form-control">
+                    <span class="edited-mark "
+                        *ngIf="oneEmployee.companyNameAr != mainEmployeeData.get('companyNameAr')?.value  && !mainEmployeeData.get('companyId')?.errors"><i
+                            class="fa-solid fa-marker"></i></span>
+
+                    <div *ngIf="enableEditName=='companyNameAr'"
+                        class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 border listOfEmployee z-3">
+                        <div (click)="setChosenValue(item , 'companyNameAr' , 'companyNameEn' , 'companyId')"
+                            *ngFor="let item of allgroups"
+                            class=" emp-Hover w-100 border-bottom  py-2 cursor-pointer position-relative d-flex justify-content-between">
+                            <span class="px-2">{{ item.nameAr }}</span>
+                            <span class="px-2 ps-3 fw-light small"> - {{ item.id }}</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <!-- Company En -->
+            <td *ngIf="currentLang == 'en'"
+                class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.CompanyEn' | translate }} :
+                </p>
+
+                <div class="position-relative my-options-list">
+                    <input formControlName="companyNameEn" type="text" [value]="oneEmployee.companyNameEn"
+                        (keyup)="makeItInvalid('companyId')"
+                        (focus)="getAllGroubOf('Company' , 'companyNameEn' , 'companyId' )"
+                        [ngClass]="{'is-invalid': mainEmployeeData.get('companyId')?.errors}" class="form-control">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.companyNameEn != mainEmployeeData.get('companyNameEn')?.value  && !mainEmployeeData.get('companyId')?.errors"><i
+                            class="fa-solid fa-marker"></i></span>
+
+                    <div *ngIf="enableEditName=='companyNameEn'"
+                        class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 border listOfEmployee z-3">
+                        <div (click)="setChosenValue(item , 'companyNameAr' , 'companyNameEn' , 'companyId')"
+                            *ngFor="let item of allgroups"
+                            class=" emp-Hover w-100 border-bottom  py-2 cursor-pointer position-relative d-flex justify-content-between">
+                            <span class="px-2">{{ item.nameEn }}</span>
+                            <span class="px-2 ps-3 fw-light small"> - {{ item.id }}</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <!-- Company ID -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.CompanyId' | translate }} :
+                </p>
+
+                <div class="position-relative ">
+                    <input formControlName="companyId" type="text" [value]="oneEmployee.companyId" class="form-control"
+                        [ngClass]="{'is-invalid': mainEmployeeData.get('companyId')?.errors}"
+                        [readOnly]="mainEmployeeData.get('companyId')?.errors">
+                    <span class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}"
+                        *ngIf="oneEmployee.companyId != mainEmployeeData.get('companyId')?.value && !mainEmployeeData.get('companyId')?.errors">
+                        <i class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+        </tr>
+        <!-- =========================================== end company ========================================= -->
+
+
+
+
+
+
+
+
+
+
+        <!-- ===========================================      START kafil     ========================================= -->
+        <!-- ===========================================      START kafil     ========================================= -->
+        <!-- ===========================================      START kafil     ========================================= -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+
+            <!-- employee Kafil Name (Arabic) -->
+            <td *ngIf="currentLang == 'ar'"
+                class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} ">{{ 'Update.KafilNameAr' |
+                    translate }} :
+                </p>
+
+                <div class="position-relative my-options-list">
+                    <input formControlName="kafilNameAr" type="text" [value]="oneEmployee.kafilNameAr"
+                        (keyup)="makeItInvalid('kafilId')" (focus)="getAllGroubOf('kafil' , 'kafilNameAr' , 'kafilId' )"
+                        [ngClass]="{'is-invalid': mainEmployeeData.get('kafilId')?.errors}" class="form-control">
+                    <span class="edited-mark"
+                        *ngIf="oneEmployee.kafilNameAr != mainEmployeeData.get('kafilNameAr')?.value && !mainEmployeeData.get('kafilId')?.errors"><i
+                            class="fa-solid fa-marker"></i></span>
+
+                    <div *ngIf="enableEditName=='kafilNameAr'"
+                        class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 border listOfEmployee z-3">
+                        <div (click)="setChosenValue(item , 'kafilNameAr' , 'kafilNameEn' , 'kafilId')"
+                            *ngFor="let item of allgroups"
+                            class=" emp-Hover w-100 border-bottom  py-2 cursor-pointer position-relative d-flex justify-content-between">
+                            <span class="px-2">{{ item.nameAr }}</span>
+                            <span class="px-2 ps-3 fw-light small"> - {{ item.id }}</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <!-- employee Kafil Name (English) -->
+            <td *ngIf="currentLang == 'en'"
+                class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.KafilNameEn' | translate }} :
+                </p>
+
+                <div class="position-relative my-options-list">
+                    <input formControlName="kafilNameEn" type="text" [value]="oneEmployee.kafilNameEn"
+                        (keyup)="makeItInvalid('kafilId')" (focus)="getAllGroubOf('kafil' , 'kafilNameEn' , 'kafilId' )"
+                        [ngClass]="{'is-invalid': mainEmployeeData.get('kafilId')?.errors}" class="form-control ">
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.kafilNameEn != mainEmployeeData.get('kafilNameEn')?.value && !mainEmployeeData.get('kafilId')?.errors"
+                        class="edited-mark"><i class="fa-solid fa-marker"></i></span>
+                    <div *ngIf="enableEditName=='kafilNameEn'"
+                        class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 border listOfEmployee">
+                        <div (click)="setChosenValue(item , 'kafilNameAr' , 'kafilNameEn'  , 'kafilId' )"
+                            *ngFor="let item of allgroups"
+                            class=" emp-Hover w-100 border-bottom  py-2 cursor-pointer position-relative d-flex justify-content-between">
+                            <span class="px-2">{{ item.nameEn }}</span>
+                            <span class="px-2 ps-3 fw-light small"> - {{ item.id }}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+
+            <!-- employee Kafil Id -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.KafilId' | translate }} :
+                </p>
+
+                <div class="position-relative ">
+                    <input formControlName="kafilId" type="text" [value]="oneEmployee.kafilId" class="form-control"
+                        [ngClass]="{'is-invalid': mainEmployeeData.get('kafilId')?.errors}"
+                        [readOnly]="mainEmployeeData.get('kafilId')?.errors">
+                    <span class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}"
+                        *ngIf="oneEmployee.kafilId != mainEmployeeData.get('kafilId')?.value&& !mainEmployeeData.get('kafilId')?.errors">
+                        <i class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+        </tr>
+        <!-- ===========================================       END kafil      ========================================= -->
+
+
+
+
+        <!-- employee Marriage Status -->
+        <tr class="row w-100  py-md-2 py-2-mobile font-18-mobile ">
+
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.MarriageStatus' | translate
+                    }} : </p>
+
+                <div class="position-relative ">
+                    <select formControlName="marrige" name="marrige" id="marrige" [value]="oneEmployee.marrige"
+                        class="form-control">
+                        <option value="0">اعزب</option>
+                        <option value="1">متزوج</option>
+                    </select>
+                    <span [ngClass]="{'edited-mark-en': currentLang == 'en'}" class="edited-mark "
+                        *ngIf="oneEmployee.marrige != mainEmployeeData.get('marrige')?.value"><i
+                            class="fa-solid fa-marker"></i></span>
+                </div>
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>
+<div class="w-100 text-center margin-50 z-0">
+    <p *ngIf="inValidMsg" class="text-danger small my-2">
+        قم بملئ المدخلات بطريقة صحيحة (اختر عنصر او اتركها فارغة)
+    </p>
+</div>

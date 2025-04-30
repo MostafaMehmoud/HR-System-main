@@ -1,0 +1,144 @@
+<section #mainSection class="my-5 CardOne">
+    <form [formGroup]="lettersForm" (ngSubmit)="sendRequest()">
+        <div class="vacationDetails arabicList bg-white rounded-4 w-100 overflow-hidden shadow-lg">
+            <div class="row">
+                <!-- الفورم -->
+                <div class="col-md-7 col-lg-6">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-column p-5 requestDetails {{ 'direction' | translate }}">
+                        <h2 class="fw-bolder my-3">{{ 'letters.طلب_خطاب' | translate }}</h2>
+                        <!-- all inputs -->
+                        <div class="w-100 mt-5">
+                            <div class="w-100 p-2">
+                                <label for="empName">{{ 'letters.اسم_الموظف' | translate }}:</label>
+                                <input type="text" id="empName" class="form-control {{ 'lang-arabic' | translate }}"
+                                    [value]="nameAr" disabled>
+                                <input type="text" id="empName" class="form-control {{ 'lang-english' | translate }} "
+                                    [value]="nameEN" disabled>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                <div class="w-50 p-2">
+                                    <label for="empId">{{ 'letters.رقم_الموظف' | translate }}:</label>
+                                    <input type="text" id="empId" class="form-control w-100" [value]="empId" disabled>
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="letterType">{{ 'letters.نوع_الخطاب' | translate }}:</label>
+                                    <select formControlName="letterType" name="letterType" id="letterType"
+                                        class="form-select font-14-mobile py-2">
+                                        <option disabled selected value="null">{{ 'letters.اختر_نوع_الخطاب' | translate
+                                            }}</option>
+                                        <option value="1">{{ 'letters.تعريف' | translate }}</option>
+                                        <option value="2">{{ 'letters.خطابات_مفتوحة' | translate }}</option>
+                                        <option value="3">{{ 'letters.خارجي_تصديق' | translate }}</option>
+                                        <option value="4">{{ 'letters.تفويض' | translate }}</option>
+                                    </select>
+                                </div>
+                                <!-- error msg type -->
+                                <p class="text-danger text-center small errorInput w-50 mx-auto"
+                                    *ngIf="lettersForm.get('letterType')?.getError('required') && lettersForm.get('letterType')?.touched">
+                                    {{ 'letters.اختر_نوع_الخطاب' | translate }}
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                <div class="w-100 p-2">
+                                    <label for="Recipient">{{ 'letters.الجهة_المراد_عمل_الخطاب_لها' | translate
+                                        }}:</label>
+                                    <input formControlName="Recipient" type="text" id="Recipient"
+                                        class="form-control w-100 font-14-mobile py-2"
+                                        placeholder="{{ 'letters.ادخل_اسم_الجهة' | translate }}">
+                                </div>
+                                <p class="text-danger small text-center errorInput w-100"
+                                    *ngIf="lettersForm.get('Recipient')?.getError('required') && lettersForm.get('Recipient')?.touched">
+                                    {{ 'letters.الجهة_المراد_عمل_الخطاب_لها' | translate }}
+                                </p>
+                            </div>
+                            <!-- يصدق الطلب من غرفة التجارة -->
+                            <div class="d-flex justify-content-center align-items-center flex-wrap p-2">
+                                <label class="w-50 p-2 m-0">{{ 'letters.يصدق_الطلب_من_الغرفة_التجارية' | translate
+                                    }}:</label>
+                                <div class="w-50 p-2 d-flex justify-content-center align-items-center">
+                                    <div class="w-50">
+                                        <input formControlName="certified" class="form-check-input border-dark"
+                                            type="radio" id="certified1" name="certified" value="true">
+                                        <label for="certified1" class="form-check-label px-2">{{ 'letters.نعم' |
+                                            translate }}</label>
+                                    </div>
+                                    <div class="w-50">
+                                        <input formControlName="certified" class="form-check-input border-dark"
+                                            type="radio" id="certified2" name="certified" value="false">
+                                        <label for="certified2" class="form-check-label px-2">{{ 'letters.لا' |
+                                            translate }}</label>
+                                    </div>
+                                </div>
+                                <p class="text-danger small text-center errorInput w-100"
+                                    *ngIf="lettersForm.get('certified')?.getError('required') && lettersForm.get('certified')?.touched">
+                                    {{ 'letters.هل_يصدق_الخطاب' | translate }}
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-100 p-2">
+                                    <label for="details">{{ 'letters.ملاحظات' | translate }}:</label>
+                                    <textarea formControlName="details" id="details" rows="3"
+                                        placeholder="{{ 'letters.هل_ترغب_في_اطلاعنا_بأي_تفاصيل_اخري' | translate }}"
+                                        class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <p class="text-danger small errorInput px-3"
+                                *ngIf="lettersForm.get('details')?.getError('required') && lettersForm.get('details')?.touched">
+                                {{ 'letters.برجاء_توضيح_سبب_الطلب' | translate }}
+                            </p>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-100 p-2">
+                                    <label for="myFile">{{ 'letters.ارفق_مستند' | translate }}:</label>
+                                    <input #fileInpu formControlName="myFile" type="file" id="myFile"
+                                        class="form-control w-100">
+                                </div>
+                            </div>
+                            <p class="text-danger small errorInput px-3"
+                                *ngIf="lettersForm.get('myFile')?.getError('required') && lettersForm.get('myFile')?.touched">
+                                {{ 'letters.ارفق_المستند_الخاص_بالطلب' | translate }}
+                            </p>
+                        </div>
+                        <!-- زر الحفظ و الارسال -->
+                        <div class="mt-5">
+                            <button class="btn btn-outline-dark custombutn px-5 py-2 rounded-5">
+                                {{ 'letters.ارسال_الطلب' | translate }} <i class="fa-solid fa-check px-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- الصورة -->
+                <div class="col-md-5 col-lg-6 hide-on-mobile">
+                    <div class="d-flex justify-content-center align-items-center vectorForm h-100">
+                        <img src="./assets/images/compressed-images/wepb/Documents.webp"
+                            alt="{{ 'letters.طلب_خطاب' | translate }}" class="w-75 vectorImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+<section #successModal class="SuccessModal vh-80 d-flex justify-content-center align-items-center d-none ">
+    <div class="bg-white w-50 w-100-mobile mx-auto rounded-3 text-center shadow-lg">
+        <div class="p-5">
+            <div class="d-flex justify-content-center align-items-center {{ 'direction' | translate }}">
+                <p class="doneMsgMain fs-3  my-0">{{'leave.تم_ارسال_الطلب_بنجاح' | translate }}</p>
+                <i class="fa-solid fa-circle-check fa-lg px-2" style="color: #11645f;"></i>
+            </div>
+
+            <p class="doneMsgSub fs-5 fw-light ">{{ 'leave.تفقد_حالة_الطلب_من_قسم_الطلبات' | translate }} </p>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/allOrders/vacation"
+                    class="btn btn-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-end-0 ">{{ 'leave.الطلبات' | translate
+                    }}</button>
+            </div>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/home"
+                    class="btn btn-outline-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-start-0">{{ 'leave.الرئيسية' |
+                    translate }}</button>
+            </div>
+        </div>
+    </div>
+</section>

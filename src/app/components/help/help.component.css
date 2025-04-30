@@ -1,0 +1,72 @@
+
+.CardOne {
+    position: relative;
+    left: 200px;
+    transition: left 1.6s , opacity .5s;
+    opacity: 0;
+    }
+    
+    .slideIn{
+    left: 0px;
+    opacity: 1;
+    }
+
+
+
+
+.whatsapp-icon{
+    width: 80px;
+    cursor: pointer;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    transition: all .3s;
+    border-radius: 50%;
+    border: 4px transparent solid;
+
+    &:hover{
+        scale: 1.15;
+        border: 4px white solid;
+    }
+
+}
+
+.social-Icon{
+transition: all .2s;
+cursor: pointer;
+
+    &:hover{
+        scale: 1.2;
+        color: rgb(0, 122, 126);
+    }
+}
+
+
+@media screen and (max-width:576px) {
+.px-2-on-mobile{
+    padding-inline: 8px !important ;
+}
+.py-2-on-mobile{
+    padding-block: 8px !important ;
+}
+
+.fs-20-mobile{
+    font-size: 20px;
+}
+.fs-14-mobile{
+    font-size: 14px;
+}
+.py-5{
+    padding-block: 15px !important;
+}
+.mt-5{
+    margin-top: 10px !important;
+}
+
+.whatsapp-icon{
+width: 60px;
+position: fixed;
+right: 10px;
+bottom: 30px;
+}
+}

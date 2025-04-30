@@ -1,0 +1,60 @@
+<section class="w-100 arabicList">
+    <div class="w-100 p-sm-5 px-2">
+        <!-- Repeating part -->
+        <div *ngFor="let order of LettersList" class="hover-scale" >
+            <div class="w-100 {{ 'direction' | translate }}">
+                <p class="orderNumber my-0 d-inline-block bg-white px-2 rounded {{ 'fixOrderNumber' | translate }}">
+                    {{ 'my_order_vac.رقم_الطلب' | translate }} : {{order.id}}
+                </p>
+            </div>
+
+            <div class="parentOfOrders {{ 'direction' | translate }} mx-0 w-100 bg-white  shadow my-2  rounded-3  rounded border row d-flex justify-content-center align-items-center overflow-hidden">
+                <div class="col-md-3">
+                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                        <p class="my-0">{{ 'EmpLetters.الجهة_المستفيدة' | translate }} : {{order.destinationName}}</p>
+                        <p class="my-0">{{ 'EmpLetters.يصدق_من_الغرفة_التجارية' | translate }} :
+                            <span *ngIf="order.isRequiredCCC">{{ 'EmpLetters.نعم' | translate }}</span>
+                            <span *ngIf="!order.isRequiredCCC">{{ 'EmpLetters.لا' | translate }}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile ">
+                        <p class="my-0">{{ 'EmpLetters.نوع_الخطاب' | translate }} :
+                            <span class="fw-lighter" *ngIf="order.letterType == 'Identification'">{{ 'EmpLetters.تعريف' | translate }}</span>
+                            <span class="fw-lighter" *ngIf="order.letterType == 'Opened'">{{ 'EmpLetters.خطابات_مفتوحة' | translate }}</span>
+                            <span class="fw-lighter" *ngIf="order.letterType == 'External'">{{ 'EmpLetters.خارجي_(تصديق)' | translate }}</span>
+                            <span class="fw-lighter" *ngIf="order.letterType == 'Delegation'">{{ 'EmpLetters.تفويض' | translate }}</span>
+                        </p>
+                        <p class="my-0">{{ 'EmpLetters.تفاصيل_الخطاب' | translate }} : <span class="fw-lighter">{{order.details}}</span></p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="w-100 noBorder-mobile ">
+                        <p class="my-0">{{ 'EmpLetters.مرفقات' | translate }} :
+                            <span class="my-0 cursor-pointer" *ngIf="order.uploadFileId">
+                                <a (click)="fileDownload(order.uploadFileId)" class="link-underline-opacity-50 link-underline">{{ 'EmpLetters.تحميل_المرفق' | translate }}</a>
+                            </span>
+                            <span *ngIf="!order.uploadFileId">{{ 'EmpLetters.لا_يوجد' | translate }}</span>
+                        </p>
+                        <p class="my-0" *ngIf="order.approveDetails">{{ 'EmpLetters.تفاصيل_الرد' | translate }} : {{order.approveDetails}}</p>
+                        <p *ngIf="order.approveStatus == 'Approved'" class="my-0">{{ 'EmpLetters.حالة_الطلب' | translate }} : <span class="status-Msg-confirmed">{{ 'EmpLetters.تمت_الموافقة' | translate }}</span></p>
+                        <p *ngIf="order.approveStatus == 'NotApproved'" class="my-0">{{ 'EmpLetters.حالة_الطلب' | translate }} : <span class="status-Msg-rejected">{{ 'EmpLetters.تم_رفض_الطلب' | translate }}</span></p>
+                        <p *ngIf="order.approveStatus == 'Pinding'" class="my-0">{{ 'EmpLetters.حالة_الطلب' | translate }} : <span class="status-Msg-pendding">{{ 'EmpLetters.جاري_مراجعة_الطلب' | translate }}</span></p>
+                    </div>
+                </div>
+
+                <div class="col-md-2 statusImg {{ 'fixStatusImg' | translate }}">
+                    <div class="w-100 mx-auto p-2 text-center">
+                        <img *ngIf="order.approveStatus == 'Approved'" src="./assets/images/compressed-images/wepb/accepted.png" alt="Approved" class="w-50 w-100-mobile">
+                        <img *ngIf="order.approveStatus == 'Pinding'" src="./assets/images/compressed-images/wepb/pending_3388322.png" alt="Pending" class="w-50 w-100-mobile">
+                        <img *ngIf="order.approveStatus == 'NotApproved'" src="./assets/images/compressed-images/wepb/delete_2808336.png" alt="NotApproved" class="w-50 w-100-mobile">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

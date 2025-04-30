@@ -1,0 +1,223 @@
+<!-- ================================ start setting  ================================ -->
+<div #mainDiv class="p-5 bg-body-secondary p-3-mobile">
+    <form class="bg-white shadow rounded-4" [formGroup]="settingSheet">
+        <p class="fs-2 text-center py-3">{{ 'display_time_sheet.page_title' | translate }}</p>
+        <div class="dashboard w-100 p-5 {{ 'direction' | translate }}">
+
+            <div class="row my-2 ">
+                <!-- ==============     name     ==============  -->
+                <div class="col-xxl-2 col-xl-3 col-md-4 ">
+                    <div class="py-2">
+                        <label for="empName">{{ 'display_time_sheet.name_label' | translate }}</label>
+                        <input type="text" id="empName" class="form-control w-100 mx-auto text-center text-start"
+                            [ngClass]="{'is-valid': empName }" disabled [value]="empName">
+                    </div>
+                </div>
+
+                <!-- ==============     id     ==============  -->
+                <div class="col-xxl-2 col-xl-3 col-md-4 ">
+                    <div class="py-2 position-relative ">
+                        <label for="employeeId" class="w-100 ">{{ 'display_time_sheet.employee_code_label' | translate }}
+                            <span class="all-Check px-1 text-start">{{ 'display_time_sheet.all_label' | translate }}</span>
+                            <input #allemp (change)="markAllEmp(allemp.checked)" type="checkbox"
+                                class="text-muted mx-0 text-start align-middle form-check-input d-inline-block form-check-inline my-0 border-dark-subtle ">
+                        </label>
+                        <input maxlength="4" type="text" id="employeeId" formControlName="employeeId"
+                            class="form-control w-100 mx-auto text-center">
+
+                        <!-- error msg -->
+                        <span *ngIf="noId" class="small text-danger ">{{ 'display_time_sheet.not_found_id' | translate
+                            }} <br></span>
+
+                        <!-- error msg -->
+                        <span
+                            *ngIf="settingSheet.get('employeeId')?.getError('minlength') && settingSheet.get('employeeId')?.touched"
+                            class="small text-danger ">{{ 'display_time_sheet.min_length_error' | translate }}</span>
+                        <!-- error msg -->
+                        <span
+                            *ngIf="settingSheet.get('employeeId')?.getError('required') && settingSheet.get('employeeId')?.touched"
+                            class="small text-danger ">{{ 'display_time_sheet.required_id_error' | translate }}</span>
+                    </div>
+                </div>
+
+                <!-- ==============     project     ==============  -->
+                <div class="col-xxl-2 col-xl-3 col-md-4 ">
+                    <div class="py-2">
+                        <label for="projectId">{{ 'display_time_sheet.project_label' | translate }}</label>
+                        <select formControlName="projectId" name="projectId" id="projectId"
+                            class="form-select project-options border border-dark-subtle">
+                            <option value="null">{{ 'display_time_sheet.all_projects' | translate }}</option>
+                            <option value="1">project1</option>
+                            <option value="2">project2</option>
+                            <option value="3">project3</option>
+                            <option value="4">project4</option>
+                            <option value="5">project5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- ==============     form date     ==============  -->
+                <div class="col-xxl-2 col-xl-3 col-md-4 ">
+                    <div class="py-2">
+                        <label for="fromDate">{{ 'display_time_sheet.from_date_label' | translate }}</label>
+                        <input #fromDate formControlName="fromDate" type="date" id="fromDate"
+                            class="form-control w-100 mx-auto text-center" [max]="todayDate">
+                    </div>
+                    <span
+                        *ngIf="settingSheet.get('fromDate')?.getError('required') && settingSheet.get('fromDate')?.touched"
+                        class="small text-danger ">{{ 'display_time_sheet.required_from_date_error' | translate
+                        }}</span>
+                </div>
+
+                <!-- ==============     to date     ==============  -->
+                <div class="col-xxl-2 col-xl-3 col-md-4 ">
+                    <div class="py-2">
+                        <label for="toDate">{{ 'display_time_sheet.to_date_label' | translate }}</label>
+                        <input formControlName="toDate" type="date" id="toDate" [max]="todayDate" [min]="fromDate.value"
+                            class="form-control w-100 mx-auto text-center">
+                    </div>
+                    <span
+                        *ngIf="settingSheet.get('toDate')?.getError('required') && settingSheet.get('toDate')?.touched"
+                        class="small text-danger ">{{ 'display_time_sheet.required_to_date_error' | translate }}</span>
+                </div>
+            </div>
+
+            <!-- -----------------  buttons  ----------------- -->
+            <div class="row text-center ">
+                <div class="col-xxl-2 col-xl-4 col-md-6 d-flex justify-content-center mx-auto align-items-center">
+                    <div *ngIf="allData.length == 0" class="w-50 px-2">
+                        <button (click)="getData()" class="btn btn-dark w-100 mx-auto d-block my-2">
+                            {{ 'display_time_sheet.show_button' | translate }}
+                        </button>
+                    </div>
+
+                    <div class="w-100 px-2" *ngIf="allData.length > 0">
+                        <button (click)="newSearch(allemp)" class="btn btn-danger w-100 mx-auto d-block my-2">
+                            {{ 'display_time_sheet.reset_button' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- -----------------  buttons  ----------------- -->
+        </div>
+    </form>
+</div>
+<!-- ================================ end setting  ================================ -->
+
+
+
+
+
+
+
+<!-- ================================ start main Content  ================================ -->
+<form>
+    <div *ngIf="allData.length > 0" class="table-responsive bg-white rounded-3">
+        <table class="table table-bordered {{ 'direction' | translate }}">
+            <thead>
+                <tr>
+                    <th class="py-3 text-center border-0"></th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.id' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.name' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.date' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.start' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.leave' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.early' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.late' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.working_time' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.project' | translate }}</th>
+                    <th class="py-3 text-center border-0">{{ 'display_time_sheet.absent' | translate }}</th>
+                </tr>
+            </thead>
+
+            <tr *ngFor="let item of allData; let myIi = index">
+                <td class="fw-lighter text-center number-Width align-middle text-muted opacity-50 small"><span>{{ myIi +
+                        1 }}</span></td>
+
+                <td class="py-2 idwidth englishFont text-center font-w-500">
+                    <span>{{ item.employeeId }}</span>
+                </td>
+
+                <td class="py-2 arabicFont name-Width personTd">
+                    <div class="d-flex justify-content-start align-items-center">
+                        <div class="greenDot px-1 me-2"></div>
+                        <img src="./assets/images/non-compressed/arabi_men(mini).webp" alt="" class="empImg px-1">
+                        <span class="px-1 empcolor  {{ 'lang-arabic' | translate}} ">{{ item.employeeNameAr }}</span>
+                        <span class="px-1 empcolor   {{ 'lang-english' | translate}} ">{{ item.employeeNameEn }}</span>
+                    </div>
+                </td>
+                <td class="py-2 font-w-500 englishFont text-center date-Width">
+                    <span>{{ item.date }}</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center time-Width">
+                    <span *ngIf="!item.absent">{{ item.start | time12hours }}</span>
+                    <span *ngIf="item.absent" class="arabicFont">-</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center time-Width">
+                    <span *ngIf="!item.absent">{{ item.leave | time12hours }}</span>
+                    <span *ngIf="item.absent" class="arabicFont">-</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center time-Width">
+                    <span *ngIf="!item.absent">
+                        {{ item.earlyByMinute }} <small *ngIf="item.earlyByMinute > 0">m</small>
+                    </span>
+                    <span *ngIf="item.absent" class="arabicFont">-</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center time-Width">
+                    <span *ngIf="!item.absent">{{ item.lateByMinute }} <small *ngIf="item.lateByMinute > 0">m</small>
+                    </span>
+                    <span *ngIf="item.absent" class="arabicFont">-</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center Worktime-Width">
+                    <span *ngIf="!item.absent">{{ item.workingTimeByMinute | minToHours }}</span>
+                    <span *ngIf="item.absent" class="arabicFont">-</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center project-Width">
+                    <span *ngIf="!item.absent">{{ item.projectId }}</span>
+                    <span *ngIf="item.absent" class="arabicFont">-</span>
+                </td>
+
+                <td class="py-2 font-w-500 englishFont text-center time-Width">
+                    <span *ngIf="item.absent" class="arabicFont">{{ 'display_time_sheet.absent2' | translate }}</span>
+                    <span *ngIf="!item.absent">-</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+<!-- ================================ end main Content  ================================ -->
+
+
+
+
+
+
+
+
+
+<!-- ================================ start template Content  ================================ -->
+<div *ngIf="noData" class="p-5 p-2-mobile">
+    <div class="w-100 bg-white rounded-3 row full-flex mx-0 arabicList">
+        <div class="col-xxl-4 col-lg-5 col-md-6 text-center">
+            <div class="pt-5-on-mobile">
+                <p class="fs-1 font-20-mobile">{{ 'display_time_sheet.no_data_title' | translate }}</p>
+                <p class="fs-3 font-16-mobile">{{ 'display_time_sheet.no_data_subtitle' | translate }}</p>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-lg-4 col-md-5">
+            <div class="w-100 text-center">
+                <img src="./assets/images/compressed-images/wepb/search.webp" alt="" class="w-100 w-50-mobile">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ================================ end template Content  ================================ -->

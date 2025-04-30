@@ -1,0 +1,168 @@
+<table class=" w-100 mb-4 {{ 'direction' | translate }}" [formGroup]="InsuranceFormData">
+    <tbody>
+
+        <!-- ===========================================      START insurance     ========================================= -->
+        <!-- ===========================================      START insurance     ========================================= -->
+        <!-- ===========================================      START insurance     ========================================= -->
+
+        <!--  In-Id + In Record Nu  -->
+        <tr class="row w-100  py-md-2 font-18-mobile ">
+
+            <!-- employee Insurance Id -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceId' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="insuranceId" type="number" [value]="oneEmployee.insuranceId"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insuranceId != InsuranceFormData.get('insuranceId')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Insurance Record No -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceRecordNo' | translate
+                    }} :</p>
+                <div class="position-relative">
+                    <input formControlName="insuranceRecordNo" type="number" [value]="oneEmployee.insuranceRecordNo"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insuranceRecordNo != InsuranceFormData.get('insuranceRecordNo')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+        </tr>
+
+
+
+        <!-- Ins Value + perc -->
+        <tr class="row w-100  py-md-2 font-18-mobile ">
+
+            <!-- employee Insurance Value -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceValue' | translate }}
+                    :</p>
+                <div class="position-relative">
+                    <input formControlName="insuranceValue" type="number" [value]="oneEmployee.insuranceValue"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insuranceValue != InsuranceFormData.get('insuranceValue')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Insurance Perc -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsurancePer' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="insurancePer" type="number" [value]="oneEmployee.insurancePer"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insurancePer != InsuranceFormData.get('insurancePer')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!--  Ins Company + ins salary -->
+        <tr class="row w-100  py-md-2 font-18-mobile ">
+
+            <!-- employee Insurance Company -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceCompany' | translate
+                    }} :</p>
+                <div class="position-relative">
+                    <input formControlName="insuranceCompany" type="text" [value]="oneEmployee.insuranceCompany"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insuranceCompany != InsuranceFormData.get('insuranceCompany')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Insurance Salary -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceSalary' | translate }}
+                    :</p>
+                <div class="position-relative">
+                    <input formControlName="insuranceSalary" type="number" [value]="oneEmployee.insuranceSalary"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insuranceSalary != InsuranceFormData.get('insuranceSalary')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!--  Ins Dang GP + Date -->
+        <tr class="row w-100  py-md-2 font-18-mobile ">
+
+            <!-- employee Insurance Dang GP -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceDangGP' | translate }}
+                    :</p>
+                <div class="position-relative">
+                    <input formControlName="insuranceDangGP" type="text" [value]="oneEmployee.insuranceDangGP"
+                        class="form-control">
+                    <span *ngIf="oneEmployee.insuranceDangGP != InsuranceFormData.get('insuranceDangGP')?.value"
+                        class="edited-mark" [ngClass]="{'edited-mark-en': currentLang == 'en'}">
+                        <i class="fa-solid fa-marker"></i>
+                    </span>
+                </div>
+            </td>
+
+            <!-- employee Insurance Date -->
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceDate' | translate }} :
+                </p>
+                <div class="position-relative">
+                    <input formControlName="insuranceDate" type="date" [value]="oneEmployee.insuranceDate"
+                        class="form-control text-center">
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!-- employee Insurance Date Expired -->
+        <tr class="row w-100  py-md-2 font-18-mobile ">
+
+            <td class="col-md-6  py-sm-2 d-flex justify-content-center flex-wrap  py-2-mobile ">
+                <p class="my-0  input-label py-sm-1  {{  'peAR_Encustom'| translate }} "
+                    [ngClass]="{'fw-semibold  fs-14': currentLang == 'en'}">{{ 'Update.InsuranceDateExpired' |
+                    translate }} :</p>
+                <div class="position-relative">
+                    <input formControlName="insuranceDateE" type="date" [min]="oneEmployee.insuranceDate"
+                        [value]="oneEmployee.insuranceDateE" class="form-control text-center ">
+                </div>
+            </td>
+            
+        </tr>
+
+
+        <!-- ===========================================       END insurance      ========================================= -->
+    </tbody>
+</table>
+

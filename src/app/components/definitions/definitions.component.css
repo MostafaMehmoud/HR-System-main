@@ -1,0 +1,79 @@
+.item {
+    height: auto !important;
+    background: #fff;
+    transition: all .2s;
+    cursor: pointer;
+}
+
+.item:hover {
+    /* background-image: linear-gradient(90deg, #3077a1, #3fb674) !important; */
+    background: linear-gradient(90deg, #3fb674, #3077a1) !important;
+    ;
+    color: #fff;
+    scale: 1.05;
+}
+
+
+
+.w-150px {
+    width: 150px !important;
+}
+
+.w-70px {
+    width: 70px !important;
+}
+
+tr:hover {
+    background: rgb(226, 226, 226);
+    color: #000000;
+}
+
+
+td:first-child {
+    padding-inline: 20px
+}
+
+
+/* ======== custom-btn  ============ */
+/* From Uiverse.io by adamgiebl */
+.cyberpunk-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #099999;
+    border-radius: 5px;
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.cyberpunk-checkbox:before {
+    content: "";
+    background-color: #078080;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.cyberpunk-checkbox:checked:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.cyberpunk-checkbox-label {
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 30px;
+}

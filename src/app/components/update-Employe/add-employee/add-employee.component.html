@@ -1,0 +1,36 @@
+<div class="bg-body-tertiary px-sm-5 vh-90 vh-100-on-mobile" [formGroup]="employeeDataForm">
+    <section class="w-100 container-fluid rounded-3 vh-80 py-5 p-sm-5">
+        <h1 class="text-center py-0 fw-bolder {{ 'admin_assets.حجم_العنوان' | translate }}">
+            {{ 'add_employee' | translate }}
+        </h1>
+        <div class="row pt-5 pb-4">
+            <div class="inputs-div p-3-mobile arabicList col-md-7 col-lg-6 col-xxl-5 mx-auto">
+                <div class="pb-3">
+                    <label for="employeeNameAr" class="input-label">{{ 'employee_name_ar' | translate }}</label>
+                    <input type="text" id="employeeNameAr" formControlName="employeeNameAr" class="form-control">
+                    <p *ngIf="employeeDataForm.get('employeeNameAr')?.errors && employeeDataForm.get('employeeNameAr')?.touched"
+                        class="text-danger small">{{ 'arabic_name_required' | translate }}</p>
+                </div>
+                <div class="">
+                    <label for="employeeNameEn" class="input-label">{{ 'employee_name_en' | translate }}</label>
+                    <input type="text" id="employeeNameEn" formControlName="employeeNameEn" class="form-control">
+                    <p *ngIf="employeeDataForm.get('employeeNameEn')?.errors && employeeDataForm.get('employeeNameEn')?.touched"
+                        class="text-danger small">{{ 'english_name_required' | translate }}</p>
+                </div>
+                <div *ngIf="creationDone" class="pt-3 text-center">
+                    <p class="text-success fs-18-mobile-16">{{ 'employee_code' | translate }} {{ newEmpData.employeeId }}</p>
+                </div>
+            </div>
+        </div>
+        <p *ngIf="unKnownErr" class="text-danger small text-center">{{ 'unknown_error' | translate }}</p>
+        <p *ngIf="UnstoredRequest" class="text-danger small text-center">{{ 'unstored_request' | translate }}</p>
+        <div class="w-100 text-center">
+            <button *ngIf="!creationDone" (click)="sendData()" class="btn btn-dark py-2 w-170px">{{ 'create' | translate }}</button>
+            <button *ngIf="creationDone" (click)="goToUpdatePage()"
+                class="btn btn-outline-dark me-3 next-Button px-5 p-3-mobile py-2 rounded-5">
+                <i class="fa-fade fa-solid fa-circle-chevron-left fa-xl px-2 position-absolute start-0"></i>
+                <span class="ps-3">{{ 'next' | translate }}</span>
+            </button>
+        </div>
+    </section>
+</div>

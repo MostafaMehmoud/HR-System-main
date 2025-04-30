@@ -1,0 +1,22 @@
+<div class="{{ 'englishBody' | translate }} ">
+    <router-outlet></router-outlet>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    <p class=" w-100  loading-text"> Loading.. </p>
+</ngx-spinner>
+
+<ngx-spinner name="spinner2" bdColor="rgba(255,255,255,0.9)" size="medium" color="#000000" type="ball-clip-rotate"
+    [fullScreen]="true">
+    <p style="color: rgb(0, 0, 0)">  save . .  </p>
+</ngx-spinner>
+
+<ngx-spinner name="spinner3" bdColor="rgba(255,255,255,0.9)" size="medium" color="#000000" type="ball-clip-rotate"
+    [fullScreen]="true">
+    <p style="color: rgb(0, 0, 0)">  searching . .  </p>
+</ngx-spinner>
+
+<div *ngIf="screenDown" (click)="scrollUP()" class="goUp-button">
+    <span class="shadow-sm rounded-circle">
+        <i class="fa-solid fa-circle-arrow-up icon-up fa-3x"></i>
+    </span>
+</div>

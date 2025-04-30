@@ -1,0 +1,24 @@
+.layout-wrapper {
+  display: flex;
+}
+
+.rtl .main-content {
+  margin-right: 230px; /* sidebar width */
+  margin-left: 0;
+}
+
+.ltr .main-content {
+  margin-left: 230px;
+  margin-right: 0;
+}
+
+app-sidebar {
+  width: 230px;
+  position: fixed;
+  top: 90px;
+  height: calc(100vh - 60px);
+  z-index: 10;
+  background-color: #f5f5f5;
+  border-inline-end: 1px solid #ddd;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,363 @@
+.full-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.w-40 {
+    width: 35%;
+}
+
+.sup-profile {
+    min-height: 340px;
+}
+
+.icon-active {
+    color: #fff !important;
+    background-image: linear-gradient(90deg, #3077a1, #3fb674) !important;
+}
+
+
+
+
+.icon-div:hover {
+    background-color: rgba(0, 0, 0, 0.053);
+    color: rgb(0, 118, 118);
+
+}
+
+.icon-div:hover .icon-img {
+    scale: 1.1;
+}
+
+.online-now {
+    /* width: 30px; */
+    /* height: 30px; */
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+.bg-green {
+    background-color: rgb(51, 255, 0);
+}
+
+.img-border {
+    background-image: linear-gradient(90deg, #3077a1, #3fb674) !important;
+    border-radius: 50%;
+}
+
+.icon-text {
+    font-size: 12px;
+}
+
+.icon-img {
+    font-size: 35px;
+    padding-bottom: 5px;
+    transition: all .3s;
+}
+
+.navbar-brand {
+    width: 170px;
+    cursor: pointer;
+}
+
+
+.navbar {
+    background-image: linear-gradient(90deg, #3077a1, #3fb674) !important;
+}
+
+.line {
+    background-image: linear-gradient(90deg, #3077a1, #3fb674) !important;
+    height: 3px;
+    width: 100%;
+}
+
+
+.nav-item ::after {
+    content: '';
+    width: 0%;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    border-radius: 2px;
+    transition: width .7s ease;
+}
+
+.nav-link {
+    font-weight: 700;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    border-bottom: solid transparent 3px;
+    border-top: solid transparent 3px;
+    border-radius: 2px;
+    position: relative;
+    transition: all .2s;
+}
+
+.nav-item :hover::after {
+    width: 100%;
+}
+
+.active-menu {
+    border-bottom: #ffffff solid 3px;
+    text-shadow: white 0 0 10px;
+    border-radius: 2px;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    transition: all .5s;
+}
+
+/* ========= */
+.abo {
+    position: relative !important;
+}
+
+.sideNav {
+    width: 100%;
+    height: 100%;
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    transition: all .2s;
+    background-image: linear-gradient(90deg, #3077a1, #3fb674) !important;
+
+}
+
+
+.sideNav .left {
+    width: 100%;
+    height: 100%;
+    /* background-color: rgb(255, 255, 255); */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    padding-top: 20px;
+    color: white;
+}
+
+
+
+.sideFooter {
+    padding: 26px
+}
+
+.sidbarUnits li {
+    color: rgb(0, 105, 105);
+    padding: 5px 70px 5px 30px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.sidbarUnits li:hover {
+    filter: drop-shadow(0 0 7px rgba(0, 229, 255, 0.528));
+    color: #000000;
+}
+
+.logoutBtn:hover {
+    filter: drop-shadow(0 0 10px white);
+}
+
+.shadow-now {
+    filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.446));
+}
+
+.show-on-tab-only {
+    display: none;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.min-h-60 {
+    min-height: 60% !important;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgba(0, 0, 0, 0.662);
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+        color: #000000;
+    }
+}
+
+.bg-black-opacity {
+    background-color: #000000a1;
+}
+
+
+.img-container {
+    position: relative;
+    width: 100% !important;
+    padding-top: 100% !important;
+    /* هذا يجعل العنصر يكون مربع */
+}
+
+.img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    /* هذا يجعل الصورة تملأ العنصر بالكامل مع الحفاظ على نسبة العرض إلى الارتفاع */
+}
+
+
+.capitalize-first-letter {
+    text-transform: lowercase !important;
+    /* لتحويل كل الأحرف إلى صغيرة */
+}
+
+.capitalize-first-letter::first-line {
+    text-transform: capitalize !important;
+}
+
+
+/* .w-90{
+    width: 95%;
+} */
+
+/* ==============  test skelton ==================== */
+/* ==============  test skelton ==================== */
+.skeleton-profile-circle-shimmer {
+    animation: shimmer 2s infinite;
+    background: #ddd linear-gradient(to right, rgba(255, 255, 255, .10) 5%, rgba(255, 255, 255, .30) 10%, rgba(255, 255, 255, .50) 15%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -500px 0;
+    }
+
+    100% {
+        background-position: 500px 0;
+    }
+}
+
+/* ==============  test skelton ==================== */
+/* ==============  test skelton ==================== */
+
+
+
+
+/*   =================      staaaaaaart media query    =================      */
+/*   =================      staaaaaaart media query    =================      */
+/*   =================      staaaaaaart media query    =================      */
+
+
+@media screen and (max-width:992px) {
+    .adminButton1 {
+        padding: 10px !important;
+        width: 150px;
+        font-size: 14px;
+    }
+
+    .emp-img {
+        margin-top: 50px;
+        width: 50%;
+    }
+
+    .show-on-tab-only {
+        display: initial;
+    }
+
+    .hide-on-tab {
+        display: none;
+    }
+
+    .emp-Data p {
+        margin: 0 !important;
+    }
+
+    .img-Modal {
+        width: 80% !important;
+    }
+}
+
+
+@media screen and (max-width:576px) {
+    .emp-img {
+        margin-top: 50px;
+        width: 50%;
+    }
+
+    .emp-Name {
+        margin: 0;
+    }
+
+    .emp-Data {
+        text-align: center;
+        padding-top: 20px !important;
+        padding-bottom: 75px !important;
+    }
+
+    .border-layer {
+        padding: 5px !important;
+    }
+
+    .my-btns {
+        display: none;
+    }
+
+    .option-btn {
+        width: 40% !important;
+    }
+
+    .emp-Data p {
+        margin: 0 !important;
+    }
+
+    .adminButton1 {
+        padding: 10px !important;
+        width: 120px;
+        font-size: 15px;
+    }
+
+    .Edit-btn-mobile {
+        bottom: 10%;
+    }
+
+    .show-on-tab-only {
+        display: none;
+    }
+
+    .sup-profile {
+        min-height: 600px;
+    }
+
+    .img-Modal {
+        width: 95% !important;
+    }
+
+    .font-13-mobile {
+        font-size: 13px;
+    }
+
+}
+
+
+/*   =================      eeeennnnndddd media query    =================      */
+/*   =================      eeeennnnndddd media query    =================      */
+/*   =================      eeeennnnndddd media query    =================      */

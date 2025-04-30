@@ -1,0 +1,80 @@
+<section>
+    <form [formGroup]="searchingForm" class="w-100 bg-primary">
+        <div class="w-100 rounded text-center py-3 full-flex flex-column row mx-0">
+            <div class="full-flex col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 px-0 position-relative">
+                <div class="input-group my-1 w-80-mobile">
+                    <input type="search" formControlName="searchInput" class="form-control"
+                        placeholder="{{ 'search.username_placeholder' | translate }}" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                    <span class="input-group-text bg-dark border-2 border-start-0 border-dark px-3" id="basic-addon1">
+                        <i class="fa-solid fa-magnifying-glass text-white fa-1x"></i>
+                    </span>
+                </div>
+                <div *ngIf="employeeList.length > 0 && showList"
+                    class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 border listOfEmployee">
+                    <div *ngFor="let employee of employeeList" (click)="getEmployeeDetails(employee.employeeId)"
+                        class="emp-Hover w-100 border-bottom py-2 cursor-pointer position-relative">
+                        {{ employee.nameAr }}
+                        <span class="px-2 position-absolute start-0 ps-3 fw-light small">{{ employee.employeeId }}
+                            -</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="w-100  row mx-0 ">
+        <div class="w-100 bg-primary text-white sections mx-0">
+            <!-- <div class="fakeHeight"></div> -->
+
+
+            <div *ngIf="showData" class="py-3 arabicList text-start">
+
+                <button [ngClass]="{'original-btn': isFormChanged}" (click)="sendData()"
+                    class="btn-light send-btn btn mt-4-mobile font-14-mobile mx-1 arabicList">
+                    حفظ <i class="fa-solid fa-floppy-disk px-1"></i>
+                </button>
+                <button [ngClass]="{'original-btn': isFormChanged}" (click)="forgetChanges()" class="btn-light forget-btn btn mt-4-mobile font-14-mobile mx-1 arabicList">
+                    اهمال <i class="fa-solid fa-ban px-1 "></i>
+                </button>
+            </div>
+
+
+
+            <div *ngIf="showData" class="{{ 'direction' | translate }} fw-semibold d-flex">
+                <p routerLink="./main" routerLinkActive="activeSection"
+                    class="sections-Hover my-0 py-2 px-4 rounded rounded-bottom-0">
+                    {{ 'search.basic_info' | translate }}
+                </p>
+                <p routerLink="./personal" routerLinkActive="activeSection"
+                    class="sections-Hover my-0 py-2 px-4 rounded rounded-bottom-0">
+                    {{ 'search.personal_info' | translate }}
+                </p>
+                <p routerLink="./management" routerLinkActive="activeSection"
+                    class="sections-Hover my-0 py-2 px-4 rounded rounded-bottom-0">
+                    {{ 'search.branches_management' | translate }}
+                </p>
+                <p routerLink="./insurance" routerLinkActive="activeSection"
+                    class="sections-Hover my-0 py-2 px-4 rounded rounded-bottom-0">
+                    {{ 'search.insurance_info' | translate }}
+                </p>
+                <p routerLink="./docs" routerLinkActive="activeSection"
+                    class="sections-Hover my-0 py-2 px-4 rounded rounded-bottom-0">
+                    {{ 'search.documents' | translate }}
+                </p>
+            </div>
+        </div>
+        <!-- <div class="col-md-2 fake-col"></div> -->
+        <div class="w-100 rounded-2">
+            <div *ngIf="!showData"
+                class="p-5 text-dark d-flex justify-content-center align-items-center {{ 'direction' | translate }} ">
+                <p class="my-0 fs-3 you-can-search">
+                    {{"يمكنك_البحث" | translate }} </p>
+                <i class="fa-solid fa-magnifying-glass fa-2x px-2"></i>
+            </div>
+            <div class="w-100 py-5" [ngClass]="{ 'd-none': !showData }">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</section>

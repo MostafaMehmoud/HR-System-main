@@ -1,0 +1,44 @@
+
+<section class="vh-80 bg-body-tertiary d-flex justify-content-center align-items-center flex-column px-4">
+   <p class="fs-2 myTitle">{{"home_Dashboard.لوحة_تحكم_المدير" | translate}}</p>
+    <div class="cards-div row arabicList g-4  text-center col-lg-10 col-xl-9 col-xxl-8 ">
+
+        <div class="col-md-4 CardOne" [ngClass]="{'slideIn': pageOpenOne}">
+            <div class="bg-white rounded-5 myItem shadow p-3">
+
+                <div class="myVector w-75 mx-auto">
+                    <img src="./assets/images/compressed-images/wepb/add_new.webp" alt="solfa" class="w-100">
+                </div>
+                <div class="buttons w-100">
+                    <button routerLink="/new-emp" class="btn btn-outline-dark rounded-4 w-100 py-3 my-1 fw-bolder">{{"home_Dashboard.اضافة_موظف" | translate}}</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4 CardTwo" [ngClass]="{'slideIn': pageOpenTwo}">
+            <div class="bg-white rounded-5 myItem shadow p-3">
+                <div class="myVector w-75 mx-auto">
+                    <img src="./assets/images/compressed-images/wepb/10838247_4559992.webp" alt="vacancy" class="w-100">
+                </div>
+                <div class="buttons w-100">
+                    <button routerLink="/employee-update" class="btn btn-outline-dark rounded-4 w-100 py-3 my-1 fw-bolder">{{"home_Dashboard.تعديل_موظف" | translate}}</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4 CardTrhee" [ngClass]="{'slideIn': pageOpenThree}">
+            <div class="bg-white rounded-5 myItem shadow p-3">
+                <div class="myVector w-75 mx-auto">
+                    <img src="./assets/images/compressed-images/wepb/5538440_2876475.webp" alt="enhaa" class="w-100">
+                </div>
+                <div class="buttons w-100">
+                    <button routerLink="/admin-dashboard" class="btn btn-outline-dark rounded-4 w-100 py-3 my-1 fw-bolder">{{"home_Dashboard.بحث_و_احصاء_الموظفين" | translate}}</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

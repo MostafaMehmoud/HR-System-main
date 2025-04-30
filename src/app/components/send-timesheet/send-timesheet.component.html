@@ -1,0 +1,235 @@
+<!-- ================================ start setting  ================================ -->
+<div #mainDiv class="p-5 bg-body-secondary p-3-mobile">
+    <form class="bg-white shadow rounded-4" [formGroup]="settingSheet">
+        <p class="fs-2 text-center py-3">{{ 'send_time_sheet.اعداد_سجل_جديد' | translate }}</p>
+        <div class="dashboard w-100 p-5 {{ 'direction' | translate }}">
+            <div class="row">
+                <div class="col-xxl-2 col-xl-3 col-md-4">
+                    <label for="empName">{{ 'send_time_sheet.اسم_الموظف' | translate }}</label>
+                    <input type="text" id="empName" class="form-control w-100 mx-auto bg-white text-center {{ 'lang-arabic' | translate }}" disabled [value]="nameAr">
+                    <input type="text" id="empName" class="form-control w-100 mx-auto bg-white text-center {{ 'lang-english' | translate }}" disabled [value]="nameEN">
+                    <label for="empId" class="py-1">{{ 'send_time_sheet.كود_الموظف' | translate }}</label>
+                    <input type="text" id="empId" class="form-control w-100 mx-auto bg-white text-center" disabled [value]="empId">
+                </div>
+                <div class="col-xxl-2 col-xl-3 col-md-4">
+                    <label for="rowNumbers">{{ 'send_time_sheet.ادخل_عدد_الصفوف' | translate }}</label>
+                    <input #number type="text" formControlName="rowNumbers" id="rowNumbers" class="form-control w-100 mx-auto text-center" maxlength="2">
+                    <label for="fixedDate" class="my-1">{{ 'send_time_sheet.ادخل_تاريخ_موحد' | translate }}
+                        <input formControlName="fixedDate" type="checkbox" class="form-check form-check-input form-check-inline my-0 border-dark-subtle">
+                    </label>
+                    <input #date type="date" [disabled]="!settingSheet.get('fixedDate')?.value" [value]="!settingSheet.get('fixedDate')?.value ? null : ''" id="fixedDate" class="form-control w-100 mx-auto text-center" maxlength="2">
+                </div>
+            </div>
+            <div class="row text-center">
+                <div *ngIf="bigFormArray.length == 0" class="col-xxl-2 col-xl-4 col-md-6 d-flex justify-content-center mx-auto align-items-center">
+                    <div class="w-100 px-2">
+                        <button (click)="setSetting(number.value, date.value)" class="btn btn-dark w-100 mx-auto d-block my-2">
+                            {{ 'send_time_sheet.اعداد' | translate }}
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="bigFormArray.length > 0" class="col-xxl-2 col-xl-4 col-md-6 d-flex justify-content-center mx-auto align-items-center">
+                    <div class="w-100 px-2">
+                        <button (click)="clearFormArray()" class="btn btn-danger w-100 mx-auto d-block my-2">
+                            {{ 'send_time_sheet.إعادة_تعيين' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- ================================ end setting  ================================ -->
+
+<!-- ================================ start main Table  ================================ -->
+<div *ngIf="bigFormArray.length > 0" class="w-100 min-vh-100 rounded-2 py-2 {{ 'direction' | translate }}">
+    <form [formGroup]="tiemSheet">
+        <div class="table-responsive min-vh-100" formArrayName="bigFormArray">
+            <table class="table table-bordered">
+                <!--====================== start Table header =================-->
+                <thead>
+                    <tr>
+                        <th class="py-3 text-center"></th>
+                        <th class="py-3 text-center">{{ 'send_time_sheet.id' | translate }}</th>
+                        <th class="py-3 text-center name-Width">{{ 'send_time_sheet.name' | translate }}</th>
+                        <th class="py-3 text-center date-Width">{{ 'send_time_sheet.date' | translate }}</th>
+                        <th class="py-3 text-center time-Width">{{ 'send_time_sheet.start' | translate }}</th>
+                        <th class="py-3 text-center time-Width">{{ 'send_time_sheet.leave' | translate }}</th>
+                        <th class="py-3 text-center time-Width">{{ 'send_time_sheet.early' | translate }}</th>
+                        <th class="py-3 text-center time-Width">{{ 'send_time_sheet.late' | translate }}</th>
+                        <th class="py-3 text-center Worktime-Width">{{ 'send_time_sheet.working_time' | translate }}</th>
+                        <th class="py-3 text-center project-Width">{{ 'send_time_sheet.project' | translate }}</th>
+                        <th class="py-3 text-center abbsent-Width">{{ 'send_time_sheet.absent' | translate }}</th>
+                    </tr>
+                </thead>
+                <!--====================== end Table header =================-->
+
+
+
+                <tbody>
+                    <tr *ngFor="let item of bigFormArray.controls; let i = index" [formGroupName]="i" class="table-bordered englishFont">
+
+
+
+
+
+
+                        <!-- index -->
+                        <td class="py-2 fw-lighter text-center number-Width align-middle text-muted index-Color  small">
+                            <input appEnterKeyFocus disabled type="text" class=" form-control-plaintext text-center active-border index-Color" [value]="i + 1">
+                        </td>
+
+
+
+
+
+
+                        <!-- id -->
+                        <td class="py-2 idwidth text-center position-relative" [ngClass]="{'errorInput': item.get('employeeId')?.errors && item.get('employeeId')?.touched}">
+                            <span>
+                                <input appEnterKeyFocus type="text" maxlength="4" formControlName="employeeId" class="form-control-plaintext is-invalid text-center englishFont idInput active-border">
+                            </span>
+                            <!-- start error msg -->
+                            <div *ngIf="item.get('employeeId')?.errors && item.get('employeeId')?.touched" class="bg-danger rounded-2 errInputMsg text-start">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p *ngIf="item.get('employeeId')?.getError('required')" class="text-center my-0 mb-2">{{ 'errors.required' | translate }}   </p>
+                                <p *ngIf="item.get('employeeId')?.getError('minlength')" class="text-center my-0 mb-2">{{ 'errors.minlength' | translate }}</p>
+                            </div>
+                            <div *ngIf="noId" class="bg-warning rounded-2 errInputMsg text-dark text-start">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p class="text-center my-0 mb-2">{{ 'errors.id_not_found' | translate }}</p>
+                            </div>
+                            <!-- end error msg -->
+                        </td>
+
+
+
+
+
+
+
+
+
+                        
+                        <!-- name -->
+                        <td class="py-2 falseId position-relative" [ngClass]="{'falseId': !item.get('employeeId')?.errors && item.get('employeeName')?.getError('required')}">
+                            <div class="d-flex justify-content-start align-items-center arabicFont">
+                                <div class="greenDot px-1 me-2"></div>
+                                <span class="empcolor w-100">
+                                    <input appEnterKeyFocus type="text" readonly class="form-control-plaintext text-center empcolor fw-bolder active-border" formControlName="employeeName">
+                                </span>
+                            </div>
+                            <div *ngIf="!item.get('employeeId')?.errors && item.get('employeeName')?.getError('required')" class="bg-warning rounded-2 errInputMsg text-dark text-start">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p class="text-center my-0 mb-2">{{ 'errors.id_not_found' | translate }}</p>
+                            </div>
+                        </td>
+
+
+
+
+
+
+
+
+
+                        <!-- date -->
+                        <td class="py-2 fw-lighter text-center w-auto position-relative" [ngClass]="{'errorInput': item.get('date')?.getError('required') && item.get('date')?.touched}">
+                            <input appEnterKeyFocus [max]="todayDate" type="date" class="form-control-plaintext text-center active-border" formControlName="date">
+                            <!-- start error msg -->
+                            <div *ngIf="item.get('date')?.getError('required') && item.get('date')?.touched" class="bg-danger rounded-2 errInputMsg text-start">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p class="text-center my-0 mb-2">{{ 'errors.required' | translate }}</p>
+                            </div>
+                            <!-- end error msg -->
+                        </td>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- start -->
+                        <td class="py-2 fw-lighter text-center position-relative" [ngClass]="{'errorInput': item.get('start')?.getError('required') && item.get('start')?.touched}">
+                            <input #starting appEnterKeyFocus type="time" [readonly]="readonly" class="form-control-plaintext text-center active-border readOnly" formControlName="start" [value]="starting.value | fullTime : item">
+                            <!-- start error msg -->
+                            <div *ngIf="item.get('start')?.getError('required') && item.get('start')?.touched" class="bg-danger rounded-2 errInputMsg text-start">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p class="text-center my-0 mb-2">{{ 'errors.required' | translate }}</p>
+                            </div>
+                            <!-- end error msg -->
+                        </td>
+
+
+
+
+                        
+                        <!-- leave -->
+                        <td class="py-2 fw-lighter position-relative" [ngClass]="{'errorInput': item.get('leave')?.errors && item.get('leave')?.touched}">
+                            <input #ending appEnterKeyFocus type="time" [readonly]="readonly" class="form-control-plaintext text-center active-border" formControlName="leave" [value]="ending.value | fullTime2 : item">
+                            <div *ngIf="item.get('leave')?.errors && item.get('leave')?.touched" class="bg-danger rounded-2 errInputMsg">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p *ngIf="item.get('leave')?.getError('leaveSmaller')" class="text-center my-0 mb-2">{{ 'errors.leave_smaller' | translate }}</p>
+                                <p *ngIf="item.get('leave')?.getError('required')" class="text-center my-0 mb-2">{{ 'errors.required' | translate }}</p>
+                            </div>
+                        </td>
+
+
+
+
+                        <!-- early -->
+                        <td class="py-2 fw-lighter">
+                            <input appEnterKeyFocus type="text" class="form-control-plaintext text-center active-border" readonly formControlName="earlyByMinute" [value]="starting.valueAsNumber | calcEarly : item">
+                        </td>
+
+
+
+
+                        <!-- late -->
+                        <td class="py-2 fw-lighter">
+                            <input appEnterKeyFocus type="text" class="form-control-plaintext text-center active-border" readonly formControlName="lateByMinute" [value]="starting.valueAsNumber | CalcLate : item">
+                        </td>
+
+
+
+                        <!-- working Time -->
+                        <td class="py-2 fw-lighter ">
+                            <input appEnterKeyFocus type="text" class="englishList form-control-plaintext text-center active-border" readonly formControlName="workingTimeByMinute" [value]="ending.valueAsNumber - starting.valueAsNumber | calcTime : item">
+                        </td>
+
+                        
+                        <!-- project -->
+                        <td class="py-2 fw-lighter position-relative" [ngClass]="{'errorInput': item.get('projectId')?.errors && item.get('projectId')?.touched}">
+                            <select appEnterKeyFocus formControlName="projectId" name="projectId" id="projectId" class="form-select border-0 project-options active-border">
+                                <option class="" value="1">project1</option>
+                                <option class="" value="2">project2</option>
+                                <option class="" value="3">project3</option>
+                                <option class="" value="4">project4</option>
+                                <option class="" value="5">project5</option>
+                            </select>
+                            <!-- start error msg -->
+                            <div *ngIf="item.get('projectId')?.getError('required') && item.get('projectId')?.touched" class="bg-danger rounded-2 errInputMsg text-start">
+                                <i class="fa-solid fa-triangle-exclamation p-2"></i><br />
+                                <p class="text-center my-0 mb-2">{{ 'errors.required' | translate }}</p>
+                            </div>
+                            <!-- end error msg -->
+                        </td>
+                        <!-- absent -->
+                        <td class="py-2 fw-lighter text-center" #parent>
+                            <input appEnterKeyFocus type="checkbox" class="form-check form-check-input abbsent form-check-inline border-secondary-subtle border" formControlName="absent" (change)="isAbssent(i)">
+                        </td>
+                    </tr>
+                </tbody>
+
+
+
+
+            </table>
+            <div class="py-4 w-100"></div>
+            <button (click)="sendData()" type="button" class="btn btn-primary ms-auto text-center d-block adding-btn">
+                {{ 'send_time_sheet.حفظ_و_ارسال' | translate }}
+            </button>
+        </div>
+    </form>
+</div>
+<!-- ================================ end main Table  ================================== -->

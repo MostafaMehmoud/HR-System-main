@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>{{ 'SIDEBAR.Companies' | translate }}</h4>
+      <button class="btn btn-primary" [routerLink]="['/configuration/add-company']">
+        {{ 'COMPANIES.AddNew' | translate }}
+      </button>
+      
+    </div>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped text-center">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>اسم الشركة عربي</th>
+            <th>Company Name</th>
+            <th>{{ 'COMMON.Actions' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of companies | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>{{ company.nameAr }}</td>
+            <td>{{ company.nameEn }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" [routerLink]="['/configuration/edit-company', company.id]">
+                {{ 'COMMON.Edit' | translate }}
+              </button>
+              
+              <button class="btn btn-sm btn-danger" (click)="confirmDelete(company.id)">
+                {{ 'COMMON.Delete' | translate }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <pagination-controls
+      [directionLinks]="true"
+      [autoHide]="true"
+      (pageChange)="currentPage = $event"
+      [responsive]="true">
+    </pagination-controls>
+  </div>
+  

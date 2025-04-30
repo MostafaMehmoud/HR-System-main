@@ -1,0 +1,104 @@
+<div class="bg-white   px-sm-5">
+    <section class=" w-100 container-fluid  rounded-3 vh-80  py-5 p-sm-5 CardOne" [ngClass]="{'slideIn': pageOpenOne} ">
+        <h1 class="text-center py-5 fw-bolder {{ 'admin_vacation.حجم_الخط_إدارة_الطلبات' | translate }}">
+            {{ 'admin_orders.ادارة_طلبات_السلفة' | translate }} </h1>
+
+        <!-- the table header -->
+        <div class="{{ 'direction' | translate }} ">
+            <div class="ordersHead rounded-top-1 w-100 py-3 ">
+                <div class="row">
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0">{{ 'admin_orders.اسم_الموظف' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0">{{ 'admin_orders.رقم_الطلب' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0 px-5">{{ 'admin_orders.مبلغ_السلفة' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center hide-on-mobile">
+                        <p class="p-0 my-0">{{ 'admin_orders.التاريخ' | translate }}</p>
+                    </div>
+                    <div class="col-md-3 text-center miniHeader show-on-mobile-only">
+                        <p class="p-0 my-0">{{ 'admin_orders.قائمة_طلبات_السلفة' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- the row of each employee -->
+        <div class="accordion arabicList overflow-hidden {{ 'direction' | translate }}" id="accordionExample">
+            <!-- one employee -->
+            <div #oneItem class=" oneItem accordion-item rounded-0" *ngFor="let order of LoanordersList">
+                <h2 class="accordion-header">
+                    <div class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#'+order.id" aria-expanded="false" [attr.aria-controls]="order.id">
+                        <div class="py-2 px-0 d-flex justify-content-center align-items-center w-100 row">
+                            <p class="my-0 col-md-3 fw-bolder w-50-mobile text-center {{ 'lang-arabic' | translate }} ">
+                                {{ order.employeeNameAr }}</p>
+                            <p
+                                class="my-0 col-md-3 fw-normal w-50-mobile text-center {{ 'lang-english' | translate }} ">
+                                {{ order.employeeNameEn }}</p>
+                            <p class="my-0 col-md-3 fw-bolder text-center arabicFont w-50-mobile">#{{order.id}}</p>
+                            <p class="my-0 col-md-3 fw-bolder text-center arabicFont w-50-mobile hide-on-mobile">
+                                {{order.advancePaymentValue}}</p>
+                            <p class="my-0 col-md-3 fw-bolder arabicFont text-center w-50-mobile hide-on-mobile">{{order.startDate
+                                | date : 'yyyy/MM/dd'}}</p>
+                        </div>
+                    </div>
+                </h2>
+                <div [id]="order.id" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body p-0">
+                        <div>
+                            <p class="orderNumber my-0 d-inline-block bg-white px-2 mx-3 rounded">{{
+                                'admin_orders.رقم_الطلب' | translate }}: {{order.id}}</p>
+                            <div
+                                class="parentOfOrders mx-0 w-100 rounded border row d-flex justify-content-center align-items-center overflow-hidden">
+                                <div class="col-md-4">
+                                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                                        <p class="my-0">{{ 'admin_orders.اسم_الموظف_التفاصيل' | translate }}:
+                                            <span class="my-0 small  {{ 'lang-arabic' | translate }} ">{{
+                                                order.employeeNameAr }}</span>
+                                            <span class="my-0 small fw-normal {{ 'lang-english' | translate }} ">{{
+                                                order.employeeNameEn }}</span>
+                                        </p>
+                                        <p class="my-0">{{ 'admin_orders.كود_الموظف' | translate }}:
+                                            {{order.employeeId}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="w-100 {{'admin_vacation.border' | translate}} noBorder-mobile">
+                                        <p class="my-0">{{ 'admin_orders.قيمة_السلفة' | translate }}:
+                                            {{order.advancePaymentValue}}</p>
+                                        <p class="my-0 fw-lighter">{{ 'admin_orders.قيمة_القسط' | translate }}:
+                                            {{order.installmentValue}}</p>
+                                        <p class="my-0 fw-lighter">{{ 'admin_orders.القسط_الاخير' | translate }}:
+                                            {{order.lastInstallmentValue}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="w-100 noBorder-mobile">
+                                        <p class="my-0">{{ 'admin_orders.عدد_الاقساط' | translate }}:
+                                            {{order.numberOfInstallment}}</p>
+                                        <p class="my-0">{{ 'admin_orders.التاريخ' | translate }}: {{order.startDate |
+                                            date : 'yyyy/MM/dd'}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="w-100 mx-auto p-1 text-center">
+                                        <button (click)="actionRequest(order.id, true, oneItem)"
+                                            class="btn btn-success my-1 w-100">{{ 'admin_orders.قبول' | translate
+                                            }}</button>
+                                        <button (click)="actionRequest(order.id, false, oneItem)"
+                                            class="btn btn-danger my-1 w-100">{{ 'admin_orders.رفض' | translate
+                                            }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

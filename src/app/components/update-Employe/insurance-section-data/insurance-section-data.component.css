@@ -1,0 +1,112 @@
+.fs-14 {
+    font-size: 14px !important;
+}
+
+.update-Button {
+    width: 90px !important;
+    min-width: 80px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-Button {
+    display: none;
+}
+
+.save-Button {
+    display: none;
+}
+
+/* start from here ================== */
+.form-control {
+    padding: 4px 20px;
+    min-width: 220px;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.form-control:disabled {
+    background-color: rgba(241, 241, 241, 0.568);
+}
+
+.input-label {
+    width: 180px;
+}
+
+select {
+    cursor: pointer;
+}
+
+.fs-14 {
+    font-size: 14px !important;
+}
+
+@media screen and (max-width:992px) {
+    .form-control {
+        max-width: 150px !important;
+        min-width: 150px !important;
+        font-size: 15px;
+        font-weight: 500 !important;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .form-control {
+        /* padding: 4px 20px; */
+        max-width: 400px !important;
+        min-width: 360px !important;
+        /* text-align: center !important; */
+        font-size: 17px;
+        font-weight: 500 !important;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .w-75-mobile {
+        width: 75% !important;
+
+    }
+
+    .w-25-mobile {
+        width: 25% !important;
+    }
+
+    .cancel-Button {
+        width: 50px !important;
+        min-width: 50px !important;
+    }
+
+    .save-Button {
+        width: 50px !important;
+        min-width: 50px !important;
+    }
+
+    .py-2-mobile {
+        padding-block: 10px !important;
+    }
+
+    .font-18-mobile {
+        font-size: 18px !important;
+    }
+
+    /* start from here ================== */
+
+    .input-label {
+        padding-inline: 20px;
+        width: 100% !important;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .form-control {
+        padding: 4px 20px;
+        min-width: unset;
+        width: 350px !important;
+        text-align: center !important;
+        font-size: 17px;
+        font-weight: 500 !important;
+    }
+
+}

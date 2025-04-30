@@ -1,0 +1,129 @@
+<section #mainSection class="my-5 CardOne " >
+    <form [formGroup]="permissionForm" (ngSubmit)="sendRequest()">
+        <div class="vacationDetails arabicList bg-white rounded-4 w-100 overflow-hidden shadow-lg">
+            <div class="row">
+                <div class="col-md-7 col-lg-6">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-column p-5 requestDetails {{ 'direction' | translate }}">
+                        <h2 class="fw-bolder my-3">{{ 'leave.طلب_إذن' | translate }}</h2>
+                        <div class="w-100 mt-5">
+                            <div class="w-100 p-2">
+                                <label for="empName">{{ 'leave.اسم_الموظف' | translate }}:</label>
+                                <input type="text" id="empName" class="form-control {{ 'lang-arabic' | translate }}" [value]="nameAr" disabled>
+                                <input type="text" id="empName" class="form-control {{ 'lang-english' | translate }} " [value]="nameEN" disabled>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="empId">{{ 'leave.رقم_الموظف' | translate }} :</label>
+                                    <input type="text" id="empId" class="form-control w-100" [value]="empId" disabled>
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="PerDate">تاريخ الاذن :</label>
+                                    <input formControlName="PerDate" type="date" id="PerDate"
+                                        class="form-control w-100">
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                <div class="w-50 p-2">
+                                    <label for="startingTime">{{ 'leave.يبدأ_وقت_الاستئذان' | translate }}:</label>
+                                    <input #start formControlName="startingTime" type="time" id="startingTime"
+                                        class="form-control w-100 font-14-mobile py-2"
+                                        placeholder="{{ 'leave.ادخل_توقيت_الاذن' | translate }}">
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="endTime">{{ 'leave.حتى_الساعة' | translate }}:</label>
+                                    <input #end formControlName="endTime" type="time" id="endTime"
+                                        class="form-control w-100 font-14-mobile py-2"
+                                        placeholder="{{ 'leave.ادخل_توقيت_الاذن' | translate }}">
+                                </div>
+
+                                <p class="text-danger text-center small errorInput w-50"
+                                    *ngIf="this.permissionForm.get('startingTime')?.getError('required') && this.permissionForm.get('startingTime')?.touched">
+                                    {{ 'leave.ادخل_توقيت_الاذن' | translate }}
+                                </p>
+
+                                <p class="text-danger text-center small errorInput w-50"
+                                    *ngIf="start.value > end.value && end.value.length > 0">
+                                    <!-- {{ 'leave.ادخل_توقيت_الاذن' | translate }} -->
+                                    توقيت النهاية اقل من البدء
+                                </p>
+
+
+                                <p class="text-danger small text-center errorInput w-50"
+                                    *ngIf="this.permissionForm.get('endTime')?.getError('required') && this.permissionForm.get('endTime')?.touched">
+                                    {{ 'leave.ادخل_توقيت_نهاية_الاذن' | translate }}</p>
+                            </div>
+
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-100 p-2">
+                                    <label for="details">{{ 'leave.سبب_الاستئذان' | translate }}:</label>
+                                    <textarea formControlName="details" name="" id="details" rows="3"
+                                        placeholder="{{ 'leave.برجاء_توضيح_سبب_الطلب_من_فضلك' | translate }}"
+                                        class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <p class="text-danger small errorInput px-3"
+                                *ngIf="this.permissionForm.get('details')?.getError('required') && this.permissionForm.get('details')?.touched">
+                                {{ 'leave.برجاء_توضيح_سبب_الطلب_من_فضلك' | translate }}</p>
+
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-100 p-2">
+                                    <label for="myFile">{{ 'leave.ارفق_مستند' | translate }}:</label>
+                                    <input #fileInpu formControlName="myFile" type="file" id="myFile"
+                                        class="form-control w-100" [min]="todayDate"
+                                        placeholder="{{ 'leave.تاريخ_البدء' | translate }}">
+                                </div>
+                            </div>
+                            <p class="text-danger small errorInput px-3"
+                                *ngIf="this.permissionForm.get('myFile')?.getError('required') && this.permissionForm.get('myFile')?.touched">
+                                {{ 'leave.ارفق_المستند_الخاص_بالطلب_من_فضلك' | translate }}</p>
+                        </div>
+
+
+
+
+
+                        <div class="mt-5">
+                            <button class="btn btn-outline-dark custombutn px-5 py-2 rounded-5">{{ 'leave.ارسال_الطلب' |
+                                translate }} <i class="fa-solid fa-check px-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 hide-on-mobile">
+                    <div class="d-flex justify-content-center align-items-center vectorForm h-100">
+                        <img src="./assets/images/compressed-images/wepb/time.webp"
+                            alt="{{ 'leave.طلب_اجازة' | translate }}" class="w-75 vectorImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<section #successModal class="SuccessModal vh-80 d-flex justify-content-center align-items-center  d-none">
+    <div class="bg-white w-50 w-100-mobile mx-auto rounded-3 text-center shadow-lg">
+        <div class="p-5">
+            <div class="d-flex justify-content-center align-items-center {{ 'direction' | translate }}">
+                <p class="doneMsgMain fs-3  my-0">{{'leave.تم_ارسال_الطلب_بنجاح' | translate }}</p>
+                <i class="fa-solid fa-circle-check fa-lg px-2" style="color: #11645f;"></i>
+            </div>
+
+            <p class="doneMsgSub fs-5 fw-light ">{{ 'leave.تفقد_حالة_الطلب_من_قسم_الطلبات' | translate }} <span
+                    class="fw-bolder"> {{ 'leave.الطلبات' | translate }} </span> </p>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/allOrders/vacation"
+                    class="btn btn-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-end-0 ">{{ 'leave.الطلبات' | translate
+                    }}</button>
+            </div>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/home"
+                    class="btn btn-outline-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-start-0">{{ 'leave.الرئيسية' |
+                    translate }}</button>
+            </div>
+        </div>
+    </div>
+</section>

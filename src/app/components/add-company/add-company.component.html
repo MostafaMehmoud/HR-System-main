@@ -1,0 +1,20 @@
+<div class="container mt-5" [dir]="dir">
+    <h2 class="mb-4 text-center">{{ 'COMPANIES.AddNew' | translate }}</h2>
+  
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">{{ 'COMPANIES.Name' | translate }} ({{ 'ar' | translate }})</label>
+        <input type="text" class="form-control" formControlName="CompanyNameAr" [placeholder]="'COMPANIES.Name' | translate">
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">{{ 'COMPANIES.Name' | translate }} ({{ 'en' | translate }})</label>
+        <input type="text" class="form-control" formControlName="CompanyNameEn" [placeholder]="'COMPANIES.Name' | translate">
+      </div>
+  
+      <button class="btn btn-primary" type="submit" [disabled]="companyForm.invalid">
+        {{ 'COMPANIES.AddNew' | translate }}
+      </button>
+    </form>
+  </div>
+  

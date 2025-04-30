@@ -1,0 +1,42 @@
+.navbar-brand {
+    width: 170px;
+    cursor: pointer;
+}
+
+.nav-item ::after {
+    content: '';
+    width: 0%;
+    height: 3px;
+    background-color: #000000;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    border-radius: 2px;
+    transition: width .7s ease;
+}
+
+.nav-link {
+    font-weight: 700;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    border-bottom: solid transparent 3px;
+    border-top: solid transparent 3px;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-item :hover::after {
+    width: 100%;
+}
+
+.active-menu {
+    border-bottom:  #000000 solid 3px;
+    text-shadow: white 0 0 10px;
+    border-radius: 2px;
+    width: 100%;
+    color: rgb(0, 0, 0);
+    transition: all .5s;
+}
+
+
+

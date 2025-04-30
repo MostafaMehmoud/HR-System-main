@@ -1,0 +1,11 @@
+.CardOne , .CardTwo , .CardTrhee{
+position: relative;
+left: -200px;
+transition: left 1s , opacity .5s , scale 1s;
+opacity: 0;
+}
+
+.slideIn{
+left: 0px;
+opacity: 1;
+}

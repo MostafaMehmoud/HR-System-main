@@ -1,0 +1,117 @@
+<section *ngIf="requestSent==false" class="my-5 CardOne" [ngClass]="{'slideIn': pageOpenOne}">
+    <form [formGroup]="loanForm" (ngSubmit)="sendRequest()">
+        <div class="loanDetails arabicList bg-white rounded-4 w-100 overflow-hidden shadow-lg">
+            <div class="row">
+                <div class="col-md-7 col-lg-6">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-column p-5 requestDetails {{ 'direction' | translate }}">
+                        <h2 class="fw-bolder my-3">{{ 'home.طلب_سلفة' | translate }}</h2>
+                        <div class="w-100 mt-5">
+                            <div class="w-100 p-2">
+                                <label for="empName">{{ 'loan.اسم_الموظف' | translate }}:</label>
+                                <input type="text" id="empName" class="form-control {{ 'lang-arabic' | translate }}"
+                                    [value]="NameAR" disabled>
+                                <input type="text" id="empName" class="form-control {{ 'lang-english' | translate }} "
+                                    [value]="NameEN" disabled>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="empId">{{ 'loan.رقم_الموظف' | translate }}:</label>
+                                    <input type="text" id="empId" class="form-control w-100" [value]="empId" disabled>
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="empCredit">{{ 'loan.الرصيد_المتبقي' | translate }}:</label>
+                                    <input type="text" id="empCredit" class="form-control w-100" [value]="raseed"
+                                        disabled>
+                                </div>
+                            </div>
+                            <div class="w-100 p-2">
+                                <label for="loan">{{ 'loan.قيمة_السلفة' | translate }}:</label>
+                                <input (keyup)="cleanInstall()" #loan formControlName="advancePaymentValue" type="text"
+                                    id="loan" class="form-control"
+                                    placeholder="{{ 'loan.ادخل_مبلغ_السلفة' | translate }}">
+                                <p *ngIf="loanForm.get('advancePaymentValue')?.getError('required') && loanForm.get('advancePaymentValue')?.touched"
+                                    class="text-danger small errorInput px-3">{{ 'loan.يجب_ادخال_مبلغ_السلفة' |
+                                    translate }}</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="install">{{ 'loan.قيمة_القسط' | translate }}:</label>
+                                    <input #install (input)="calcNumberOfInstalls()" formControlName="installmentValue"
+                                        type="number" id="install" class="form-control w-100"
+                                        placeholder="{{ 'loan.ادخل_مبلغ_القسط_الواحد' | translate }}">
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="lastInstall">{{ 'loan.القسط_الاخير' | translate }}:</label>
+                                    <input formControlName="lastInstallmentValue" type="number" id="lastInstall"
+                                        class="form-control w-100"
+                                        placeholder="{{ 'loan.ادخل_مبلغ_القسط_الاخير' | translate }}">
+                                </div>
+                            </div>
+                            <p *ngIf="loanForm.get('installmentValue')?.getError('minAmount') && install.value.length > 0"
+                                class="text-danger small errorInput px-3">{{ 'loan.الحد_الادني_للقسط_الواحد' | translate
+                                }}</p>
+                            <p *ngIf="loanForm.get('installmentValue')?.getError('moreThan')"
+                                class="text-danger small errorInput px-3">{{ 'loan.قيمة_القسط_اقل_من_السلفة' | translate
+                                }}</p>
+                            <p *ngIf="loanForm.get('installmentValue')?.value==null && loanForm.get('installmentValue')?.touched"
+                                class="text-danger small errorInput px-3">{{ 'loan.يجب_ادخال_قيمة_القسط_الواحد' |
+                                translate }}</p>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="startingDate">{{ 'loan.تاريخ_البدء' | translate }}:</label>
+                                    <input formControlName="startDate" type="date" id="startingDate"
+                                        class="form-control w-100" [min]="todayDate"
+                                        placeholder="{{ 'loan.تاريخ_البدء' | translate }}">
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="numInstall">{{ 'loan.عدد_الاقساط' | translate }}:</label>
+                                    <input formControlName="numberOfInstallment" type="number" id="numInstall"
+                                        class="form-control w-100" placeholder="{{ 'loan.عدد_الاقساط' | translate }}">
+                                </div>
+                            </div>
+                            <p *ngIf="loanForm.get('startDate')?.getError('required') && loanForm.get('startDate')?.touched"
+                                class="text-danger small errorInput px-3">{{ 'loan.يجب_ادخال_تاريخ_البدء' | translate }}
+                            </p>
+                        </div>
+                        <div class="mt-5">
+                            <button class="btn btn-outline-dark custombutn px-5 py-2 rounded-5">{{ 'loan.ارسال_الطلب' |
+                                translate }}<i class="fa-solid fa-check px-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 hide-on-mobile">
+                    <div class="d-flex justify-content-center align-items-center vectorForm h-100">
+                        <img src="./assets/images/compressed-images/wepb/5740247.webp"
+                            alt="{{ 'loan.ادخل_بيانات_الطلب' | translate }}" class="w-75 vectorImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+
+<section *ngIf="requestSent" class="SuccessModal vh-80 d-flex justify-content-center align-items-center ">
+    <div class="bg-white w-50 w-100-mobile mx-auto rounded-3 text-center shadow-lg">
+        <div class="p-5">
+            <div class="d-flex justify-content-center align-items-center {{ 'direction' | translate }}">
+                <p class="doneMsgMain fs-3  my-0">{{'leave.تم_ارسال_الطلب_بنجاح' | translate }}</p>
+                <i class="fa-solid fa-circle-check fa-lg px-2" style="color: #11645f;"></i>
+            </div>
+
+            <p class="doneMsgSub fs-5 fw-light ">{{ 'leave.تفقد_حالة_الطلب_من_قسم_الطلبات' | translate }} </p>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/allOrders/loan"
+                    class="btn btn-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-end-0 ">{{ 'leave.الطلبات' | translate
+                    }}</button>
+            </div>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/home"
+                    class="btn btn-outline-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-start-0">{{ 'leave.الرئيسية' |
+                    translate }}</button>
+            </div>
+        </div>
+    </div>
+</section>

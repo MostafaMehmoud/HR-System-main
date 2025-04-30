@@ -1,0 +1,109 @@
+<section #mainSection class="my-5 CardOne ">
+    <form [formGroup]="AssetForm" (ngSubmit)="sendRequest()">
+        <div class="vacationDetails arabicList bg-white rounded-4 w-100 overflow-hidden shadow-lg  ">
+            <div class=" row ">
+                <div class="col-md-7 col-lg-6 {{ 'direction' | translate }} ">
+                    <div class="d-flex justify-content-center align-items-center flex-column p-5 requestDetails">
+                        <h2 class="fw-bolder my-3"> {{ 'asset_request.طلب_عهدة' | translate }} </h2>
+                        <div class="w-100 mt-5">
+                            <div class="w-100 p-2">
+                                <label for="empName"> {{ 'asset_request.اسم_الموظف' | translate }} : </label>
+                                <input type="text" id="empName" class="form-control {{ 'lang-arabic' | translate }}" [value]="nameAr" disabled>
+                                <input type="text" id="empName" class="form-control {{ 'lang-english' | translate }} " [value]="nameEN" disabled>
+                                <span class=" ">{{nameAr.split(' ', 2).join(' ') }}</span>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-50 p-2">
+                                    <label for="empId"> {{ 'asset_request.رقم_الموظف' | translate }} : </label>
+                                    <input type="text" id="empId" class="form-control w-100" [value]=" empId " disabled>
+                                </div>
+                                <div class="w-50 p-2">
+                                    <label for="typeOfPermission"> {{ 'asset_request.نوع_الخدمة' | translate }} :
+                                    </label>
+                                    <input type="text" id="typeOfPermission" class="form-control w-100"
+                                        value="{{ 'asset_request.طلب_عهدة' | translate }}" disabled>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                <div class="w-100 p-2">
+                                    <label for="AssetName"> {{ 'asset_request.العهدة_المطلوبة' | translate }} : </label>
+                                    <textarea formControlName="AssetName" type="text" id="AssetName" rows="3"
+                                        class="form-control w-100 font-14-mobile"
+                                        placeholder="{{ 'asset_request.ادخل_تفاصيل_العهدة_المطلوبة' | translate }}"></textarea>
+                                </div>
+                                <p class="text-danger small text-center errorInput w-100"
+                                    *ngIf="this.AssetForm.get('AssetName')?.getError('required') && this.AssetForm.get('AssetName')?.touched">
+                                    {{ 'asset_request.ادخل_تفاصيل_العهدة_المطلوبة' | translate }}
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="w-100 p-2">
+                                    <label for="myFile"> {{ 'asset_request.ارفق_مستند' | translate }} : </label>
+                                    <input #fileInpu formControlName="myFile" type="file" id="myFile" class="form-control w-100">
+                                </div>
+                            </div>
+                            <!-- <p class="text-danger small errorInput px-3"
+                                *ngIf="this.AssetForm.get('myFile')?.getError('required') && this.AssetForm.get('myFile')?.touched">
+                                {{ 'asset_request.ارفق_المستند_الخاص_بالطلب' | translate }}
+                            </p> -->
+                            <div class="d-flex justify-content-center align-items-center p-2">
+                                <div class="w-100 py-3 text-center">
+                                    <input type="checkbox" formControlName="saveAsset" name="saveAsset" id="saveAsset"
+                                        class="border-secondary my-0 py-0 form-check form-check-input form-check-inline">
+                                    <label for="saveAsset" class="form-check-label px-2 fw-bold fs-18-mobile-16">
+                                        {{ 'asset_request.أقر_بالمحافظة_على_العهدة' | translate }}
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text-danger small errorInput px-3"
+                                *ngIf="this.AssetForm.get('saveAsset')?.getError('required') && this.AssetForm.get('saveAsset')?.touched">
+                                {{ 'asset_request.يجب_الموافقة_علي_الاقرار_بالحفاظ_علي_العهدة' | translate }}
+                            </p>
+                        </div>
+                        <div class="mt-5">
+                            <button class="btn btn-outline-dark custombutn px-5 py-2 rounded-5">
+                                {{ 'asset_request.ارسال_الطلب' | translate }} <i class="fa-solid fa-check px-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 hide-on-mobile">
+                    <div class="d-flex justify-content-center align-items-center vectorForm h-100">
+                        <img src="./assets/images/compressed-images/wepb/enhaa.webp"
+                            alt="{{ 'asset_request.طلب_اجازة' | translate }}" class="w-75 vectorImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+
+
+<section #successModal class="SuccessModal vh-80 d-flex justify-content-center align-items-center d-none">
+    <div class="bg-white w-50 w-100-mobile mx-auto rounded-3 text-center shadow-lg">
+        <div class="p-5">
+            <p class="doneMsgMain fs-3">
+                <i class="fa-solid fa-circle-check fa-lg pe-2" style="color: #11645f;"></i>
+                {{ 'asset_request.تم_ارسال_الطلب_بنجاح' | translate }}
+            </p>
+            <p class="doneMsgSub fs-5 fw-light">
+                {{ 'asset_request.تفقد_حالة_الطلب' | translate }} <span class="fw-bolder">{{ 'asset_request.الطلبات' |
+                    translate }}</span>
+            </p>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/allOrders/vacation"
+                    class="btn btn-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-end-0">
+                    {{ 'asset_request.الطلبات' | translate }}
+                </button>
+            </div>
+            <div class="w-50-mobile d-inline-block w-25">
+                <button routerLink="/home"
+                    class="btn btn-outline-dark p-3 px-4 mx-1 btn-on-mobile w-100 rounded-start-0">
+                    {{ 'asset_request.الرئيسية' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

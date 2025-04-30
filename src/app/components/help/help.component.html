@@ -1,0 +1,38 @@
+<section class="w-100 vh-80 d-flex justify-content-center align-items-center my-5 CardOne" [ngClass]="{'slideIn': pageOpenOne}">
+    <div class="w-100 h-100 d-flex justify-content-center align-items-center vh-80">
+        <div class="w-75 px-2-on-mobile px-5 bg-white py-5 {{ 'direction' | translate }} text-center rounded-3 border shadow-lg w-100-mobile row">
+            <div class="text-center pb-5 py-2-on-mobile">
+                <h1 class="fw-bolder py-2 fs-20-mobile">{{ 'help.لا_تتردد_في_مشاركة_ما_لديك' | translate }}</h1>
+                <p class="fw-lighter fs-14-mobile">{{ 'help.فقط_ارسل_لنا_استفسارك_و_سوف_نقدم_لك_المساعدة' | translate }}</p>
+            </div>
+            <div class="py-1">
+                <input type="text" class="form-control py-2" placeholder="{{ 'help.الاسم' | translate }}">
+            </div>
+            <div class="py-1">
+                <input type="text" class="form-control" placeholder="{{ 'help.البريد_الالكتروني' | translate }}">
+            </div>
+            <div class="py-1">
+                <input type="text" class="form-control" placeholder="{{ 'help.الجوال' | translate }}">
+            </div>
+            <div class="py-1">
+                <textarea class="form-control" name="" id="" cols="30" rows="4" placeholder="{{ 'help.الرسالة' | translate }}"></textarea>
+            </div>
+            <div class="text-end py-3 mx-2">
+                <button class="btn btn-primary px-4 py-2 rounded-2">{{ 'help.ارسل_رسالتك' | translate }} <i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+            <div class="mt-5">
+                <p class="fs-14-mobile fw-lighter">{{ 'help.او_يمكنك_التواصل_معنا_عبر_المنصات_المختلفة' | translate }}</p>
+                <i class="fa-brands social-Icon fa-2xl p-2 fa-linkedin"></i>
+                <i class="fa-brands social-Icon fa-2xl p-2 fa-whatsapp"></i>
+                <i class="fa-brands social-Icon fa-2xl p-2 fa-instagram"></i>
+                <i class="fa-brands social-Icon fa-2xl p-2 fa-facebook "></i>
+            </div>
+        </div>
+    </div>
+    <div class="whatsapp-icon">
+        <a href="https://api.whatsapp.com/send?phone=201126311534" target="_blank">
+            <img src="./assets/images/2062095_application_chat_communication_logo_whatsapp_icon.svg.png" alt="whatsapp-icon" class="w-100">
+        </a>
+    </div>
+</section>
+

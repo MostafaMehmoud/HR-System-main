@@ -1,84 +1,88 @@
-<section class="vh-80  d-flex bg-body-tertiary align-items-center  flex-column px-4 row mx-0">
-    <p class="fs-1 text-center myTitle englishFont fw-medium py-3">Master</p>
-    <div class=" row arabicList g-0 text-center col-md-10 col-xl-9 col-xxl-8  mx-0">
+<section class="bg-white min-vh-100 overflow-hidden">
+    <app-admin-nav></app-admin-nav>
+    <app-fake-nav></app-fake-nav>
+    <div id="wrapper">
+        <aside id="sidebar-wrapper" [style.background]="color">
+            <div class="sidebar-brand">
+                <h2>
+                    {{ 'Configuration' | translate }}
+                    <i class="fa-solid fa-gear"></i>
+                </h2>
+            </div>
+            <ul class="sidebar-nav">
+                <!-- <li class="text-white cursor">
+                <p (click)="selectColor = !selectColor">
+                    <span  *ngIf="selectColor" >
+                        <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span  *ngIf="!selectColor">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                    Custome Color 
+                </p>
+            </li>
+            <color-sketch *ngIf="selectColor" [color]="color" (onChangeComplete)="changeBackground($event)"></color-sketch> -->
 
-        <div [formGroup]="settingForm" class="col-12 d-flex mb-3">
-            <div class="w-25 px-2">
-                <select #select (change)="getAllItems(select.value)" name="" id="" class="form-control">
-                    <option value="company">شركات</option>
-                    <option value="nation">جنسية</option>
-                    <option value="branch">فروع</option>
-                    <option value="job">وظيفة</option>
-                </select>
-            </div>
-            <div class="w-75 px-2">
-                <input type="text" formControlName="searchInput" class="form-control"
-                    placeholder="ابحث عن التعريفات بالأسم او الكود . .">
-            </div>
+                <ng-container *ngFor="let node of treeData">
+                    <li>
+                        <div (click)="toggleNode(node)" class="text-white cursor">
+                            <span *ngIf="node.children?.length">
+                                <span *ngIf="node.expanded">
+                                    <i class="fa fa-angle-down"></i>
+                                </span>
+                                <span *ngIf="!node.expanded">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </span>
+                            {{ currentLang == 'ar' ? node.nameAr : node.nameEn}}
+                        </div>
+
+                        <ul *ngIf="node.expanded" style="list-style: none;padding-left: 1.5rem;">
+                            <ng-container
+                                *ngTemplateOutlet="recursiveTemplate; context: {$implicit: node.children}"></ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ul>
+            <ng-template #recursiveTemplate let-children>
+                <ng-container *ngFor="let child of children">
+                    <li class="mt-1 text-white">
+                        <div class="selected cursor" [class]="url.includes(child.url) ? 'activeSelect' :'' "
+                             [routerLink]="child.url" 
+                            (click)="toggleNode(child, $event)">
+                            <span *ngIf="child.children?.length">
+                                <span *ngIf="child.expanded">
+                                    <i class="fa fa-angle-down"></i>
+                                </span>
+                                <span *ngIf="!child.expanded">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </span>
+                                {{ currentLang == 'ar' ? child.nameAr : child.nameEn }}
+                        </div>
+
+                        <ul *ngIf="child.expanded && child.children?.length"
+                            style="list-style: none; padding-left: 1.5rem;">
+                            <ng-container
+                                *ngTemplateOutlet="recursiveTemplate; context: {$implicit: child.children}"></ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ng-template>
+        </aside>
+
+        <div id="navbar-wrapper">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                </div>
+            </nav>
         </div>
 
-        <!-- <div *ngFor="let item of itemsList" class="col-md-6 ">
-            <div class=" rounded-5 item shadow p-3 d-flex ">
-                <p class="my-0 fw-lighter">{{item.id}} </p>
-                <p class="my-0 mx-auto"> {{item.nameAr}} </p>
-            </div>
-        </div> -->
-
-
-        <table class="table-bordered table-info mt-4">
-            <thead class="border border-info bg-primary-subtle">
-                <th class="w-70px"></th>
-                <th class=" py-3 w-150px englishFont fw-normal">Master id</th>
-                <th class=" py-3 englishFont fw-normal">Name</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of itemsList" class="">
-                    <td class="">
-                        <label class="cyberpunk-checkbox-label">
-                            <input type="checkbox" class="cyberpunk-checkbox">
-                        </label>
-                    </td>
-                    <td class=" py-3 ">
-                        <p class="my-0  fw-normal">{{item.id}} </p>
-                    </td>
-                    <td class=" py-3">
-                        <p *ngIf="currentLang == 'ar'" class="my-0 mx-auto fw-normal"> {{item.nameAr}} </p>
-                        <p *ngIf="currentLang == 'en'" class="my-0 mx-auto fw-normal"> {{item.nameEn}} </p>
-                    </td>
-                </tr>
-            </tbody>
-
-        </table>
-
-        <div class="my-5"></div>
-
-        <!-- <div class="col-md-4 ">
-            <div class="bg-white rounded-5 myItem shadow p-3">
-                <div class="myVector w-75 mx-auto">
-                    <img src="./assets/images/compressed-images/wepb/10838247_4559992.webp" alt="vacancy" class="w-100">
-                </div>
-                <div class="buttons w-100">
-                    <button routerLink="/employee-update"
-                        class="btn btn-outline-dark rounded-4 w-100 py-3 my-1 fw-bolder">{{"home_Dashboard.تعديل_موظف" |
-                        translate}}</button>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-md-4 ">
-            <div class="bg-white rounded-5 myItem shadow p-3">
-                <div class="myVector w-75 mx-auto">
-                    <img src="./assets/images/compressed-images/wepb/5538440_2876475.webp" alt="enhaa" class="w-100">
-                </div>
-                <div class="buttons w-100">
-                    <button routerLink="/admin-dashboard"
-                        class="btn btn-outline-dark rounded-4 w-100 py-3 my-1 fw-bolder">{{"home_Dashboard.بحث_و_احصاء_الموظفين"
-                        | translate}}</button>
-                </div>
-
-            </div>
-        </div> -->
-
+        <section id="content-wrapper">
+            <router-outlet></router-outlet>
+        </section>
     </div>
 </section>

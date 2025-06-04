@@ -13,7 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoanComponent } from './components/loan/loan.component';
 import { VacationComponent } from './components/vacation/vacation.component';
 import { TerminationComponent } from './components/termination/termination.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HelpComponent } from './components/help/help.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
@@ -77,6 +77,17 @@ import { CompaniesComponent } from './components/companies/companies.component';
 import { BranchesComponent } from './components/branches/branches.component';
 import { AddCompanyComponent } from "./components/add-company/add-company.component";
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
+import { AddEditComponent } from './shared/components/modals/add-edit/add-edit.component';
+import { JobComponent } from './components/job/job.component';
+import { ReligionsComponent } from './components/religions/religions.component';
+import { ManagementComponent } from './components/management/management.component';
+import { NeighborComponent } from './components/neighbor/neighbor.component';
+import { NationalityComponent } from './components/nationality/nationality.component';
+import { DepartmentComponent } from './components/department/department.component';
+import { QualificationsComponent } from './components/qualifications/qualifications.component';
+import { CountriesComponent } from './components/countries/countries.component';
+import { CitiesComponent } from './components/cities/cities.component';
+import { KafilComponent } from './components/kafil/kafil.component';
 
 
 
@@ -86,7 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [ SidebarComponent,
+  declarations: [SidebarComponent,
     EditCompanyComponent,
     AddCompanyComponent,
     ConfigLayoutComponent,
@@ -155,11 +166,22 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfigLayoutComponent,
     CompaniesComponent,
     BranchesComponent,
-    EditCompanyComponent
+    EditCompanyComponent,
+    AddEditComponent,
+    JobComponent,
+    ReligionsComponent,
+    ManagementComponent,
+    NeighborComponent,
+    NationalityComponent,
+    DepartmentComponent,
+    QualificationsComponent,
+    CountriesComponent,
+    CitiesComponent,
+    KafilComponent
   ],
   imports: [
-    BrowserModule,NgxPaginationModule,
-    
+    BrowserModule, NgxPaginationModule,
+    FormsModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -178,14 +200,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContentLoaderModule,
     NgxPaginationModule
   ],
-
-
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-
-
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true }
   ],
+  exports: [AddEditComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

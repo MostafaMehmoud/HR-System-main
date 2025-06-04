@@ -52,6 +52,16 @@ import { CompaniesComponent } from './components/companies/companies.component';
 import { BranchesComponent } from './components/branches/branches.component';
 import { AddCompanyComponent } from './components/add-company/add-company.component';
 import { EditCompanyComponent } from './components/edit-company/edit-company.component';
+import { JobComponent } from './components/job/job.component';
+import { ManagementComponent } from './components/management/management.component';
+import { ReligionsComponent } from './components/religions/religions.component';
+import { NeighborComponent } from './components/neighbor/neighbor.component';
+import { NationalityComponent } from './components/nationality/nationality.component';
+import { DepartmentComponent } from './components/department/department.component';
+import { QualificationsComponent } from './components/qualifications/qualifications.component';
+import { CountriesComponent } from './components/countries/countries.component';
+import { CitiesComponent } from './components/cities/cities.component';
+import { KafilComponent } from './components/kafil/kafil.component';
 
 const routes: Routes = [
 
@@ -132,10 +142,22 @@ const routes: Routes = [
   },
   {
     path: 'configuration', 
-    component: ConfigLayoutComponent, // المكون الذي يحتوي على الـ sidebar والـ navbar
+    component: DefinitionsComponent, // المكون الذي يحتوي على الـ sidebar والـ navbar
     children: [
+      { path: '', redirectTo: 'companies', pathMatch: 'full' },
       { path: 'companies', component: CompaniesComponent },
       { path: 'branches', component: BranchesComponent },
+      { path: 'job', component: JobComponent },
+      { path: 'nationality', component: NationalityComponent },
+      { path: 'religions', component: ReligionsComponent },
+      { path: 'neighbor', component: NeighborComponent },
+      { path: 'management', component: ManagementComponent },
+      { path: 'departments', component: DepartmentComponent },
+      { path: 'qualification', component: QualificationsComponent },
+      { path: 'countries', component: CountriesComponent },
+      { path: 'cities', component: CitiesComponent },
+      { path: 'kafil', component: KafilComponent },
+
       { path: 'add-company', component: AddCompanyComponent },
       { path: 'edit-company/:id', component: EditCompanyComponent } // المسار الجديد
       // أي صفحات أخرى تريد أن تحتوي على الـ sidebar والـ navbar

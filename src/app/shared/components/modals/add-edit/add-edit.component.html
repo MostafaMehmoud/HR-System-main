@@ -1,0 +1,58 @@
+<div class="modal fade" #modalRef id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <span style="font-weight: bold;">
+                        <span *ngIf="addOrEdit == 'add'"> {{ 'add' | translate}} </span>
+                        <span *ngIf="addOrEdit == 'edit'"> {{ 'edit' | translate}} </span>
+                        {{ configurationName | translate}}
+                    </span>
+                </h5>
+                <button #modalCloseBtn type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body {{'direction' | translate}}">
+                <form [formGroup]="configurationForm" (ngSubmit)="preventDefault()" id="Form" name="form" method="POST"
+                    (keydown.enter)="preventDefault()">
+                    <div class="col-md-12">
+                        <label for="nameAr" class="mb-1">
+                            {{ 'nameAr' | translate }}
+                        </label>
+                        <div class="w-100 mx-auto pb-1 text-center">
+                            <input id="nameAr" #detailsInput type="text" class="form-control border-dark"
+                                placeholder="{{ 'nameAr' | translate }}" [formControlName]="NameAr">
+                        </div>
+
+                        <label for="nameEn" class="mt-2 mb-1">
+                            {{ 'nameEn' | translate }}
+                        </label>
+                        <div class="w-100 mx-auto pb-1 text-center">
+                            <input id="nameEn" type="text" class="form-control border-dark" placeholder="{{ 'nameEn' | translate }}"
+                                [formControlName]="NameEn">
+                        </div>
+
+                        <div *ngIf="wrongError && submited">
+                            <hr>
+                            <p class="dontHave text-danger m0">{{ 'unknown_error' | translate }}</p>
+                        </div>
+
+                        <div *ngIf="textError !== '' && submited">
+                            <hr>
+                            <p class="dontHave text-danger m0">{{ textError | translate }}</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()"
+                    [disabled]="configurationForm.invalid">
+                    {{ addOrEdit == 'add' ? ('add' | translate) : ('edit' | translate) }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

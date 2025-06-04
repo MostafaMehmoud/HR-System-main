@@ -1,11 +1,240 @@
-<div class="sidebar-container" [ngClass]="{'rtl-sidebar': currentLang === 'ar', 'ltr-sidebar': currentLang !== 'ar'}">
+<!-- <div class="sidebar-container" [ngClass]="{'rtl-sidebar': currentLang === 'ar', 'ltr-sidebar': currentLang !== 'ar'}">
   <div class="sidebar">
-    <ul>
-      <li><a routerLink="/dashboard">{{ 'SIDEBAR.Dashboard' | translate }}</a></li>
-      <li><a routerLink="/configuration/companies">{{ 'SIDEBAR.Companies' | translate }}</a></li>
-      <li><a routerLink="/branches">{{ 'SIDEBAR.Branches' | translate }}</a></li>
-      <li><a routerLink="/nationalities">{{ 'SIDEBAR.Nationalities' | translate }}</a></li>
-      <li><a routerLink="/job-titles">{{ 'SIDEBAR.JobTitles' | translate }}</a></li>
+    <h3 class="text-center mt-3 mb-4">
+      {{ 'Configuration' | translate }}
+      <i class="fa-solid fa-gear"></i>
+    </h3>
+    <ul id="menuSideBar">
+      <li [class]="url.includes('companies') ? 'active' : ''"><a routerLink="/configuration/companies">{{ 'SIDEBAR.Companies' | translate }}</a></li>
+      <li [class]="url.includes('branches') ? 'active' : ''"><a routerLink="/configuration/branches">{{ 'SIDEBAR.Branches' | translate }}</a></li>
+      <li [class]="url.includes('nationalities') ? 'active' : ''"><a routerLink="/configuration/nationalities">{{ 'SIDEBAR.Nationalities' | translate }}</a></li>
+      <li [class]="url.includes('job-titles') ? 'active' : ''"><a routerLink="/configuration/job-titles">{{ 'SIDEBAR.JobTitles' | translate }}</a></li>
     </ul>
   </div>
+</div> -->
+
+<!-- 
+
+<aside id="sidebar-wrapper" [style.background]="color">
+  <div class="sidebar-brand">
+    <h2>
+      {{ 'Configuration' | translate }}
+      <i class="fa-solid fa-gear"></i>
+    </h2>
+  </div>
+  <ul class="sidebar-nav">
+    <ng-container *ngFor="let node of treeData">
+      <li>
+        <div (click)="toggleNode(node)" class="text-white cursor">
+          <span *ngIf="node.children?.length">
+            <span *ngIf="node.expanded">
+              <i class="fa fa-angle-down"></i>
+            </span>
+            <span *ngIf="!node.expanded">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </span>
+          {{ currentLang == 'ar' ? node.nameAr : node.nameEn}}
+        </div>
+
+        <ul *ngIf="node.expanded" style="list-style: none;padding-left: 1.5rem;">
+          <ng-container *ngTemplateOutlet="recursiveTemplate; context: {$implicit: node.children}"></ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ul>
+  <ng-template #recursiveTemplate let-children>
+    <ng-container *ngFor="let child of children">
+      <li class="mt-1 text-white">
+        <div class="selected cursor" [class]="child.active ? 'activeSelect' : ''" (click)="toggleNode(child, $event)">
+          <span *ngIf="child.children?.length">
+            <span *ngIf="child.expanded">
+              <i class="fa fa-angle-down"></i>
+            </span>
+            <span *ngIf="!child.expanded">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </span>
+          <span routerLink="/configuration/{{child.url}}">
+
+            {{ currentLang == 'ar' ? child.nameAr : child.nameEn }}sss
+          </span>
+        </div>
+
+        <ul *ngIf="child.expanded && child.children?.length" style="list-style: none; padding-left: 1.5rem;">
+          <ng-container *ngTemplateOutlet="recursiveTemplate; context: {$implicit: child.children}"></ng-container>
+        </ul>
+      </li>
+    </ng-container>
+  </ng-template>
+</aside>
+
+<div id="navbar-wrapper">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+      </div>
+    </div>
+  </nav>
 </div>
+
+ -->
+
+
+
+
+
+
+<app-admin-nav></app-admin-nav>
+
+<div id="wrapper">
+  <aside id="sidebar-wrapper" [style.background]="color">
+    <div class="sidebar-brand">
+      <h2>
+        {{ 'Configuration' | translate }}
+        <i class="fa-solid fa-gear"></i>
+      </h2>
+    </div>
+    <ul class="sidebar-nav">
+      <!-- <li class="text-white cursor">
+                <p (click)="selectColor = !selectColor">
+                    <span  *ngIf="selectColor" >
+                        <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span  *ngIf="!selectColor">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                    Custome Color 
+                </p>
+            </li>
+            <color-sketch *ngIf="selectColor" [color]="color" (onChangeComplete)="changeBackground($event)"></color-sketch> -->
+
+      <ng-container *ngFor="let node of treeData">
+        <li>
+          <div (click)="toggleNode(node)" class="text-white cursor">
+            <span *ngIf="node.children?.length">
+              <span *ngIf="node.expanded">
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <span *ngIf="!node.expanded">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </span>
+            {{ currentLang == 'ar' ? node.nameAr : node.nameEn}}
+          </div>
+
+          <ul *ngIf="node.expanded" style="list-style: none;padding-left: 1.5rem;">
+            <ng-container *ngTemplateOutlet="recursiveTemplate; context: {$implicit: node.children}"></ng-container>
+          </ul>
+        </li>
+      </ng-container>
+    </ul>
+    <ng-template #recursiveTemplate let-children>
+      <ng-container *ngFor="let child of children">
+        <li class="mt-1 text-white">
+          <div class="selected cursor" [class]="child.active ? 'activeSelect' : ''" (click)="toggleNode(child, $event)">
+            <span *ngIf="child.children?.length">
+              <span *ngIf="child.expanded">
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <span *ngIf="!child.expanded">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </span>
+            <span routerLink="/configuration/{{child.url}}">
+
+              {{ currentLang == 'ar' ? child.nameAr : child.nameEn }}sss
+            </span>
+          </div>
+
+          <ul *ngIf="child.expanded && child.children?.length" style="list-style: none; padding-left: 1.5rem;">
+            <ng-container *ngTemplateOutlet="recursiveTemplate; context: {$implicit: child.children}"></ng-container>
+          </ul>
+        </li>
+      </ng-container>
+    </ng-template>
+  </aside>
+
+  <div id="navbar-wrapper">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <section id="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <section class="bg-test2 w-100 vh-80 p-3 position-relative">
+          <div class=" w-100 h-100  ">
+            <p class="fs-1 text-center myTitle englishFont fw-medium py-3">Master</p>
+            <router-outlet></router-outlet>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <span style="font-weight: bold;">
+            <span *ngIf="addOrEdit == 'add'"> {{ 'add' | translate}} </span>
+            <span *ngIf="addOrEdit == 'edit'"> {{ 'edit' | translate}} </span>
+            <span *ngIf="nodeSelect == 'Company'">{{'company' | translate}}</span>
+            <span *ngIf="nodeSelect == 'Nation'">{{'nationality' | translate}}</span>
+            <span *ngIf="nodeSelect == 'Branch'">{{'branche' | translate}}</span>
+            <span *ngIf="nodeSelect == 'Job'">{{'job' | translate}}</span>
+          </span>
+        </h5>
+        <button #modalCloseBtn type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body  {{'direction' | translate}}">
+        <form id="Form" name="form" method="POST" (keydown.enter)="preventDefault()">
+          <div class="col-md-12" (keydown.enter)="preventDefault()">
+            {{ 'nameAr' | translate }}
+            <div class="w-100 mx-auto pb-1 text-center">
+              <input [(ngModel)]="nameInAr" #detailsInput type="text" class="form-control border-dark"
+                placeholder="{{ 'nameAr' | translate }} " (input)="filterArabicOnly(detailsInput)"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <p *ngIf="nameInAr == ''  && submited" class="dontHave text-danger">
+              {{ 'arabic_name_required' | translate }}
+            </p>
+
+            {{ 'nameEn' | translate }}
+            <div class="w-100 mx-auto pb-1 text-center">
+              <input [(ngModel)]="nameInEn" #detailsInput type="text" class="form-control border-dark"
+                placeholder="{{ 'nameEn' | translate }}" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div *ngIf="wrongError && submited">
+              <hr>
+              <p class="dontHave text-danger m0">
+                {{ 'unknown_error' | translate }}
+              </p>
+            </div>
+            <div *ngIf="textError != '' && submited">
+              <hr>
+              <p class="dontHave text-danger m0">
+                {{ textError | translate }}
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="addEdit()">
+          {{ addOrEdit == 'add' ? ('add' | translate) : ('edit' | translate) }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->

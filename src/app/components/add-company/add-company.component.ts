@@ -43,7 +43,7 @@ export class AddCompanyComponent {
               confirmButtonText: this.translate.instant('COMPANIES.Ok')
             }).then(() => {
               this.companyForm.reset();
-              this.router.navigate(['/configuration/companies']);
+              // this.router.navigate(['/configuration/companies']);
             });
           } else {
             // API returned Success = false

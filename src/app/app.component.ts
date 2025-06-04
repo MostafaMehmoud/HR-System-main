@@ -26,26 +26,40 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const favLanguage: string = localStorage.getItem('myLanguage')!;
-  
+
+    // if (favLanguage) {
+    //   this._TranslateService.setDefaultLang(favLanguage);
+    //   this._TranslateService.use(favLanguage);
+    //   document.documentElement.dir = favLanguage === 'ar' ? 'rtl' : 'ltr';
+    // } else {
+    //   this._TranslateService.setDefaultLang('ar');
+    //   this._TranslateService.use('ar');
+    //   document.documentElement.dir = 'rtl';
+    // }
+    // this._TranslateService.onLangChange.subscribe(event => {
+    //   const currentLang = event.lang;
+    //   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    // });
+
+
+    // اذا كانت هناك لغة مختارة  اجعلها هي الاساسية 
     if (favLanguage) {
-      this._TranslateService.setDefaultLang(favLanguage);
+      this._TranslateService.setDefaultLang(favLanguage)
       this._TranslateService.use(favLanguage);
-      document.documentElement.dir = favLanguage === 'ar' ? 'rtl' : 'ltr';
-    } else {
-      this._TranslateService.setDefaultLang('ar');
-      this._TranslateService.use('ar');
-      document.documentElement.dir = 'rtl';
     }
-    this._TranslateService.onLangChange.subscribe(event => {
-      const currentLang = event.lang;
-      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-    });
-      
+
+    // اذا لم تكن هناك لغة مختارة اجعل العربية اللغة الاساسية 
+    else {
+      this._TranslateService.setDefaultLang('ar')
+      this._TranslateService.use('ar');
+
+    }
+
   }
-  
 
 
-  scrollUP(){
-    window.scrollTo(0 , 0)
+
+  scrollUP() {
+    window.scrollTo(0, 0)
   }
 }

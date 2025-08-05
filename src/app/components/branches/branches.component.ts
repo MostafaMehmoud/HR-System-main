@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-branches',
   templateUrl: './branches.component.html',
-  styleUrls: ['./branches.component.css']
+  styleUrls: ['./branches.component.css' , '../../shared/configration.css']
 })
 
 export class BranchesComponent implements OnInit {

@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
-  styleUrls: ['./countries.component.css']
+  styleUrls: ['./countries.component.css' , '../../shared/configration.css']
 })
 
 export class CountriesComponent implements OnInit {
@@ -70,9 +70,9 @@ export class CountriesComponent implements OnInit {
     this.configurationForm = this._FormBuilder.group({
       nameArCountry: ['', Validators.required],
       nameEnCountry: ['', Validators.required],
-      vatValue: ['', Validators.required],
+      vatValue: ['', [Validators.required , Validators.pattern(/^\d*\.?\d+$/)]],
       currency: ['', Validators.required],
-      exchangeRate: ['', Validators.required],
+      exchangeRate: ['', [Validators.required , Validators.pattern(/^\d*\.?\d+$/)]],
       currencyId: ['', Validators.required],
     });
   }
@@ -165,10 +165,10 @@ export class CountriesComponent implements OnInit {
           'id': this.id,
           'nameArCountry': this.configurationForm.value.nameArCountry,
           'nameEnCountry': this.configurationForm.value.nameEnCountry,
-          'vatValue' : this.configurationForm.value.vatValue ,
-          'currency' :  this.configurationForm.value.currency,
-          'exchangeRate' : this.configurationForm.value.exchangeRate,
-          'currencyId' :  this.configurationForm.value.currencyId,
+          'vatValue': this.configurationForm.value.vatValue,
+          'currency': this.configurationForm.value.currency,
+          'exchangeRate': this.configurationForm.value.exchangeRate,
+          'currencyId': this.configurationForm.value.currencyId,
         }
         this.countriesService.updateCountry(body).subscribe({
           next: (res) => {
@@ -201,9 +201,9 @@ export class CountriesComponent implements OnInit {
       nameArCountry: item.nameAr,
       nameEnCountry: item.nameEn,
       currency: item.currency,
-      currencyId: item.currencyId ,
-      vatValue :  item.vatValue,
-      exchangeRate : item.exchangeRate
+      currencyId: item.currencyId,
+      vatValue: item.vatValue,
+      exchangeRate: item.exchangeRate
     });
     this.id = item.id
     this.submited = false;
@@ -266,8 +266,8 @@ export class CountriesComponent implements OnInit {
       nameEnCountry: '',
       currency: '',
       currencyId: '',
-      vatValue:'',
-      exchangeRate : ''
+      vatValue: '',
+      exchangeRate: ''
     });
     this.submited = false;
     this.wrongError = false
@@ -319,5 +319,31 @@ export class CountriesComponent implements OnInit {
   //   let ids = this.countries.filter((obj) => obj.checked).map(item => item.id)
   //   this.DeleteItem(ids)
   // }
+
+allowOnlyNumbers(event: KeyboardEvent, inputValue: string) {
+  const key = event.key;
+
+  // Allow control keys (navigation, backspace, etc.)
+  if (
+    key === 'Backspace' || key === 'Tab' || key === 'ArrowLeft' ||
+    key === 'ArrowRight' || key === 'Delete' || key === 'Home' || key === 'End'
+  ) {
+    return;
+  }
+
+  // Allow digits
+  if (/^\d$/.test(key)) {
+    return;
+  }
+
+  // Allow one decimal point if not already present
+  if (key === '.' && !inputValue.includes('.')) {
+    return;
+  }
+
+  // Block all other keys
+  event.preventDefault();
+}
+
 
 }

@@ -1,0 +1,52 @@
+<div class="filterIcons mt-2 mb-4 {{ 'direction' | translate }}">
+  <!-- Filter Dropdown -->
+  <div class="dropdown">
+    <button class="dropdown-toggle btnDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa fa-filter"></i>
+      {{ 'filters' | translate }}
+    </button>
+    <ul class="dropdown-menu">
+      <li class="cursor" [ngClass]="filterSelected === 'all' ? 'bg-active' : ''">
+        <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate }}" (click)="filterClicked('all')">
+          {{ 'all' | translate }}
+        </span>
+      </li>
+      <li class="cursor" [ngClass]="filterSelected === 'name' ? 'bg-active' : ''">
+        <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate }}" (click)="filterClicked('name')">
+          {{ 'name' | translate }}
+        </span>
+      </li>
+      <li class="cursor" [ngClass]="filterSelected === 'id' ? 'bg-active' : ''">
+        <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate }}" (click)="filterClicked('id')">
+          {{ 'id' | translate }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Group By Dropdown -->
+  <div class="dropdown">
+    <button class="dropdown-toggle btnDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-layer-group"></i>
+      {{ 'groupBy' | translate }}
+    </button>
+    <ul class="dropdown-menu">
+      <li class="cursor">
+        <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate }}" (click)="groupBy('name')">
+          {{ 'name' | translate }}
+        </span>
+      </li>
+      <li class="cursor">
+        <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate }}" (click)="groupBy('id')">
+          {{ 'id' | translate }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Favorites -->
+  <span class="cursor">
+    <i class="fa fa-star"></i>
+    {{ 'favorites' | translate }}
+  </span>
+</div>

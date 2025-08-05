@@ -750,7 +750,8 @@
         "required": "يجب ملئ الحقل بشكل صحيح",
         "minlength": "يتكون رقم التعريف من 4 ارقام",
         "id_not_found": "رقم التعريف غير موجود",
-        "leave_smaller": "يجب ان يكون وقت الخروج بعد وقت البدء"
+        "leave_smaller": "يجب ان يكون وقت الخروج بعد وقت البدء",
+        "not_number": "مسموح فقط بالأرقام أو القيم العشرية"
     },
     "display_time_sheet": {
         "page_title": "عرض سجل الحضور",
@@ -1039,8 +1040,13 @@
     "Branch already exists": "الفرع موجودة بالفعل",
     "Job already exists": "الوظيفة موجودة بالفعل",
     "select company": "اختار الشركة",
+    "select management": "اختار الادارة",
     "currency": "العملة",
     "currency id": "رمز العملة",
     "vatValue": "قيمة ضريبة القيمة المضافة",
-    "exchangeRate": "سعر الصرف"
+    "exchangeRate": "سعر الصرف",
+    "PAGINATION": {
+        "PREVIOUS": "السابق",
+        "NEXT": "التالي"
+    }
 }

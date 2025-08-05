@@ -42,7 +42,7 @@
     "COMPANIES": {
         "SuccessTitle": "Company Added Successfully",
         "SuccessMessage": "The new company has been successfully added to the system.",
-        "updated":"Company updated successfully.",
+        "updated": "Company updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the company.",
         "ErrorMessage2": "Sorry, there was an error while Update the company.",
@@ -62,7 +62,7 @@
     "BRANCHES": {
         "SuccessTitle": "Branch Added Successfully",
         "SuccessMessage": "The new Branch has been successfully added to the system.",
-        "updated":"Branch updated successfully.",
+        "updated": "Branch updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Branch.",
         "ErrorMessage2": "Sorry, there was an error while Update the Branch.",
@@ -82,7 +82,7 @@
     "JOBS": {
         "SuccessTitle": "Job Added Successfully",
         "SuccessMessage": "The new Job has been successfully added to the system.",
-        "updated":"Job updated successfully.",
+        "updated": "Job updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Job.",
         "ErrorMessage2": "Sorry, there was an error while Update the Job.",
@@ -102,7 +102,7 @@
     "RELIGIONS": {
         "SuccessTitle": "Religion Added Successfully",
         "SuccessMessage": "The new Religion has been successfully added to the system.",
-        "updated":"Religion updated successfully.",
+        "updated": "Religion updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Religion.",
         "ErrorMessage2": "Sorry, there was an error while Update the Religion.",
@@ -122,7 +122,7 @@
     "MANAGEMENTS": {
         "SuccessTitle": "Management Added Successfully",
         "SuccessMessage": "The new Management has been successfully added to the system.",
-        "updated":"Management updated successfully.",
+        "updated": "Management updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Management.",
         "ErrorMessage2": "Sorry, there was an error while Update the Management.",
@@ -142,7 +142,7 @@
     "NATIONALITIES": {
         "SuccessTitle": "Nationality Added Successfully",
         "SuccessMessage": "The new Nationality has been successfully added to the system.",
-        "updated":"Nationality updated successfully.",
+        "updated": "Nationality updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Nationality.",
         "ErrorMessage2": "Sorry, there was an error while Update the Nationality.",
@@ -162,7 +162,7 @@
     "NEIGHBORS": {
         "SuccessTitle": "Neighbor Added Successfully",
         "SuccessMessage": "The new Neighbor has been successfully added to the system.",
-        "updated":"Neighbor updated successfully.",
+        "updated": "Neighbor updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Neighbor.",
         "ErrorMessage2": "Sorry, there was an error while Update the Neighbor.",
@@ -182,7 +182,7 @@
     "CITIES": {
         "SuccessTitle": "City Added Successfully",
         "SuccessMessage": "The new City has been successfully added to the system.",
-        "updated":"City updated successfully.",
+        "updated": "City updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the City.",
         "ErrorMessage2": "Sorry, there was an error while Update the City.",
@@ -202,7 +202,7 @@
     "COUNTRIES": {
         "SuccessTitle": "Country Added Successfully",
         "SuccessMessage": "The new Country has been successfully added to the system.",
-        "updated":"Country updated successfully.",
+        "updated": "Country updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Country.",
         "ErrorMessage2": "Sorry, there was an error while Update the Country.",
@@ -222,7 +222,7 @@
     "KAFILS": {
         "SuccessTitle": "Kafil Added Successfully",
         "SuccessMessage": "The new Kafil has been successfully added to the system.",
-        "updated":"Kafil updated successfully.",
+        "updated": "Kafil updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Kafil.",
         "ErrorMessage2": "Sorry, there was an error while Update the Kafil.",
@@ -242,7 +242,7 @@
     "DEPERTMENTS": {
         "SuccessTitle": "Depertment Added Successfully",
         "SuccessMessage": "The new Depertment has been successfully added to the system.",
-        "updated":"Depertment updated successfully.",
+        "updated": "Depertment updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Depertment.",
         "ErrorMessage2": "Sorry, there was an error while Update the Depertment.",
@@ -262,7 +262,7 @@
     "QUALIFICATIONS": {
         "SuccessTitle": "Quilfication Added Successfully",
         "SuccessMessage": "The new Quilfication has been successfully added to the system.",
-        "updated":"Quilfication updated successfully.",
+        "updated": "Quilfication updated successfully.",
         "ErrorTitle": "An Error Occurred",
         "ErrorMessage": "Sorry, there was an error while adding the Quilfication.",
         "ErrorMessage2": "Sorry, there was an error while Update the Quilfication.",
@@ -747,7 +747,8 @@
         "required": "This field is required",
         "minlength": "ID must be 4 digits",
         "id_not_found": "ID not found",
-        "leave_smaller": "Leave time must be after start time"
+        "leave_smaller": "Leave time must be after start time",
+        "not_number": "Only numbers or decimal values are allowed"
     },
     "display_time_sheet": {
         "page_title": "Display Attendance Record",
@@ -807,17 +808,17 @@
         "انتهاء_الهوية": " ID Expiry ",
         "فصيلة_الدم": "Blood type ",
         "الجنسية": "Nationality ",
-        "قرابه" : "Neighbor" ,
-        "قرابات" : "Neighbors" ,
-        "ديانة" : "Religion" ,
-        "ديانات" : "Religions",
-        "مدينه" : "City",
-        "مدن" : "Cities",
-        "بلد" : "Country",
-        "بلاد" : "Countries",
-        "مؤهل" : "Qualification",
-        "مؤهلات" : "Qualifications",
-        "كفلاء" : "Kafils"
+        "قرابه": "Neighbor",
+        "قرابات": "Neighbors",
+        "ديانة": "Religion",
+        "ديانات": "Religions",
+        "مدينه": "City",
+        "مدن": "Cities",
+        "بلد": "Country",
+        "بلاد": "Countries",
+        "مؤهل": "Qualification",
+        "مؤهلات": "Qualifications",
+        "كفلاء": "Kafils"
     },
     "=========start work task ==============": "",
     "التفاصيل_الخاصة_بالمهمة": "Task Details",
@@ -1035,10 +1036,14 @@
     "Nation already exists": "Nationality already exists",
     "Branch already exists": "Branch already exists",
     "Job already exists": "Job already exists",
-    "select company" : "Select Company" ,
-    "currency" : "Currency" , 
-    "currency id" : "Currency Id" ,
-    "vatValue" :"Vat Value" ,
-    "exchangeRate" : "Exchange Rate"
-
+    "select company": "Select Company",
+    "select management": "Select Management",
+    "currency": "Currency",
+    "currency id": "Currency Id",
+    "vatValue": "Vat Value",
+    "exchangeRate": "Exchange Rate",
+    "PAGINATION": {
+        "PREVIOUS": "Previous",
+        "NEXT": "Next"
+    }
 }

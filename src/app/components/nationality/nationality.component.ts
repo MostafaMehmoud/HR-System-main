@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-nationality',
   templateUrl: './nationality.component.html',
-  styleUrls: ['./nationality.component.css']
+  styleUrls: ['./nationality.component.css' , '../../shared/configration.css']
 })
 
 export class NationalityComponent implements OnInit {

@@ -1,145 +1,91 @@
 <div class=" {{ 'direction' | translate }}">
-  <div [formGroup]="settingForm" class="row arabicList g-0 mt-2">
-    <div class="input-wrapper-start position-relative" [ngClass]="currentLang === 'ar' ? 'rtl' : 'ltr'">
-      <span class="input-prefix">{{ filterSelected | translate }} </span>
-      <input type="text" class="form-control {{ 'direction' | translate }}" formControlName="searchInput"
-        [placeholder]="currentLang == 'ar' ? 'ابحث ...' : 'Search ...'" (input)="onSearchChange()" />
+    <div [formGroup]="settingForm" class="row arabicList g-0 mt-2">
+        <div class="input-wrapper-start position-relative" [ngClass]="currentLang === 'ar' ? 'rtl' : 'ltr'">
+            <span class="input-prefix">{{ filterSelected | translate }} </span>
+            <input type="text" class="form-control {{ 'direction' | translate }}" formControlName="searchInput"
+                [placeholder]="currentLang == 'ar' ? 'ابحث ...' : 'Search ...'" (input)="onSearchChange()" />
+        </div>
     </div>
-  </div>
-  <div *ngIf="filteredArr.length > 0" #dropdownRef class="{{ 'direction' | translate}}">
-    <ul class="dropdown-menu show  ">
-      <li *ngFor="let item of filteredArr" class="dropdown-item filterItem cursor {{'textAlign' | translate}}"
-        (click)="selectItem(item)">
-        <span *ngIf="filterSelected == 'all' || filterSelected == 'id'">{{ item.id
-          }}</span>
-        <span *ngIf="filterSelected == 'all'"> - </span>
-        <span *ngIf="filterSelected == 'all' || filterSelected == 'name'"> {{
-          currentLang === 'ar' ? item.nameAr : item.nameEn }} </span>
-      </li>
-    </ul>
-  </div>
-  <div class="filterIcons mt-2 mb-4 {{'direction' | translate}}">
-    <div class="dropdown">
-      <button class="dropdown-toggle btnDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa fa-filter"></i>
-        {{ 'filters' | translate}}
-      </button>
-      <ul class="dropdown-menu">
-        <li class="cursor" [ngClass]="filterSelected == 'all' ? 'bg-active' :'' ">
-          <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}" (click)="filterClicked('all')">
-            {{ 'all' | translate}}
-          </span>
-        </li>
-        <li class="cursor" [ngClass]="filterSelected == 'name' ? 'bg-active' :'' ">
-          <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}" (click)="filterClicked('name')">
-            {{ 'name' | translate}}
-          </span>
-        </li>
-        <li class="cursor" [ngClass]="filterSelected == 'id' ? 'bg-active' :'' ">
-          <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}" (click)="filterClicked('id')">
-            {{ 'id' | translate}}
-          </span>
-        </li>
-      </ul>
+    <div *ngIf="filteredArr.length > 0" #dropdownRef class="{{ 'direction' | translate}}">
+        <ul class="dropdown-menu show  ">
+            <li *ngFor="let item of filteredArr" class="dropdown-item filterItem cursor {{'textAlign' | translate}}"
+                (click)="selectItem(item)">
+                <span *ngIf="filterSelected == 'all' || filterSelected == 'id'">{{ item.id
+                    }}</span>
+                <span *ngIf="filterSelected == 'all'"> - </span>
+                <span *ngIf="filterSelected == 'all' || filterSelected == 'name'"> {{
+                    currentLang === 'ar' ? item.nameAr : item.nameEn }} </span>
+            </li>
+        </ul>
     </div>
 
-    <div class="dropdown">
-      <button class="dropdown-toggle btnDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-layer-group"></i>
-        {{ 'groupBy' | translate}}
-      </button>
-      <ul class="dropdown-menu">
-        <li class="cursor">
-          <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}" (click)="groupBy('name')">
-            {{ 'name' | translate}}
-          </span>
-        </li>
-        <li class="cursor">
-          <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}" (click)="groupBy('id')">
-            {{ 'id' | translate}}
-          </span>
-        </li>
-      </ul>
+    <app-filter-toolbar [filterSelected]="filterSelected" (onFilterClicked)="filterClicked($event)"
+        (onGroupBy)="groupBy($event)">
+    </app-filter-toolbar>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ 'Dashboard.ادارات' | translate }}</h4>
+        <button (click)="openModal()" class="btn btn-success mt-2 btnDelete">
+            <span>
+                {{ 'MANAGEMENTS.AddNew' | translate }}
+            </span>
+        </button>
     </div>
 
-    <span class="cursor">
-      <i class="fa fa-star"></i>
-      {{'favorites' | translate}}
-    </span>
-  </div>
+    <div class="table-responsive">
+        <table class="table-bordered table-info mt-2 mb-2" style="width: 100%;">
+            <thead class="border border-info bg-primary-subtle">
+                <th class="w-70px"></th>
+                <th class=" py-3 w-150px englishFont fw-normal">{{'action' | translate}}</th>
+                <th class=" py-3 w-150px englishFont fw-normal">{{'id' | translate}}</th>
+                <th class=" py-3 englishFont fw-normal">{{'name' | translate}}</th>
+            </thead>
+            <tbody>
+                <tr *ngIf="managements.length == 0" class="text-center">
+                    <td colspan="4" class="te">
+                        {{ 'page.لا_يوجد_بيانات_متاحة'| translate }}
+                    </td>
+                </tr>
+                <tr
+                    *ngFor="let item of managements | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
 
+                    <td class="">
+                        <label class="cyberpunk-checkbox-label">
+                            <input [(ngModel)]="item.checked" type="checkbox" class="cyberpunk-checkbox">
+                        </label>
+                    </td>
+                    <td class="py-3">
+                        <button class="border-0 bg-transparent" (click)="confirmDelete(item.id)">
+                            <i class="fa-solid fa-trash fa-2x red cursor"></i>
+                        </button>
+                        &nbsp;
+                        <button class="border-0 bg-transparent" (click)="getUpdateData(item)">
+                            <i class="fa-solid fa-pen-to-square fa-2x orange cursor" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"></i>
+                        </button>
+                    </td>
+                    <td class=" py-3 ">
+                        <p class="my-0  fw-normal">{{item.id}} </p>
+                    </td>
+                    <td class=" py-3">
+                        <p class="my-0 mx-auto fw-normal">
+                            {{ currentLang == 'ar' ? item.nameAr : item.nameEn }}
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
 
+        </table>
+    </div>
 
-
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4>{{ 'Dashboard.ادارات' | translate }}</h4>
-    <button (click)="openModal()" class="btn btn-success mt-2 btnDelete">
-      <span>
-        {{ 'MANAGEMENTS.AddNew' | translate }}
-      </span>
-    </button>
-  </div>
-
-  <div class="table-responsive">
-    <table class="table-bordered table-info mt-2 mb-2" style="width: 100%;">
-      <thead class="border border-info bg-primary-subtle">
-        <th class="w-70px"></th>
-        <th class=" py-3 w-150px englishFont fw-normal">{{'action' | translate}}</th>
-        <th class=" py-3 w-150px englishFont fw-normal">{{'id' | translate}}</th>
-        <th class=" py-3 englishFont fw-normal">{{'name' | translate}}</th>
-      </thead>
-      <tbody>
-        <tr *ngIf="managements.length == 0" class="text-center">
-          <td colspan="4" class="te">
-            {{ 'page.لا_يوجد_بيانات_متاحة'| translate }}
-          </td>
-        </tr>
-        <tr *ngFor="let item of managements | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
-
-          <td class="">
-            <label class="cyberpunk-checkbox-label">
-              <input [(ngModel)]="item.checked" type="checkbox" class="cyberpunk-checkbox">
-            </label>
-          </td>
-          <td class="py-3">
-            <button class="border-0 bg-transparent" (click)="confirmDelete(item.id)">
-               <i class="fa-solid fa-trash fa-2x red cursor"></i>
-             </button>
-            &nbsp;
-            <button class="border-0 bg-transparent" (click)="getUpdateData(item)">
-              <i class="fa-solid fa-pen-to-square fa-2x orange cursor" data-bs-toggle="modal"
-                data-bs-target="#exampleModal"></i>
-            </button>
-          </td>
-          <td class=" py-3 ">
-            <p class="my-0  fw-normal">{{item.id}} </p>
-          </td>
-          <td class=" py-3">
-            <p class="my-0 mx-auto fw-normal">
-              {{ currentLang == 'ar' ? item.nameAr : item.nameEn }}
-            </p>
-          </td>
-        </tr>
-      </tbody>
-
-    </table>
-  </div>
-
-  <!-- Pagination Controls -->
-  <pagination-controls [directionLinks]="true" [autoHide]="true" (pageChange)="currentPage = $event"
-    [responsive]="true" class="text-center">
-  </pagination-controls>
+    <!-- Pagination Controls -->
+    <pagination-controls  [previousLabel]="('PAGINATION.PREVIOUS' | translate)"
+        [nextLabel]="('PAGINATION.NEXT' | translate)" [directionLinks]="true" [autoHide]="true" (pageChange)="currentPage = $event"
+        [responsive]="true" class="text-center">
+    </pagination-controls>
 </div>
 
 
-<app-add-edit
-  [configurationName] = "configurationName"
-  [NameAr] = "NameAr"
-  [NameEn] = "NameEn"
-  [addOrEdit]="addOrEdit"
-  [configurationForm]="configurationForm"
-  [textError]="textError"
-  [wrongError]="wrongError"
-  [submited]="submited"
-  (submit)="addEdit()"
-></app-add-edit>
+<app-add-edit [configurationName]="configurationName" [NameAr]="NameAr" [NameEn]="NameEn" [addOrEdit]="addOrEdit"
+    [configurationForm]="configurationForm" [textError]="textError" [wrongError]="wrongError" [submited]="submited"
+    (submit)="addEdit()"></app-add-edit>

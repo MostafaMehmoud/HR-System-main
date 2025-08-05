@@ -88,6 +88,7 @@ import { QualificationsComponent } from './components/qualifications/qualificati
 import { CountriesComponent } from './components/countries/countries.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { KafilComponent } from './components/kafil/kafil.component';
+import { FilterToolbarComponent } from './shared/components/modals/filter-toolbar/filter-toolbar.component';
 
 
 
@@ -177,7 +178,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     QualificationsComponent,
     CountriesComponent,
     CitiesComponent,
-    KafilComponent
+    KafilComponent,
+    FilterToolbarComponent
   ],
   imports: [
     BrowserModule, NgxPaginationModule,
@@ -204,7 +206,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true }
   ],
-  exports: [AddEditComponent],
+  exports: [AddEditComponent , FilterToolbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

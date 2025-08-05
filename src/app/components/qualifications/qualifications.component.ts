@@ -11,13 +11,13 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-qualifications',
   templateUrl: './qualifications.component.html',
-  styleUrls: ['./qualifications.component.css']
+  styleUrls: ['./qualifications.component.css' , '../../shared/configration.css']
 })
 
 export class QualificationsComponent implements OnInit {
   configurationName = 'Dashboard.مؤهل'
-  NameAr = 'qualificationNameAr'
-  NameEn = 'qualificationNameEn'
+  NameAr = 'collegeNameAr'
+  NameEn = 'collegeNameEn'
   @ViewChild(AddEditComponent) addEditComponent!: AddEditComponent;
 
   @ViewChild('dropdownRef') dropdownRef!: ElementRef;
@@ -73,19 +73,19 @@ export class QualificationsComponent implements OnInit {
     private _toaster: ToastrService,
   ) {
     this.configurationForm = this._FormBuilder.group({
-      qualificationNameAr: ['', Validators.required],
-      qualificationNameEn: ['', Validators.required]
+      collegeNameAr: ['', Validators.required],
+      collegeNameEn: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.getAllManage();
+    this.getAllqualifications();
   }
 
-  getAllManage() {
-    this.qualificationService.getAllQualification().subscribe({
+  getAllqualifications() {
+    this.qualificationService.getAllQualifications().subscribe({
       next: (res) => {
-        this.qualifications = res
+        this.qualifications = res.data
         if (this.qualifications.length > 0) {
           this.qualifications.forEach((obj: any) => obj.checked = false);
         }
@@ -149,7 +149,7 @@ export class QualificationsComponent implements OnInit {
               this._toaster.success(this.translate.instant('QUALIFICATIONS.SuccessTitle'));
               this.textError = ''
               this.addEditComponent?.close();
-              this.getAllManage();
+              this.getAllqualifications();
             } else {
               this.textError = this.translate.instant('QUALIFICATIONS.ErrorMessage')
             }
@@ -165,8 +165,8 @@ export class QualificationsComponent implements OnInit {
       } else {
         let body = {
           'id': this.id,
-          'qualificationNameAr': this.configurationForm.value.qualificationNameAr,
-          'qualificationNameEn': this.configurationForm.value.qualificationNameEn,
+          'collegeNameAr': this.configurationForm.value.collegeNameAr,
+          'collegeNameEn': this.configurationForm.value.collegeNameEn,
         }
         this.qualificationService.updateQualification(body).subscribe({
           next: (res) => {
@@ -175,7 +175,7 @@ export class QualificationsComponent implements OnInit {
             if (res.success) {
               this._toaster.success(this.translate.instant('QUALIFICATIONS.updated'));
               this.textError = ''
-              this.getAllManage();
+              this.getAllqualifications();
               this.addEditComponent?.close();
             } else {
               this.textError = this.translate.instant('QUALIFICATIONS.ErrorMessage2')
@@ -196,8 +196,8 @@ export class QualificationsComponent implements OnInit {
     this.textError = ''
     this.addOrEdit = 'edit';
     this.configurationForm.patchValue({
-      qualificationNameAr: item.nameAr, // Adjust if necessary based on your response
-      qualificationNameEn: item.nameEn  // Adjust if necessary based on your response
+      collegeNameAr: item.nameAr, // Adjust if necessary based on your response
+      collegeNameEn: item.nameEn  // Adjust if necessary based on your response
     });
     this.id = item.id
     this.submited = false;
@@ -220,7 +220,7 @@ export class QualificationsComponent implements OnInit {
           next: (res) => {
             console.log(res);
             if (res.success) {
-              this.getAllManage();
+              this.getAllqualifications();
               Swal.fire(
                 this.translate.instant('COMMON.Deleted'),
                 this.translate.instant('QUALIFICATIONS.Success'),
@@ -256,8 +256,8 @@ export class QualificationsComponent implements OnInit {
 
   resetVar() {
     this.configurationForm.patchValue({
-      qualificationNameAr: '',
-      qualificationNameEn: ''
+      collegeNameAr: '',
+      collegeNameEn: ''
     });
     this.submited = false;
     this.wrongError = false

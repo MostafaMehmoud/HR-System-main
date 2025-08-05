@@ -18,62 +18,10 @@
             </li>
         </ul>
     </div>
-    <div class="filterIcons mt-2 mb-4 {{'direction' | translate}}">
-        <div class="dropdown">
-            <button class="dropdown-toggle btnDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-filter"></i>
-                {{ 'filters' | translate}}
-            </button>
-            <ul class="dropdown-menu">
-                <li class="cursor" [ngClass]="filterSelected == 'all' ? 'bg-active' :'' ">
-                    <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}"
-                        (click)="filterClicked('all')">
-                        {{ 'all' | translate}}
-                    </span>
-                </li>
-                <li class="cursor" [ngClass]="filterSelected == 'name' ? 'bg-active' :'' ">
-                    <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}"
-                        (click)="filterClicked('name')">
-                        {{ 'name' | translate}}
-                    </span>
-                </li>
-                <li class="cursor" [ngClass]="filterSelected == 'id' ? 'bg-active' :'' ">
-                    <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}"
-                        (click)="filterClicked('id')">
-                        {{ 'id' | translate}}
-                    </span>
-                </li>
-            </ul>
-        </div>
 
-        <div class="dropdown">
-            <button class="dropdown-toggle btnDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-layer-group"></i>
-                {{ 'groupBy' | translate}}
-            </button>
-            <ul class="dropdown-menu">
-                <li class="cursor">
-                    <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}"
-                        (click)="groupBy('name')">
-                        {{ 'name' | translate}}
-                    </span>
-                </li>
-                <li class="cursor">
-                    <span class="dropdown-item py-2 border-bottom {{ 'textAlign' | translate}}" (click)="groupBy('id')">
-                        {{ 'id' | translate}}
-                    </span>
-                </li>
-            </ul>
-        </div>
-
-        <span class="cursor">
-            <i class="fa fa-star"></i>
-            {{'favorites' | translate}}
-        </span>
-    </div>
-
-
-
+    <app-filter-toolbar [filterSelected]="filterSelected" (onFilterClicked)="filterClicked($event)"
+        (onGroupBy)="groupBy($event)">
+    </app-filter-toolbar>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>{{ 'SIDEBAR.Branches' | translate }}</h4>
@@ -132,7 +80,8 @@
     </div>
 
     <!-- Pagination Controls -->
-    <pagination-controls [directionLinks]="true" [autoHide]="true" (pageChange)="currentPage = $event"
+    <pagination-controls  [previousLabel]="('PAGINATION.PREVIOUS' | translate)"
+        [nextLabel]="('PAGINATION.NEXT' | translate)" [directionLinks]="true" [autoHide]="true" (pageChange)="currentPage = $event"
         [responsive]="true" class="text-center">
     </pagination-controls>
 </div>
@@ -182,7 +131,7 @@
                             </select>
                         </div>
 
-                         <div *ngIf="wrongError && submited">
+                        <div *ngIf="wrongError && submited">
                             <hr>
                             <p class="dontHave text-danger m0">{{ 'unknown_error' | translate }}</p>
                         </div>

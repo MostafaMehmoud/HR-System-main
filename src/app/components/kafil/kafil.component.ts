@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-kafil',
   templateUrl: './kafil.component.html',
-  styleUrls: ['./kafil.component.css']
+  styleUrls: ['./kafil.component.css' , '../../shared/configration.css']
 })
 
 export class KafilComponent implements OnInit {

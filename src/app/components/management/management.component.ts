@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-management',
   templateUrl: './management.component.html',
-  styleUrls: ['./management.component.css']
+  styleUrls: ['./management.component.css' , '../../shared/configration.css']
 })
 
 export class ManagementComponent implements OnInit {

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-religions',
   templateUrl: './religions.component.html',
-  styleUrls: ['./religions.component.css']
+  styleUrls: ['./religions.component.css' , '../../shared/configration.css']
 })
 
 export class ReligionsComponent implements OnInit {

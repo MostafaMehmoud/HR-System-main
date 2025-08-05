@@ -7,11 +7,12 @@ import { AddEditComponent } from 'src/app/shared/components/modals/add-edit/add-
 import { configuration } from 'src/app/shared/interfaces/config';
 import { DepartmentsService } from 'src/app/shared/services/departments/departments.service';
 import Swal from 'sweetalert2';
+import { ManagementService } from 'src/app/shared/services/management/management.service';
 
 @Component({
   selector: 'app-department',
   templateUrl: './department.component.html',
-  styleUrls: ['./department.component.css']
+  styleUrls: ['./department.component.css', '../../shared/configration.css']
 })
 
 export class DepartmentComponent implements OnInit {
@@ -58,6 +59,7 @@ export class DepartmentComponent implements OnInit {
   itemsPerPage: number = 10;
 
   departments: configuration[] = [];
+  managements: configuration[] = [];
   originalAllItems: configuration[] = []
 
 
@@ -65,6 +67,7 @@ export class DepartmentComponent implements OnInit {
     return this._TranslateService.currentLang
   }
   constructor(
+    private managementService: ManagementService,
     private departmentsService: DepartmentsService,
     private translate: TranslateService,
     private _FormBuilder: FormBuilder,
@@ -74,21 +77,34 @@ export class DepartmentComponent implements OnInit {
   ) {
     this.configurationForm = this._FormBuilder.group({
       departmentNameAr: ['', Validators.required],
-      departmentNameEn: ['', Validators.required]
+      departmentNameEn: ['', Validators.required],
+      manageId: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.getAllManage();
+    this.getAllManagements();
+    this.getAllDepartments();
   }
 
-  getAllManage() {
+  getAllManagements() {
+    this.managementService.getAllManage().subscribe({
+      next: (res) => {
+        this.managements = res.data
+        if (this.managements.length > 0) {
+          this.managements.forEach((obj: any) => obj.checked = false);
+        }
+        this.originalAllItems = this.managements
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  getAllDepartments() {
     this.departmentsService.getAllDepartments().subscribe({
       next: (res) => {
-        this.departments = res
-        if (this.departments.length > 0) {
-          this.departments.forEach((obj: any) => obj.checked = false);
-        }
+        this.departments = res.data
+        this.departments.forEach((obj: any) => obj.checked = false);
         this.originalAllItems = this.departments
       },
       error: (err) => console.error(err)
@@ -149,7 +165,7 @@ export class DepartmentComponent implements OnInit {
               this._toaster.success(this.translate.instant('DEPERTMENTS.SuccessTitle'));
               this.textError = ''
               this.addEditComponent?.close();
-              this.getAllManage();
+              this.getAllDepartments();
             } else {
               this.textError = this.translate.instant('DEPERTMENTS.ErrorMessage')
             }
@@ -175,7 +191,7 @@ export class DepartmentComponent implements OnInit {
             if (res.success) {
               this._toaster.success(this.translate.instant('DEPERTMENTS.updated'));
               this.textError = ''
-              this.getAllManage();
+              this.getAllDepartments();
               this.addEditComponent?.close();
             } else {
               this.textError = this.translate.instant('DEPERTMENTS.ErrorMessage2')
@@ -196,8 +212,9 @@ export class DepartmentComponent implements OnInit {
     this.textError = ''
     this.addOrEdit = 'edit';
     this.configurationForm.patchValue({
-      departmentNameAr: item.nameAr, // Adjust if necessary based on your response
-      departmentNameEn: item.nameEn  // Adjust if necessary based on your response
+      departmentNameAr: item.nameAr, 
+      departmentNameEn: item.nameEn,
+      manageId: item.manageId 
     });
     this.id = item.id
     this.submited = false;
@@ -220,7 +237,7 @@ export class DepartmentComponent implements OnInit {
           next: (res) => {
             console.log(res);
             if (res.success) {
-              this.getAllManage();
+              this.getAllDepartments();
               Swal.fire(
                 this.translate.instant('COMMON.Deleted'),
                 this.translate.instant('DEPERTMENTS.Success'),
@@ -257,7 +274,8 @@ export class DepartmentComponent implements OnInit {
   resetVar() {
     this.configurationForm.patchValue({
       departmentNameAr: '',
-      departmentNameEn: ''
+      departmentNameEn: '',
+      manageId:''
     });
     this.submited = false;
     this.wrongError = false
@@ -289,7 +307,7 @@ export class DepartmentComponent implements OnInit {
   //             icon: 'success',
   //             confirmButtonText: this.currentLang === 'ar' ? 'موافق' : 'OK'
   //           });
-  //           this.getAllManage()
+  //           this.getAllDepartments()
   //         },
   //         error: () => {
   //           Swal.fire({

@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-neighbor',
   templateUrl: './neighbor.component.html',
-  styleUrls: ['./neighbor.component.css']
+  styleUrls: ['./neighbor.component.css' , '../../shared/configration.css']
 })
 
 export class NeighborComponent implements OnInit {

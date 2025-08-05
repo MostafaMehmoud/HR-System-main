@@ -88,7 +88,6 @@ export class BranchesComponent implements OnInit {
         if (this.companies.length > 0) {
           this.companies.forEach((obj: any) => obj.checked = false);
         }
-        this.originalAllItems = this.companies
       },
       error: (err) => console.error(err)
     });

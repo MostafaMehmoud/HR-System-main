@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { AddEditComponent } from 'src/app/shared/components/modals/add-edit/add-edit.component';
 import { configuration } from 'src/app/shared/interfaces/config';
 import { DepartmentsService } from 'src/app/shared/services/departments/departments.service';
 import Swal from 'sweetalert2';
@@ -19,9 +18,10 @@ export class DepartmentComponent implements OnInit {
   configurationName = 'Dashboard.قسم'
   NameAr = 'departmentNameAr'
   NameEn = 'departmentNameEn'
-  @ViewChild(AddEditComponent) addEditComponent!: AddEditComponent;
 
   @ViewChild('dropdownRef') dropdownRef!: ElementRef;
+  @ViewChild('modalCloseBtn') modalCloseBtn!: ElementRef;
+
   // Detect clicks outside
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
@@ -30,14 +30,6 @@ export class DepartmentComponent implements OnInit {
       this.filteredArr = [];
       // this.settingForm.get('searchInput')?.setValue('');
     }
-  }
-
-  openModal() {
-    this.addOrEdit = 'add';
-    this.resetVar()
-    setTimeout(() => {
-      this.addEditComponent?.open();
-    });
   }
 
   settingForm: FormGroup = this._FormBuilder.group({
@@ -94,7 +86,6 @@ export class DepartmentComponent implements OnInit {
         if (this.managements.length > 0) {
           this.managements.forEach((obj: any) => obj.checked = false);
         }
-        this.originalAllItems = this.managements
       },
       error: (err) => console.error(err)
     });
@@ -123,8 +114,8 @@ export class DepartmentComponent implements OnInit {
     this.filteredArr = this.originalAllItems.filter((item: any) => {
       const idMatch = item.id.includes(value);
       const nameMatch = this.currentLang == 'ar'
-        ? item.nameAr.includes(value)
-        : item.nameEn.toLowerCase().includes(value);
+        ? item.nameAr?.includes(value)
+        : item.nameEn?.toLowerCase().includes(value);
       return this.filterSelected == 'all' ? idMatch || nameMatch : this.filterSelected == 'name' ? nameMatch : idMatch;
     });
   }
@@ -164,7 +155,7 @@ export class DepartmentComponent implements OnInit {
             if (res.success) {
               this._toaster.success(this.translate.instant('DEPERTMENTS.SuccessTitle'));
               this.textError = ''
-              this.addEditComponent?.close();
+              this.modalCloseBtn.nativeElement.click();
               this.getAllDepartments();
             } else {
               this.textError = this.translate.instant('DEPERTMENTS.ErrorMessage')
@@ -183,6 +174,7 @@ export class DepartmentComponent implements OnInit {
           'id': this.id,
           'departmentNameAr': this.configurationForm.value.departmentNameAr,
           'departmentNameEn': this.configurationForm.value.departmentNameEn,
+          'manageId': this.configurationForm.value.manageId,
         }
         this.departmentsService.updateDepartment(body).subscribe({
           next: (res) => {
@@ -191,8 +183,8 @@ export class DepartmentComponent implements OnInit {
             if (res.success) {
               this._toaster.success(this.translate.instant('DEPERTMENTS.updated'));
               this.textError = ''
-              this.getAllDepartments();
-              this.addEditComponent?.close();
+              this.modalCloseBtn.nativeElement.click();
+              this.getAllDepartments();              
             } else {
               this.textError = this.translate.instant('DEPERTMENTS.ErrorMessage2')
             }

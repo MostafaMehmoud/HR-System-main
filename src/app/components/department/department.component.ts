@@ -90,7 +90,7 @@ export class DepartmentComponent implements OnInit {
   getAllManagements() {
     this.managementService.getAllManage().subscribe({
       next: (res) => {
-        this.managements = res.data
+        this.managements = res
         if (this.managements.length > 0) {
           this.managements.forEach((obj: any) => obj.checked = false);
         }

@@ -10,6 +10,7 @@ export class CompanyService {
 
   private baseUrl = `${environment.apiUrl}/api/Company`;
   
+  
     constructor(private _HttpClient: HttpClient) { }
   
     private setHeaders(): any {
